@@ -5,16 +5,19 @@ namespace WebApp.Models
 {
     public class People
     {
-        [BsonElement("qa")]
-        public IEnumerable<string> QualityAnalysts { get; set; }
+        [BsonElement("quails")]
+        public IEnumerable<string> Quails { get; set; }
 
-        [BsonElement("design")]
+        [BsonElement("designers")]
         public IEnumerable<string> Designers { get; set; }
 
-        [BsonElement("dev")]
+        [BsonElement("developers")]
         public IEnumerable<string> Developers { get; set; }
 
-        [BsonElement("codeReview")]
+        [BsonElement("codeReviewers")]
         public IEnumerable<string> CodeReviewers { get; set; }
+
+        [BsonElement("projectManagers")]
+        public IEnumerable<string> ProjectManagers { get; set; }
     }
 }

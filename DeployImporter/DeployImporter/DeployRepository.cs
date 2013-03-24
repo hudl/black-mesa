@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MongoRepository;
+﻿using MongoRepository;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver;
-using MongoDB.Bson.Serialization;
 
 namespace DeployImporter
 {
-    class DeployRepository : MongoRepository.MongoRepository<Deploy>
+    class DeployRepository : MongoRepository<Deploy>
     {
-
-        public void UpdateSomething(Deploy deploy)
+        public DeployRepository()
         {
-            //if (!BsonClassMap.IsClassMapRegistered(typeof(Deploy)))
-            //{
-            //    BsonClassMap.RegisterClassMap<Deploy>(m => {
-            //        m.AutoMap();
-            //        m.GetMemberMap(x => x.Id).SetIgnoreIfNull(true);
-            //    });
-            //}
+            Collection.EnsureIndex(Deploy.Fields.LineNumber);
+        }
+
+        public void Upsert(Deploy deploy)
+        {
             deploy.Id = null;
-            this.Collection.Update(Query.EQ("LineNumber", deploy.LineNumber), MongoDB.Driver.Builders.Update.Replace(deploy), UpdateFlags.Upsert);
+            Collection.Update(Query.EQ(Deploy.Fields.LineNumber, deploy.LineNumber), MongoDB.Driver.Builders.Update.Replace(deploy), UpdateFlags.Upsert);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace WebApp.Models
     /// Without that attribute, it's opt-out, and only properties marked with JsonIgnore are not serialized.
     /// </summary>
     [BsonIgnoreExtraElements(Inherited = true)]
-    public abstract class DeployDumpsterEntity : IEntity
+    public abstract class BlackMesaEntity : IEntity
     {
         /// <summary>
         /// Gets or sets the id for this object (the primary record for an entity).

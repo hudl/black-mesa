@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Http;
 using WebApp.Models;
 using WebApp.Repositories;
@@ -12,7 +13,7 @@ namespace WebApp.Controllers.Api
             var repository = new DeployRepository();
             return new Deploys
                 {
-                    Items = repository.GetPage(0, 100).ToArray()
+                    Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2)).ToArray()
                 };
         }
     }

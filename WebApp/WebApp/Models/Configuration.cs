@@ -12,8 +12,8 @@ namespace WebApp.Models
         [BsonId]
         public string Id { get; set; }
 
-        [JsonProperty("jiraBaseUrl")]
-        public string JiraBaseUrl { get; set; }
+        [JsonProperty("jiraSearchByLabelBaseUrl")]
+        public string JiraSearchByLabelBaseUrl { get; set; }
 
         [JsonProperty("gitHubPullRequestBaseUrl")]
         public string GitHubPullRequestBaseUrl { get; set; }

@@ -1,12 +1,10 @@
-﻿using CsvHelper;
+﻿using System.Globalization;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace DeployImporter
 {
@@ -16,33 +14,32 @@ namespace DeployImporter
         {
             var deploys = doDeployDoc();
             var hotfixes = doHotfixDoc();
-            List<Deploy> finalDeploys = new List<Deploy>();
-            foreach (DeployDTO deploy in deploys)
+            var finalDeploys = new List<Deploy>();
+            foreach (var deploy in deploys)
             {
                 finalDeploys.Add(new Deploy
                 {
-                    Action = deploy.ACTION,
-                    Branch = deploy.BRANCH,
-                    Component = deploy.COMPONENT,
-                    DateTime = deploy.DATE_TIME,
-                    Day = deploy.Day,
-                    Des = deploy.DES,
-                    Dev = deploy.DEV,
-                    DevCodeReview = deploy.DEVCR,
+                    Action = deploy.ACTION.Trim(),
+                    Branch = deploy.BRANCH.Trim(),
+                    Component = deploy.COMPONENT.Trim(),
+                    DeployTime = deploy.DATE_TIME.Trim().TryParseDateTime(),
                     LineNumber = deploy.ID,
-                    IsHotfix = false,
-                    Jira = "http://jira/secure/IssueNavigator.jspa?reset=true&jqlQuery=labels+%3D+" + deploy.BRANCH,
                     Notes = deploy.NOTES,
-                    Project = deploy.PROJECT,
-                    ProjectManager = deploy.PM,
-                    PullRequest = deploy.PR,
-                    PullRequestLink = "https://github.com/hudl/hudl/pull/" + deploy.PR,
-                    QA = deploy.QA,
-                    Type = deploy.TYPE
+                    Project = deploy.PROJECT.Trim(),
+                    PullRequestId = deploy.PR.Trim().TryParseInt(),
+                    Type = deploy.TYPE.Trim(),
+                    People = new People
+                        {
+                            Designers = new List<string> { deploy.DES.Trim() },
+                            Developers = new List<string> { deploy.DEV.Trim() },
+                            CodeReviewers = new List<string> { deploy.DEVCR.Trim() },
+                            ProjectManagers = new List<string> { deploy.PM.Trim() },
+                            Quails = new List<string> { deploy.QA.Trim() },
+                        },
                 });
             }
             var i = 0;
-            foreach (HotfixDTO hotfix in hotfixes)
+            foreach (var hotfix in hotfixes)
             {
                 Deploy deploy = null;
                 if (hotfix.BRANCH.ToLower().Contains("(2nd pr)"))
@@ -61,29 +58,41 @@ namespace DeployImporter
                 }
                 else
                 {
-                    deploy.BranchThatBrokeIt = hotfix.Breaker_Branch;
-                    deploy.DevAffectedUserImpact = hotfix.DEV_Affected_User_Impact;
-                    deploy.DevHudlWideImpact = hotfix.DEV_Hudl_Wide_Impact;
-                    deploy.DevInitials = hotfix.DEV_Initials;
-                    deploy.DevTeamCulpability = hotfix.DEV_Team_Culpability;
-                    deploy.HfNotes = hotfix.Notes;
-                    deploy.IsHotfix = true;
-                    deploy.ProdTicket = "http://jira/browse/PROD-" + hotfix.PROD_Ticket_Num;
-                    deploy.ProdTicketNum = hotfix.PROD_Ticket_Num;
-                    deploy.QaAffectedUserImpact = hotfix.QA_Affected_User_Impact;
-                    deploy.QaHudlWideImpact = hotfix.QA_Hudl_Wide_Impact;
-                    deploy.QaInitials = hotfix.QA_Initials;
-                    deploy.QaTeamCulpability = hotfix.QA_Team_Culpability;
-                    deploy.Special = hotfix.SPECIAL;
+                    deploy.Hotfixes.Add(new Hotfix
+                        {
+                            BranchThatBrokeIt = hotfix.Breaker_Branch.Trim(),
+                            Notes = hotfix.Notes,
+                            ProdTicket = hotfix.PROD_Ticket_Num.Trim().TryParseInt(),
+                            Special = hotfix.SPECIAL,
+                            Assessments = new Assessments
+                                {
+                                    Developers = new Assessment
+                                        {
+                                            Culpability = hotfix.DEV_Team_Culpability.Trim().TryParseDecimal(),
+                                            HudlWideImpact = hotfix.DEV_Hudl_Wide_Impact.Trim().TryParseDecimal(),
+                                            AffectedUserImpact = hotfix.DEV_Affected_User_Impact.Trim().TryParseDecimal(),
+                                            Initials = hotfix.DEV_Initials.Trim(),
+                                        },
+                                    Quails = new Assessment
+                                        {
+                                            Culpability = hotfix.QA_Team_Culpability.Trim().TryParseDecimal(),
+                                            HudlWideImpact = hotfix.QA_Hudl_Wide_Impact.Trim().TryParseDecimal(),
+                                            AffectedUserImpact = hotfix.QA_Affected_User_Impact.Trim().TryParseDecimal(),
+                                            Initials = hotfix.QA_Initials.Trim(),
+                                        }
+                                }
+                        });
                 }
             }
             Console.WriteLine(i + " unmatched hotfixes");
             var repo = new DeployRepository();
             foreach (Deploy d in finalDeploys)
             {
-                repo.UpdateSomething(d);
+                repo.Upsert(d);
             }
         }
+
+
 
         public static List<DeployDTO> doDeployDoc()
         {

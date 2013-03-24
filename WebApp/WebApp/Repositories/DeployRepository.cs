@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using MongoDB.Driver.Builders;
 using MongoRepository;
 using WebApp.Models;
 
@@ -7,9 +8,13 @@ namespace WebApp.Repositories
 {
     public class DeployRepository : MongoRepository<Deploy>
     {
-        public IEnumerable<Deploy> GetPage(int skip, int take)
+        private const int MaxReturnSize = 100;
+
+        public IEnumerable<Deploy> GetSince(DateTime deployTime)
         {
-            return Collection.FindAll().Skip(skip).Take(take);
+            return Collection
+                .Find(Query<Deploy>.Where(d => d.DeployTime > deployTime))
+                .SetLimit(MaxReturnSize);
         }
     }
 }

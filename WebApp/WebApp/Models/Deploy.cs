@@ -5,8 +5,9 @@ using Newtonsoft.Json;
 
 namespace WebApp.Models
 {
-    [CollectionName("prod")]
-    public class Deploy : DeployDumpsterEntity
+    [CollectionName("deploys")]
+    [BsonIgnoreExtraElements]
+    public class Deploy : BlackMesaEntity
     {
         private static readonly TimeZoneInfo CentralTime = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
 
@@ -20,7 +21,7 @@ namespace WebApp.Models
         public string Component { get; set; }
 
         [BsonElement("deployTime")]
-        public DateTime DeployTime { get; set; }
+        public DateTime? DeployTime { get; set; }
 
         [BsonElement("jiraLabel")]
         public string JiraLabel { get; set; }
@@ -35,7 +36,7 @@ namespace WebApp.Models
         public string Project { get; set; }
 
         [BsonElement("pullRequestId")]
-        public int PullRequestId { get; set; }
+        public int? PullRequestId { get; set; }
 
         [BsonElement("type")]
         public string Type { get; set; }
@@ -45,7 +46,12 @@ namespace WebApp.Models
         {
             get
             {
-                var localTime = TimeZoneInfo.ConvertTimeFromUtc(DeployTime.ToUniversalTime(), CentralTime);
+                if (!DeployTime.HasValue)
+                {
+                    return String.Empty;
+                }
+
+                var localTime = TimeZoneInfo.ConvertTimeFromUtc(DeployTime.Value.ToUniversalTime(), CentralTime);
                 return localTime.ToString("ddd");
             }
         }
