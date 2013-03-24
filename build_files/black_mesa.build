@@ -5,7 +5,13 @@
   <property name="compiledDir" value="${codeDir}\WebApp\WebApp\BlackMesaDeploy" />
   <property name="payload" value="${tempDir}\${branch}_${buildNumber}.zip" />
   
-  <target name="Build" description="Build Black-Mesa">    
+  <target name="GenerateConnectionStrings" description="Creates the ConnectionStrings.config file">
+	<touch file="${codeDir}\WebApp\WebApp\ConnectionStrings.config" />
+	<echo file="${codeDir}\WebApp\WebApp\ConnectionStrings.config">&lt;?xml version=&quot;1.0&quot;?&gt;&lt;connectionStrings&gt;&lt;add name=&quot;MongoServerSettings&quot; connectionString=&quot;&quot; /&gt;&lt;/connectionStrings&gt;</echo>
+	<xmlpoke file="${codeDir}\WebApp\WebApp\ConnectionStrings.config" xpath="/connectionStrings/add[@name='MongoServerSettings']/@connectionString" value="${mongoConnectionString}" />
+  </target>
+  
+  <!--target name="Build" description="Build Black-Mesa">    
     <msbuild failonerror="true" project="${codeDir}\WebApp\WebApp.sln" target="Rebuild">
       <property name="Configuration" value="Release" />
       <property name="DeployOnBuild" value="true" />
@@ -19,5 +25,5 @@
         <include name="**/*" />
       </fileset>
     </zip>
-  </target>  
+  </target-->  
 </project>
