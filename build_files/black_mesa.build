@@ -11,7 +11,7 @@
 	<xmlpoke file="${codeDir}\WebApp\WebApp\ConnectionStrings.config" xpath="/connectionStrings/add[@name='MongoServerSettings']/@connectionString" value="${mongoConnectionString}" />
   </target>
   
-  <!--target name="Build" description="Build Black-Mesa">    
+  <target name="Build" description="Build Black-Mesa" depends="GenerateConnectionStrings">    
     <msbuild failonerror="true" project="${codeDir}\WebApp\WebApp.sln" target="Rebuild">
       <property name="Configuration" value="Release" />
       <property name="DeployOnBuild" value="true" />
@@ -25,5 +25,5 @@
         <include name="**/*" />
       </fileset>
     </zip>
-  </target-->  
+  </target>  
 </project>
