@@ -12,6 +12,8 @@ namespace DeployImporter
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Do you have the latest deploy_doc.csv and hotfix_doc.csv in the folder than this exe is in? Press enter when you do");
+            Console.Read();
             var deploys = doDeployDoc();
             var hotfixes = doHotfixDoc();
             var finalDeploys = new List<Deploy>();
@@ -86,8 +88,10 @@ namespace DeployImporter
             }
             Console.WriteLine(i + " unmatched hotfixes");
             var repo = new DeployRepository();
+            i = 0;
             foreach (Deploy d in finalDeploys)
             {
+                Console.WriteLine("Updating Entry " + ++i +" of " + finalDeploys.Count);
                 repo.Upsert(d);
             }
         }
