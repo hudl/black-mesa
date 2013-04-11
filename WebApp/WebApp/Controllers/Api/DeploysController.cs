@@ -14,7 +14,7 @@ namespace WebApp.Controllers.Api
             var repository = new DeployRepository();
             return new Deploys
                 {
-                    Items = repository.GetSince(DateTime.UtcNow.AddMonths(-12), returnSize).ToArray()
+                    Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2), returnSize).ToArray()
                 };
         }
 
