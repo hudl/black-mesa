@@ -18,6 +18,10 @@
         "LongText": LongTextEditor,
         "People": PeopleEditor,
         "Jira": JiraEditor,
+        "Type": TypeEditor,
+        "Action": ActionEditor,
+        "Component": ComponentEditor,
+        "Project": ProjectEditor,
       }
     }
   });
@@ -629,6 +633,282 @@
 
       this.applyValue = function (item, state) {
           item.Branch = state;
+      };
+
+      this.isValueChanged = function () {
+          return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+      };
+
+      this.validate = function () {
+          if (args.column.validator) {
+              var validationResults = args.column.validator($input.val());
+              if (!validationResults.valid) {
+                  return validationResults;
+              }
+          }
+
+          return {
+              valid: true,
+              msg: null
+          };
+      };
+
+      this.init();
+  }
+
+  function TypeEditor(args) {
+      var $input;
+      var defaultValue;
+      var scope = this;
+
+      this.init = function () {
+          $input = $("<select><option>Fix</option><option>Hotfix</option><option>Enhancement</option><option>New Feature</option><option>Task</option><option>Rollback</option></select>")
+              .appendTo(args.container)
+              .bind("keydown.nav", function (e) {
+                  if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                      e.stopImmediatePropagation();
+                  }
+              })
+              .focus()
+              .select();
+      };
+
+      this.destroy = function () {
+          $input.remove();
+      };
+
+      this.focus = function () {
+          $input.focus();
+      };
+
+      this.getValue = function () {
+          return $input.val();
+      };
+
+      this.setValue = function (val) {
+          $input.val(val);
+      };
+
+      this.loadValue = function (item) {
+          defaultValue = item[args.column.field] || "";
+          $input.val(defaultValue);
+          $input[0].defaultValue = defaultValue;
+          $input.select();
+      };
+
+      this.serializeValue = function () {
+          return $input.val();
+      };
+
+      this.applyValue = function (item, state) {
+          item[args.column.field] = state;
+      };
+
+      this.isValueChanged = function () {
+          return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+      };
+
+      this.validate = function () {
+          if (args.column.validator) {
+              var validationResults = args.column.validator($input.val());
+              if (!validationResults.valid) {
+                  return validationResults;
+              }
+          }
+
+          return {
+              valid: true,
+              msg: null
+          };
+      };
+
+      this.init();
+  }
+
+  function ActionEditor(args) {
+      var $input;
+      var defaultValue;
+      var scope = this;
+
+      this.init = function () {
+          $input = $("<select><option>Deploy</option><option>Script</option><option>App</option><option>Tool Fail</option><option>Other</option></select>")
+              .appendTo(args.container)
+              .bind("keydown.nav", function (e) {
+                  if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                      e.stopImmediatePropagation();
+                  }
+              })
+              .focus()
+              .select();
+      };
+
+      this.destroy = function () {
+          $input.remove();
+      };
+
+      this.focus = function () {
+          $input.focus();
+      };
+
+      this.getValue = function () {
+          return $input.val();
+      };
+
+      this.setValue = function (val) {
+          $input.val(val);
+      };
+
+      this.loadValue = function (item) {
+          defaultValue = item[args.column.field] || "";
+          $input.val(defaultValue);
+          $input[0].defaultValue = defaultValue;
+          $input.select();
+      };
+
+      this.serializeValue = function () {
+          return $input.val();
+      };
+
+      this.applyValue = function (item, state) {
+          item[args.column.field] = state;
+      };
+
+      this.isValueChanged = function () {
+          return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+      };
+
+      this.validate = function () {
+          if (args.column.validator) {
+              var validationResults = args.column.validator($input.val());
+              if (!validationResults.valid) {
+                  return validationResults;
+              }
+          }
+
+          return {
+              valid: true,
+              msg: null
+          };
+      };
+
+      this.init();
+  }
+
+  function ProjectEditor(args) {
+      var $input;
+      var defaultValue;
+      var scope = this;
+
+      this.init = function () {
+          $input = $("<select><option>Admin</option><option>Attachments</option><option>Auto</option><option>BBall</option><option>Core</option><option>DS</option><option>DVD</option><option>Fan</option><option>Lifeguard</option><option>MacMercury</option><option>Mercury</option><option>MODI</option><option>Ops</option><option>OVE</option><option>Pro</option><option>Recruit</option><option>VE</option></select>")
+              .appendTo(args.container)
+              .bind("keydown.nav", function (e) {
+                  if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                      e.stopImmediatePropagation();
+                  }
+              })
+              .focus()
+              .select();
+      };
+
+      this.destroy = function () {
+          $input.remove();
+      };
+
+      this.focus = function () {
+          $input.focus();
+      };
+
+      this.getValue = function () {
+          return $input.val();
+      };
+
+      this.setValue = function (val) {
+          $input.val(val);
+      };
+
+      this.loadValue = function (item) {
+          defaultValue = item[args.column.field] || "";
+          $input.val(defaultValue);
+          $input[0].defaultValue = defaultValue;
+          $input.select();
+      };
+
+      this.serializeValue = function () {
+          return $input.val();
+      };
+
+      this.applyValue = function (item, state) {
+          item[args.column.field] = state;
+      };
+
+      this.isValueChanged = function () {
+          return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+      };
+
+      this.validate = function () {
+          if (args.column.validator) {
+              var validationResults = args.column.validator($input.val());
+              if (!validationResults.valid) {
+                  return validationResults;
+              }
+          }
+
+          return {
+              valid: true,
+              msg: null
+          };
+      };
+
+      this.init();
+  }
+
+  function ComponentEditor(args) {
+      var $input;
+      var defaultValue;
+      var scope = this;
+
+      this.init = function () {
+          $input = $("<select><option>Hudl</option><option>Jobs</option><option>SQL</option><option>Mongo</option><option>VE</option><option>Mercury</option><option>MacMercury</option><option>iOS</option><option>Android</option><option>Remotes</option><option>Alyx</option><option>Old Alyx</option><option>AWS</option><option>S3</option><option>TeamCity</option><option>Pro</option><option>Other</option></select>")
+              .appendTo(args.container)
+              .bind("keydown.nav", function (e) {
+                  if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                      e.stopImmediatePropagation();
+                  }
+              })
+              .focus()
+              .select();
+      };
+
+      this.destroy = function () {
+          $input.remove();
+      };
+
+      this.focus = function () {
+          $input.focus();
+      };
+
+      this.getValue = function () {
+          return $input.val();
+      };
+
+      this.setValue = function (val) {
+          $input.val(val);
+      };
+
+      this.loadValue = function (item) {
+          defaultValue = item[args.column.field] || "";
+          $input.val(defaultValue);
+          $input[0].defaultValue = defaultValue;
+          $input.select();
+      };
+
+      this.serializeValue = function () {
+          return $input.val();
+      };
+
+      this.applyValue = function (item, state) {
+          item[args.column.field] = state;
       };
 
       this.isValueChanged = function () {
