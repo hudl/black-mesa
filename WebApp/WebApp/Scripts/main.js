@@ -55,6 +55,7 @@
 
             var grid = new Slick.Grid('#deploys', dataView, columns, {
                 editable: true,
+                autoEdit: false,
                 asyncEditorLoading: false,
                 enableColumnReorder: false,
                 enableCellNavigation: true

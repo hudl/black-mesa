@@ -8,13 +8,11 @@ namespace WebApp.Repositories
 {
     public class DeployRepository : MongoRepository<Deploy>
     {
-        private const int MaxReturnSize = 100;
-
-        public IEnumerable<Deploy> GetSince(DateTime deployTime)
+        public IEnumerable<Deploy> GetSince(DateTime deployTime, int returnSize)
         {
             return Collection
                 .Find(Query<Deploy>.Where(d => d.DeployTime > deployTime))
-                .SetLimit(MaxReturnSize);
+                .SetLimit(returnSize);
         }
     }
 }
