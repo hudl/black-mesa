@@ -15,16 +15,20 @@ namespace WebApp
                 "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js",
                 "~/Scripts/jquery.dateFormat-1.0.js",
                 "~/Scripts/underscore.js",
+                "~/Scripts/toastr.js",
                 "~/Scripts/jquery.event.drag.js",
                 "~/Scripts/SlickGrid/slick.core.js",
                 "~/Scripts/SlickGrid/slick.grid.js",
                 "~/Scripts/SlickGrid/slick.dataview.js",
-                "~/Scripts/SlickGrid/Plugins/slick.rowselectionmodel.js"
+                "~/Scripts/SlickGrid/slick.editors.js",
+                "~/Scripts/SlickGrid/Plugins/slick.*"
                 ));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/slick.grid.css",
+                "~/Content/toastr-responsive.css",
+                "~/Content/toastr.css",
                 "~/Content/grid.css"
                 ));
             bundles.Add(new StyleBundle("~/content/css-responsive").Include(

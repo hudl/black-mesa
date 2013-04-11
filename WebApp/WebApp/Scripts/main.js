@@ -1,4 +1,15 @@
 ﻿(function (blackmesa, $) {
+
+    $(function () {
+        toastr.options = {
+            "debug": false,
+            "fadeIn": 300,
+            "fadeOut": 500,
+            "timeOut": 2000,
+            "extendedTimeOut": 1000
+        }
+    });
+
     Slick.Formatters = _.extend(Slick.Formatters || {}, {
         DateTimeFormatter: function(row, cell, value, columnDef, dataContext) {
             return $.format.date(new Date(value), columnDef.dateFormat);
@@ -27,26 +38,30 @@
             var columns = [
                 { id: 'Day', name: 'Day', field: 'Day', width: 35 },
                 { id: 'DeployTime', name: 'Time', field: 'DeployTime', formatter: Slick.Formatters.DateTimeFormatter, dateFormat: "M/d HH:mm", width: 80 },
-                { id: 'Action', name: 'Action', field: 'Action', width: 60 },
-                { id: 'Component', name: 'Comp.', field: 'Component', width: 50 },
-                { id: 'Type', name: 'Type', field: 'Type', width: 80 },
-                { id: 'Project', name: 'Proj.', field: 'Project', width: 50 },
-                { id: 'Branch', name: 'Branch', field: 'Branch', width: 150 },
+                { id: 'Action', name: 'Action', field: 'Action', width: 60, editor: Slick.Editors.Text },
+                { id: 'Component', name: 'Comp.', field: 'Component', width: 50, editor: Slick.Editors.Text },
+                { id: 'Type', name: 'Type', field: 'Type', width: 80, editor: Slick.Editors.Text },
+                { id: 'Project', name: 'Proj.', field: 'Project', width: 50, editor: Slick.Editors.Text },
+                { id: 'Branch', name: 'Branch', field: 'Branch', width: 150, editor: Slick.Editors.Text },
                 { id: 'PullRequestId', name: 'PR', field: 'PullRequestId', width: 40, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl },
                 { id: 'JiraLabel', name: 'Jira', field: 'Branch', width: 40, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl },
                 { id: 'Quails', name: 'QA', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Quails', width: 80 },
                 { id: 'Designers', name: 'DES', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Designers', width: 80 },
                 { id: 'Developers', name: 'DEV', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Developers', width: 80 },
                 { id: 'CodeReviewers', name: 'CR', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'CodeReviewers', width: 80 },
-                { id: 'Notes', name: 'Notes', field: 'Notes', width: 260 }
+                { id: 'Notes', name: 'Notes', field: 'Notes', width: 260, editor: Slick.Editors.Text }
             ];
             var dataView = new Slick.Data.DataView();
+
             var grid = new Slick.Grid('#deploys', dataView, columns, {
+                editable: true,
+                asyncEditorLoading: false,
                 enableColumnReorder: false,
                 enableCellNavigation: true
             });
-            grid.setSelectionModel(new Slick.RowSelectionModel());
-            
+
+            grid.setSelectionModel(new Slick.CellSelectionModel());
+
             dataView.onRowCountChanged.subscribe(function (e, args) {
                 grid.updateRowCount();
                 grid.render();
@@ -58,15 +73,20 @@
             grid.onSelectedRowsChanged.subscribe(function(e, args) {
                 grid.render();
             });
+            grid.onCellChange.subscribe(function (e, args) {
+                $.post("/api/v1/deploys", args.item, function (data) {
+                    toastr.info('Updated ' + grid.getColumns()[args.cell].field + " to " + $(grid.getCellNode(args.row, args.cell)).text());
+                });
+            });
             
             dataView.beginUpdate();
             dataView.setItems(data.Items, 'Id');
             dataView.endUpdate();
 
-            var selectedItemId = /\/([0-9a-f]+)/.exec(window.location.href);
-            if (selectedItemId !== null && selectedItemId.length > 0) {
-                var selectedRowIndex = dataView.getIdxById(selectedItemId[1]);
-                grid.setSelectedRows([selectedRowIndex]);
+            var selecteditemid = /\/([0-9a-f]+)/.exec(window.location.href);
+            if (selecteditemid !== null && selecteditemid.length > 0) {
+                var selectedrowindex = dataview.getidxbyid(selecteditemid[1]);
+                grid.setselectedrows([selectedrowindex]);
             }
 
             window.grid = grid;

@@ -16,5 +16,11 @@ namespace WebApp.Controllers.Api
                     Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2)).ToArray()
                 };
         }
+
+        public void Post(Deploy deploy)
+        {
+            var repository = new DeployRepository();
+            repository.Update(deploy);
+        }
     }
 }
