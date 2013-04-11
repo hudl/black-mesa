@@ -40,15 +40,15 @@
                 { id: 'DeployTime', name: 'Time', field: 'DeployTime', formatter: Slick.Formatters.DateTimeFormatter, dateFormat: "M/d HH:mm", width: 80 },
                 { id: 'Action', name: 'Action', field: 'Action', width: 60, editor: Slick.Editors.Text },
                 { id: 'Component', name: 'Comp.', field: 'Component', width: 50, editor: Slick.Editors.Text },
-                { id: 'Type', name: 'Type', field: 'Type', width: 80, editor: Slick.Editors.Text },
+                { id: 'Type', name: 'Type', field: 'Type', width: 90, editor: Slick.Editors.Text },
                 { id: 'Project', name: 'Proj.', field: 'Project', width: 50, editor: Slick.Editors.Text },
                 { id: 'Branch', name: 'Branch', field: 'Branch', width: 150, editor: Slick.Editors.Text },
-                { id: 'PullRequestId', name: 'PR', field: 'PullRequestId', width: 40, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl },
-                { id: 'JiraLabel', name: 'Jira', field: 'Branch', width: 40, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl },
-                { id: 'Quails', name: 'QA', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Quails', width: 80, editor: Slick.Editors.People },
-                { id: 'Designers', name: 'DES', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Designers', width: 80, editor: Slick.Editors.People },
-                { id: 'Developers', name: 'DEV', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Developers', width: 80, editor: Slick.Editors.People },
-                { id: 'CodeReviewers', name: 'CR', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'CodeReviewers', width: 80, editor: Slick.Editors.People },
+                { id: 'PullRequestId', name: 'PR', field: 'PullRequestId', width: 60, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text },
+                { id: 'JiraLabel', name: 'Jira', field: 'Branch', width: 50, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira },
+                { id: 'Quails', name: 'QA', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Quails', width: 70, editor: Slick.Editors.People },
+                { id: 'Designers', name: 'DES', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Designers', width: 70, editor: Slick.Editors.People },
+                { id: 'Developers', name: 'DEV', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Developers', width: 70, editor: Slick.Editors.People },
+                { id: 'CodeReviewers', name: 'CR', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'CodeReviewers', width: 70, editor: Slick.Editors.People },
                 { id: 'Notes', name: 'Notes', field: 'Notes', width: 249, editor: Slick.Editors.Text }
             ];
             var dataView = new Slick.Data.DataView();
