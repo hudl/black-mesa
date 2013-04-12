@@ -23,7 +23,11 @@
                 return '';
             }
             var people = value[columnDef.peopleKey];
-            return (people.length) ? people[0] : 0;
+            if (people) {
+                return (people.length) ? people[0] : 0;
+            } else {
+                return "";
+            }
         },
         PullRequestFormatter: function(row, cell, value, columnDef, dataContext) {
             if (!value) {
@@ -45,11 +49,12 @@
                 { id: 'Branch', name: 'Branch', field: 'Branch', width: 150, editor: Slick.Editors.Text },
                 { id: 'PullRequestId', name: 'PR', field: 'PullRequestId', width: 60, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text },
                 { id: 'JiraLabel', name: 'Jira', field: 'Branch', width: 50, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira },
-                { id: 'Quails', name: 'QA', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Quails', width: 70, editor: Slick.Editors.People },
-                { id: 'Designers', name: 'DES', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Designers', width: 70, editor: Slick.Editors.People },
-                { id: 'Developers', name: 'DEV', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Developers', width: 70, editor: Slick.Editors.People },
-                { id: 'CodeReviewers', name: 'CR', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'CodeReviewers', width: 70, editor: Slick.Editors.People },
-                { id: 'Notes', name: 'Notes', field: 'Notes', width: 249, editor: Slick.Editors.Text }
+                { id: 'Quails', name: 'QA', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Quails', width: 100, editor: Slick.Editors.People },
+                { id: 'Designers', name: 'DES', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Designers', width: 100, editor: Slick.Editors.People },
+                { id: 'Developers', name: 'DEV', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Developers', width: 100, editor: Slick.Editors.People },
+                { id: 'CodeReviewers', name: 'CR', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'CodeReviewers', width: 100, editor: Slick.Editors.People },
+                { id: 'ProjectManagers', name: 'PM', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'ProjectManagers', width: 100, editor: Slick.Editors.People },
+                { id: 'Notes', name: 'Notes', field: 'Notes', width: 259, editor: Slick.Editors.Text }
             ];
             var dataView = new Slick.Data.DataView();
 
