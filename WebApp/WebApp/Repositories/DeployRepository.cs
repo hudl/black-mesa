@@ -12,6 +12,7 @@ namespace WebApp.Repositories
         {
             return Collection
                 .Find(Query<Deploy>.Where(d => d.DeployTime > deployTime))
+                .SetSortOrder(SortBy.Descending("deployTime"))
                 .SetLimit(returnSize);
         }
     }
