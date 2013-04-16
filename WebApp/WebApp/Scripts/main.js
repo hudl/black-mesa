@@ -34,7 +34,7 @@
                 return '';
             }
             return '<a href="' + columnDef.githubBaseUrl + value.toString() + '" target="_blank">' + value.toString() + '<i class="icon-share-alt"></i></a>';
-        }
+        },
     });
     
     $(function () {
@@ -84,6 +84,7 @@
                     toastr.info('Updated ' + grid.getColumns()[args.cell].field + " to " + $(grid.getCellNode(args.row, args.cell)).text());
                 });
             });
+            grid.registerPlugin(new Slick.AutoTooltips());
             
             dataView.beginUpdate();
             dataView.setItems(data.Items, 'Id');
