@@ -8,6 +8,10 @@
             "timeOut": 2000,
             "extendedTimeOut": 1000
         }
+        $('#load-all').click(function () {
+            loadData(true);
+        });
+        loadData(false);
     });
 
     Slick.Formatters = _.extend(Slick.Formatters || {}, {
@@ -18,17 +22,6 @@
             var jiraUrl = columnDef.jiraBaseUrl + encodeURIComponent('labels = ' + value);
             return '<a href="' + jiraUrl + '" target="_blank">tix<i class="icon-share-alt"></i></a>';
         },
-        PeopleFormatter: function(row, cell, value, columnDef, dataContext) {
-            if (!value) {
-                return '';
-            }
-            var people = value[columnDef.peopleKey];
-            if (people) {
-                return (people.length) ? people[0] : 0;
-            } else {
-                return "";
-            }
-        },
         PullRequestFormatter: function(row, cell, value, columnDef, dataContext) {
             if (!value) {
                 return '';
@@ -37,24 +30,39 @@
         },
     });
     
-    $(function () {
-        $.getJSON('/api/v1/deploys').then(function (data) {
+    function loadData(loadAll) {
+        $.getJSON('/api/v1/deploys' + (loadAll ? '/all' : '')).then(function (data) {
+            if (loadAll) {
+                $('#load-all').text("You suck, but I did it for you, but just this once.");
+            }
+
+            $.each(data.items, function (index, item) {
+                item.qa = item.people["quails"].join(','),
+                item.dev = item.people["developers"].join(','),
+                item.design = item.people["designers"].join(','),
+                item.pm = item.people["projectManagers"].join(','),
+                item.codeReview = item.people["codeReviewers"].join(',')
+            });
+
+            // If we have them all loaded we really need to add the year
+            var dateFormatter = loadAll ? "M/d/yy HH:mm" : "M/d HH:mm";
+
             var columns = [
-                { id: 'Day', name: 'Day', field: 'Day', width: 35 },
-                { id: 'DeployTime', name: 'Time', field: 'DeployTime', formatter: Slick.Formatters.DateTimeFormatter, dateFormat: "M/d HH:mm", width: 80 },
-                { id: 'Action', name: 'Action', field: 'Action', width: 60, editor: Slick.Editors.Action },
-                { id: 'Component', name: 'Comp.', field: 'Component', width: 50, editor: Slick.Editors.Component },
-                { id: 'Type', name: 'Type', field: 'Type', width: 90, editor: Slick.Editors.Type },
-                { id: 'Project', name: 'Proj.', field: 'Project', width: 50, editor: Slick.Editors.Project },
-                { id: 'Branch', name: 'Branch', field: 'Branch', width: 150, editor: Slick.Editors.Text },
-                { id: 'PullRequestId', name: 'PR', field: 'PullRequestId', width: 60, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text },
-                { id: 'JiraLabel', name: 'Jira', field: 'Branch', width: 50, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira },
-                { id: 'Quails', name: 'QA', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Quails', width: 100, editor: Slick.Editors.People },
-                { id: 'Designers', name: 'DES', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Designers', width: 100, editor: Slick.Editors.People },
-                { id: 'Developers', name: 'DEV', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'Developers', width: 100, editor: Slick.Editors.People },
-                { id: 'CodeReviewers', name: 'CR', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'CodeReviewers', width: 100, editor: Slick.Editors.People },
-                { id: 'ProjectManagers', name: 'PM', field: 'People', formatter: Slick.Formatters.PeopleFormatter, peopleKey: 'ProjectManagers', width: 100, editor: Slick.Editors.People },
-                { id: 'Notes', name: 'Notes', field: 'Notes', width: 259, editor: Slick.Editors.Text }
+                { id: 'Day', name: 'Day', field: 'day', width: 35 },
+                { id: 'DeployTime', name: 'Time', field: 'deployTime', formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, width: 80 },
+                { id: 'Action', name: 'Action', field: 'action', width: 60, editor: Slick.Editors.Action },
+                { id: 'Component', name: 'Comp.', field: 'component', width: 60, editor: Slick.Editors.Component },
+                { id: 'Type', name: 'Type', field: 'type', width: 100, editor: Slick.Editors.Type },
+                { id: 'Project', name: 'Proj.', field: 'project', width: 100, editor: Slick.Editors.Project },
+                { id: 'Branch', name: 'Branch', field: 'branch', width: 150, editor: Slick.Editors.Text },
+                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 60, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text },
+                { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 50, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira },
+                { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.Text },
+                { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.Text },
+                { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.Text },
+                { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.Text },
+                { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.Text },
+                { id: 'Notes', name: 'Notes', field: 'notes', width: 259, editor: Slick.Editors.Text }
             ];
             var dataView = new Slick.Data.DataView();
 
@@ -63,7 +71,8 @@
                 autoEdit: false,
                 asyncEditorLoading: false,
                 enableColumnReorder: false,
-                enableCellNavigation: true
+                enableCellNavigation: true,
+                forceFitColumns: true
             });
 
             grid.setSelectionModel(new Slick.CellSelectionModel());
@@ -85,9 +94,9 @@
                 });
             });
             grid.registerPlugin(new Slick.AutoTooltips());
-            
+
             dataView.beginUpdate();
-            dataView.setItems(data.Items, 'Id');
+            dataView.setItems(data.items, 'id');
             dataView.endUpdate();
 
             var selecteditemid = /\/([0-9a-f]+)/.exec(window.location.href);
@@ -98,5 +107,5 @@
 
             window.grid = grid;
         });
-    });
+    };
 })(window.BlackMesa, jQuery);

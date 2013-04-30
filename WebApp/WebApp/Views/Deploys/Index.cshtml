@@ -3,11 +3,14 @@
     @Scripts.Render("~/bundles/main")
 }
 <div class="header">
-  <div class="container">
-	<h1>Deploy</h1>
-  </div>
+    <div class="container">
+        <h1>Deploys</h1>
+    </div>
+</div>
+<div style="margin-left: 10px; margin-right: 10px;">
+    <a href="#" id="new-deploy">Add New Deploy</a>
+    <div id="deploys" style="height: 700px; width: auto;"></div>
+    <a href="#" id="load-all">Load All (Only if you really need it, because seriously it's a lot of rows and the server is lazy and doesn't want to do that for you)</a>
 </div>
 
-<div class="container">
-    <div id="deploys" style="height: 500px; width: 1400px;"></div>
-</div>
+@Html.Partial("DeployDoc")
