@@ -19,7 +19,6 @@ namespace DeployExporter
                 csv.Configuration.Delimiter = "\t";
                 csv.WriteRecords<Deploy>(deploys);
             }
-            Console.Read();
         }
     }
 }

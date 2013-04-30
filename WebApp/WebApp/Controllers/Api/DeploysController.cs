@@ -8,13 +8,20 @@ namespace WebApp.Controllers.Api
 {
     public class DeploysController : ApiController
     {
-        public Deploys Get()
+        private const int MaxReturnSize = 100;
+        public Deploys Get(int returnSize = MaxReturnSize)
         {
             var repository = new DeployRepository();
             return new Deploys
                 {
-                    Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2)).ToArray()
+                    Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2), returnSize).ToArray()
                 };
+        }
+
+        public void Post(Deploy deploy)
+        {
+            var repository = new DeployRepository();
+            repository.Update(deploy);
         }
     }
 }
