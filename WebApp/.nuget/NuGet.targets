@@ -23,7 +23,7 @@
             <PackageSource Include="https://nuget.org/api/v2/" />
             <PackageSource Include="https://my-nuget-source/nuget/" />
         -->
-		<PackageSource Include="\\agileserver.agilesports.local\DevShare\NuGet" />
+		<PackageSource Include="$(NuGetRepo)" />
     </ItemGroup>
 
     <PropertyGroup Condition=" '$(OS)' == 'Windows_NT'">

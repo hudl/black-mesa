@@ -18,6 +18,7 @@
       <property name="PublishProfile" value="Local" />
       <property name="VisualStudioVersion" value="11.0" />
       <property name="WarningLevel" value="0" />
+	  <property name="NuGetRepo" value="${nugetRepo}" />
     </msbuild>
 
     <zip zipfile="${payload}">
