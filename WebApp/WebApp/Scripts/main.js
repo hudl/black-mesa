@@ -90,7 +90,7 @@
             });
             grid.onCellChange.subscribe(function (e, args) {
                 $.post("/api/v1/deploys", args.item, function (data) {
-                    toastr.info('Updated ' + grid.getColumns()[args.cell].field + " to " + $(grid.getCellNode(args.row, args.cell)).text());
+                    toastr.info('Updated ' + grid.getColumns()[args.cell].id + " to " + $(grid.getCellNode(args.row, args.cell)).text());
                 });
             });
             grid.registerPlugin(new Slick.AutoTooltips());

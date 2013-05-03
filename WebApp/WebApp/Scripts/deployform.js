@@ -6,10 +6,10 @@
         $.getJSON('/api/v1/people', function (data) {
             productTeamMembers = data["accounts"];
             productTeamMembers = _.sortBy(productTeamMembers, function (user) { return user.Name; });
-            var noneAccount = new Object();
-            noneAccount.Name = "None";
-            noneAccount.Groups = new Array();
-            noneAccount.Groups[0] = "all";
+            var noneAccount = {
+                Name: "None",
+                Groups: ["all"]
+            };
             productTeamMembers.unshift(noneAccount);
             // They all need ids for this :(
             $.each(productTeamMembers, function (index, value) {
