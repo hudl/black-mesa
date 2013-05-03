@@ -5,15 +5,15 @@
     $(function () {
         $.getJSON('/api/v1/people', function (data) {
             productTeamMembers = data["accounts"];
-            productTeamMembers = _.sortBy(productTeamMembers, function (user) { return user.name; });
+            productTeamMembers = _.sortBy(productTeamMembers, function (user) { return user.Name; });
             var noneAccount = new Object();
-            noneAccount.name = "None";
-            noneAccount.groups = new Array();
-            noneAccount.groups[0] = "all";
+            noneAccount.Name = "None";
+            noneAccount.Groups = new Array();
+            noneAccount.Groups[0] = "all";
             productTeamMembers.unshift(noneAccount);
             // They all need ids for this :(
             $.each(productTeamMembers, function (index, value) {
-                value.id = value.name;
+                value.id = value.Name;
             });
         });
         $('#new-deploy').click(function () {
@@ -199,12 +199,12 @@
         var i = 0;
         var sortedList = [];
         _.each(users, function (user) {
-            if ($.inArray("all", user.groups) > -1 || $.inArray(role, user.groups) > -1) {
+            if ($.inArray("all", user.Groups) > -1 || $.inArray(role, user.Groups) > -1) {
                 sortedList[i++] = user;
             }
         });
         _.each(users, function (user) {
-            if ($.inArray("all", user.groups) == -1 && $.inArray(role, user.groups) == -1) {
+            if ($.inArray("all", user.Groups) == -1 && $.inArray(role, user.Groups) == -1) {
                 sortedList[i++] = user;
             }
         });
@@ -212,7 +212,7 @@
     }
 
     function format(item) {
-        return item.name;
+        return item.Name;
     }
     function formatDes(item) {
         return formatter(item, "Design");
@@ -227,10 +227,10 @@
         return formatter(item, "PM");
     };
     function formatter(item, role) {
-        if ($.inArray(role, item.groups) > -1 || $.inArray("all", item.groups) > -1) {
-            return "<b>" + item.name + "</b>";
+        if ($.inArray(role, item.Groups) > -1 || $.inArray("all", item.Groups) > -1) {
+            return "<b>" + item.Name + "</b>";
         } else {
-            return item.name;
+            return item.Name;
         }
     }
 
@@ -306,11 +306,14 @@
     }
 
     function fullNameForGithubName(githubName) {
+        var name;
         $.each(productTeamMembers, function (index, value) {
-            if (value.github == githubName) {
-                return value.name;
+            if (value.GithubName == githubName) {
+                name = value.Name;
+                return false;
             }
         });
+        return name;
     }
 
 })(window.deployform, jQuery, _);
