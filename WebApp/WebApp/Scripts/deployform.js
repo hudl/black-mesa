@@ -68,6 +68,22 @@
                         width: "320px",
                         placeholder: "Project Manager..."
                     });
+                    $('#devInitials').select2({
+                        data: { results: sortByRole(productTeamMembers, "Developers"), text: function (item) { return item.id; } },
+                        formatSelection: format,
+                        formatResult: formatDev,
+                        tags: [],
+                        width: "320px",
+                        placeholder: "Developer..."
+                    });
+                    $('#qaInitials').select2({
+                        data: { results: sortByRole(productTeamMembers, "QA"), text: function (item) { return item.id; } },
+                        formatSelection: format,
+                        formatResult: formatQa,
+                        tags: [],
+                        width: "320px",
+                        placeholder: "Quality Assurance..."
+                    });
                     $('#pullRequestId').change(prChanged);
 
                     $(function () {

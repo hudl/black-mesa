@@ -98,7 +98,36 @@
                     </div>
                 </div>
                 <br />
-                <label class="control-label">Hudl Impact</label>
+                <div id="prod-ticket-div">
+                    <label class="control-label">Prod-Ticket</label>
+                    <div class="controls">
+                        <input type="number" id="prodTicket" name="prodTicket" data-desc="Prod-Ticket Number" placeholder="Just the number" />
+                    </div>
+                </div>
+                <br />
+                <div id="ticket-div">
+                    <label class="control-label">Ticket</label>
+                    <div class="controls">
+                        <input type="text" id="ticket" name="ticket" data-desc="Ticket" placeholder="Project-Number (i.e. THOR-17620)" />
+                    </div>
+                </div>
+                <br />
+                <div id="hotfix-notes-div">
+                    <label class="control-label">Hotfix Notes</label>
+                    <div class="controls">
+                        <textarea rows="3" id="hotfixNotes" name="hotfixNotes"></textarea>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div id="special-div">
+                    <label class="control-label">Special</label>
+                    <div class="controls">
+                        <textarea rows="3" id="special" name="special"></textarea>
+                    </div>
+                </div>
+                <br />
+                <label class="control-label">QA Hudl Impact</label>
                 <div class="controls">
                     <select id="qaHudlImpact" name="qaHudlImpact" data-hudl-required="true" data-desc="QA - Hudl Impact">
                         <option value=""></option>
@@ -111,7 +140,7 @@
                     </select>
                 </div>
                 <br />
-                <label class="control-label">Culpability</label>
+                <label class="control-label">QA Culpability</label>
                 <div class="controls">
                     <select id="qaTeamCulp" name="qaTeamCulp" data-hudl-required="true" data-desc="QA - Team Culpability">
                         <option value=""></option>
@@ -124,7 +153,7 @@
                     </select>
                 </div>
                 <br />
-                <label class="control-label">User Impact</label>
+                <label class="control-label">QA User Impact</label>
                 <div class="controls">
                     <select id="qaUserImpact" name="qaUserImpact" data-hudl-required="true" data-desc="QA - User Impact">
                         <option value=""></option>
@@ -136,6 +165,55 @@
                         <option value="5">5 - Blocker - Data loss. Blocked from Hudl completely. Or blocked from major part of Hudl.</option>
                     </select>
                 </div>
+				<br />
+			    <label class="control-label">QA Member</label>
+			    <div class="controls">
+				    <input type="hidden" id="qaInitials" name="qaInitials" placeholder="Quality Assurance..." data-hudl-required="true" data-desc="QA Member">
+			    </div>
+			    <br />
+                <label class="control-label">Dev Hudl Impact</label>
+                <div class="controls">
+                    <select id="devHudlImpact" name="devHudlImpact" data-hudl-required="true" data-desc="Dev - Hudl Impact">
+                        <option value=""></option>
+                        <option value="0">0 - None, it's impossible for users to be affected</option>
+                        <option value="1">1 - None, we discovered it internally before receiving any calls</option>
+                        <option value="2">2 - A couple of calls</option>
+                        <option value="3">3 - Support gets a number of calls - this happened to a majority of users OR at a prime time (not both)</option>
+                        <option value="4">4 - Support gets a lot of calls, it's a combo of a good % of users and prime usage</option>
+                        <option value="5">5 - Support is overwhelmed</option>
+                    </select>
+                </div>
+                <br />
+                <label class="control-label">Dev Culpability</label>
+                <div class="controls">
+                    <select id="devTeamCulp" name="devTeamCulp" data-hudl-required="true" data-desc="Dev - Team Culpability">
+                        <option value=""></option>
+                        <option value="0">0 - It was a third party that broke this. They suck.</option>
+                        <option value="1">1 - Not reasonable to have caught. Extremely isolated case or hardware-specific.</option>
+                        <option value="2">2 - Wouldn't expect to catch in a code review, and wasn't laid out in test plan.</option>
+                        <option value="3">3 - Reasonable to have caught in a code review or during the course of testing, but was not specifically in test plan.</option>
+                        <option value="4">4 - Probably should have been caught in a code review, or the item was in regression, but poorly worded/misunderstood/or not specific enough.</option>
+                        <option value="5">5 - Definitely should have been caught. Would have been obvious in a code review or was a clearly outlined part of the test plan.</option>
+                    </select>
+                </div>
+                <br />
+                <label class="control-label">Dev User Impact</label>
+                <div class="controls">
+                    <select id="devUserImpact" name="devUserImpact" data-hudl-required="true" data-desc="Dev - User Impact">
+                        <option value=""></option>
+                        <option value="0">0 - No users were affected, the problem was related to logging.</option>
+                        <option value="1">1 - Trivial - Cosmetic problems like mispealt words or misaligned text. Does not affect funtion.</option>
+                        <option value="2">2 - Minor - Minor loss of function, or other problem where easy workaround is present. Only affects one or two features of Hudl, or downtime shorter than time it takes to refresh page.</option>
+                        <option value="3">3 - Major - Major loss of function that is limited either by shorter downtime, or small scope (only a few features of Hudl go down).</option>
+                        <option value="4">4 - Critical - Minor data loss, short periods of being blocked from Hudl or major parts of Hudl.</option>
+                        <option value="5">5 - Blocker - Data loss. Blocked from Hudl completely. Or blocked from major part of Hudl.</option>
+                    </select>
+                </div>
+				<br />
+			    <label class="control-label">Dev Member</label>
+			    <div class="controls">
+				    <input type="hidden" id="devInitials" name="devInitials" placeholder="Developer..." data-hudl-required="true" data-desc="Dev Member">
+			    </div>
             </div>
         </div>
         <div class="control-group">

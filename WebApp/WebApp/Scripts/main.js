@@ -9,6 +9,7 @@
             "extendedTimeOut": 1000
         }
         $('#load-all').click(function () {
+            $('#row-loading-spinner').show();
             loadData(true);
         });
         loadData(false);
@@ -28,41 +29,53 @@
             }
             return '<a href="' + columnDef.githubBaseUrl + value.toString() + '" target="_blank">' + value.toString() + '<i class="icon-share-alt"></i></a>';
         },
+        TypeFormatter: function (row, cell, value, columnDef, dataContext) {
+            if (value == "Hotfix") {
+                return '<a href="#" class="hotfix" data-mongo-id="' + dataContext.id + '">' + value + '<i class="icon-share-alt"></i></a>';
+            }
+            return value;
+        },
     });
     
     function loadData(loadAll) {
         $.getJSON('/api/v1/deploys' + (loadAll ? '/all' : '')).then(function (data) {
             if (loadAll) {
-                $('#load-all').text("You suck, but I did it for you, but just this once.");
+                $('#load-all').text("Loaded all rows in Mongo");
+                $('#row-loading-spinner').hide();
             }
 
             $.each(data.items, function (index, item) {
-                item.qa = item.people["quails"].join(','),
-                item.dev = item.people["developers"].join(','),
-                item.design = item.people["designers"].join(','),
-                item.pm = item.people["projectManagers"].join(','),
-                item.codeReview = item.people["codeReviewers"].join(',')
+                if (item.people["quails"])
+                    item.qa = item.people["quails"].join(',');
+                if (item.people["developers"])
+                    item.dev = item.people["developers"].join(',');
+                if (item.people["designers"])
+                    item.design = item.people["designers"].join(',');
+                if (item.people["projectManagers"])
+                    item.pm = item.people["projectManagers"].join(',');
+                if (item.people["codeReviewers"])
+                    item.codeReview = item.people["codeReviewers"].join(',');
             });
 
             // If we have them all loaded we really need to add the year
-            var dateFormatter = loadAll ? "M/d/yy HH:mm" : "M/d HH:mm";
+            var dateFormatter = "M/d/yyyy HH:mm";
 
             var columns = [
                 { id: 'Day', name: 'Day', field: 'day', width: 35 },
-                { id: 'DeployTime', name: 'Time', field: 'deployTime', formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, width: 80 },
-                { id: 'Action', name: 'Action', field: 'action', width: 60, editor: Slick.Editors.Action },
-                { id: 'Component', name: 'Comp.', field: 'component', width: 60, editor: Slick.Editors.Component },
-                { id: 'Type', name: 'Type', field: 'type', width: 100, editor: Slick.Editors.Type },
-                { id: 'Project', name: 'Proj.', field: 'project', width: 100, editor: Slick.Editors.Project },
-                { id: 'Branch', name: 'Branch', field: 'branch', width: 150, editor: Slick.Editors.Text },
-                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 60, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text },
-                { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 50, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira },
-                { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.Text },
-                { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.Text },
-                { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.Text },
-                { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.Text },
-                { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.Text },
-                { id: 'Notes', name: 'Notes', field: 'notes', width: 259, editor: Slick.Editors.Text }
+                { id: 'DeployTime', name: 'Time', field: 'deployTime', formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, width: 80, sortable: true },
+                { id: 'Action', name: 'Action', field: 'action', width: 60, editor: Slick.Editors.Action, sortable: true },
+                { id: 'Component', name: 'Comp.', field: 'component', width: 60, editor: Slick.Editors.Component, sortable: true },
+                { id: 'Type', name: 'Type', field: 'type', width: 100, formatter: Slick.Formatters.TypeFormatter, editor: Slick.Editors.Type, sortable: true },
+                { id: 'Project', name: 'Proj.', field: 'project', width: 100, editor: Slick.Editors.Project, sortable: true },
+                { id: 'Branch', name: 'Branch', field: 'branch', width: 150, editor: Slick.Editors.Text, sortable: true },
+                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 60, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text, sortable: true },
+                { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 50, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira, sortable: true },
+                { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.Text, sortable: true },
+                { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.Text, sortable: true },
+                { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.Text, sortable: true },
+                { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.Text, sortable: true },
+                { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.Text, sortable: true },
+                { id: 'Notes', name: 'Notes', field: 'notes', width: 259, editor: Slick.Editors.Text, sortable: true }
             ];
             var dataView = new Slick.Data.DataView();
 
@@ -72,7 +85,27 @@
                 asyncEditorLoading: false,
                 enableColumnReorder: false,
                 enableCellNavigation: true,
-                forceFitColumns: true
+                forceFitColumns: true,
+                multiColumnSort: true
+            });
+
+            grid.onSort.subscribe(function (e, args) {
+                var cols = args.sortCols;
+
+                dataView.sort(function (dataRow1, dataRow2) {
+                    for (var i = 0, l = cols.length; i < l; i++) {
+                        var field = cols[i].sortCol.field;
+                        var sign = cols[i].sortAsc ? 1 : -1;
+                        var value1 = dataRow1[field], value2 = dataRow2[field];
+                        var result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
+                        if (result != 0) {
+                            return result;
+                        }
+                    }
+                    return 0;
+                });
+                grid.invalidate();
+                grid.render();
             });
 
             grid.setSelectionModel(new Slick.CellSelectionModel());
@@ -101,8 +134,8 @@
 
             var selecteditemid = /\/([0-9a-f]+)/.exec(window.location.href);
             if (selecteditemid !== null && selecteditemid.length > 0) {
-                var selectedrowindex = dataview.getidxbyid(selecteditemid[1]);
-                grid.setselectedrows([selectedrowindex]);
+                var selectedrowindex = dataView.getIdxById(selecteditemid[1]);
+                grid.setSelectedRows([selectedrowindex]);
             }
 
             window.grid = grid;

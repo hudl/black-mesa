@@ -10,6 +10,7 @@ namespace DeployImporter
     {
         public string ID { get; set; }
         public string BRANCH { get; set; }
+        public string TICKET { get; set; }
         public string COMPONENT { get; set; }
         public string SPECIAL { get; set; }
         public string DEV_Team_Culpability { get; set; }

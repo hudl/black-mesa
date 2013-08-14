@@ -1,6 +1,17 @@
 ﻿using System.Web.Mvc;
 using Newtonsoft.Json;
 using WebApp.Queries;
+using WebApp.Repositories;
+using CsvHelper;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebApp.Models;
+using AttributeRouting.Web.Mvc;
+
 
 namespace WebApp.Controllers
 {
@@ -9,6 +20,25 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             return RedirectToRoute(new {controller = "Deploys", action = "Index"});
+        }
+
+        [GET("export")]
+        public void DataExport()
+        {
+            var repo = new DeployRepository();
+            var deploys = repo.Collection.FindAll().ToList();
+            StringBuilder strBuilder = new StringBuilder();
+            StringWriter str = new StringWriter(strBuilder);
+            using (var csv = new CsvWriter(str))
+            {
+                csv.Configuration.Delimiter = "\t";
+                csv.Configuration.IsCaseSensitive = false;
+                csv.WriteRecords<DeployForExport>(DeployForExport.convertDeploysForExport(deploys));
+            }
+            Response.AddHeader("Content-disposition", "attachment; filename=deployData.tsv");
+            Response.ContentType = "application/octet-stream";
+            Response.Write(str.ToString());
+            Response.End();
         }
 
         public ContentResult Config()

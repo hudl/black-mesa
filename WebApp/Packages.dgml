@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="WebApp" Label="WebApp" Category="Project" />
+    <Node Id="AttributeRouting 3.5.6" Label="AttributeRouting 3.5.6" Category="Package" />
+    <Node Id="AttributeRouting.Core 3.5.6" Label="AttributeRouting.Core 3.5.6" Category="Package" />
+    <Node Id="AttributeRouting.Core.Web 3.5.6" Label="AttributeRouting.Core.Web 3.5.6" Category="Package" />
+    <Node Id="CsvHelper 1.17.0" Label="CsvHelper 1.17.0" Category="Package" />
+    <Node Id="EntityFramework 5.0.0" Label="EntityFramework 5.0.0" Category="Package" />
+    <Node Id="html5shiv 0.1.0.6" Label="html5shiv 0.1.0.6" Category="Package" />
+    <Node Id="jQuery 1.8.3" Label="jQuery 1.8.3" Category="Package" />
+    <Node Id="jQuery.dateFormat 1.0.1" Label="jQuery.dateFormat 1.0.1" Category="Package" />
+    <Node Id="jquery.event.drag 2.0.0" Label="jquery.event.drag 2.0.0" Category="Package" />
+    <Node Id="jQuery.UI.Combined 1.8.20.1" Label="jQuery.UI.Combined 1.8.20.1" Category="Package" />
+    <Node Id="jQuery.Validation 1.9.0.1" Label="jQuery.Validation 1.9.0.1" Category="Package" />
+    <Node Id="knockoutjs 2.1.0" Label="knockoutjs 2.1.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Mvc 4.0.20710.0" Label="Microsoft.AspNet.Mvc 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Providers.Core 1.1" Label="Microsoft.AspNet.Providers.Core 1.1" Category="Package" />
+    <Node Id="Microsoft.AspNet.Providers.LocalDB 1.1" Label="Microsoft.AspNet.Providers.LocalDB 1.1" Category="Package" />
+    <Node Id="Microsoft.AspNet.Razor 2.0.20715.0" Label="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Web.Optimization 1.0.0" Label="Microsoft.AspNet.Web.Optimization 1.0.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi 4.0.20710.0" Label="Microsoft.AspNet.WebApi 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Label="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Label="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Label="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages 2.0.20710.0" Label="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.jQuery.Unobtrusive.Ajax 2.0.20710.0" Label="Microsoft.jQuery.Unobtrusive.Ajax 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.jQuery.Unobtrusive.Validation 2.0.20710.0" Label="Microsoft.jQuery.Unobtrusive.Validation 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.0.20710.0" Label="Microsoft.Net.Http 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.Web.Infrastructure 1.0.0.0" Label="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package" />
+    <Node Id="Modernizr 2.5.3" Label="Modernizr 2.5.3" Category="Package" />
+    <Node Id="mongocsharpdriver 1.7" Label="mongocsharpdriver 1.7" Category="Package" />
+    <Node Id="MongoRepository 1.4.1" Label="MongoRepository 1.4.1" Category="Package" />
+    <Node Id="navigationroutes.mvc4 1.0.41" Label="navigationroutes.mvc4 1.0.41" Category="Package" />
+    <Node Id="Newtonsoft.Json 5.0.3" Label="Newtonsoft.Json 5.0.3" Category="Package" />
+    <Node Id="ServiceStack.Common 3.9.43" Label="ServiceStack.Common 3.9.43" Category="Package" />
+    <Node Id="ServiceStack.Redis 3.9.43" Label="ServiceStack.Redis 3.9.43" Category="Package" />
+    <Node Id="ServiceStack.Text 3.9.43" Label="ServiceStack.Text 3.9.43" Category="Package" />
+    <Node Id="SlickGrid 2.1.20121205" Label="SlickGrid 2.1.20121205" Category="Package" />
+    <Node Id="Twitter.Bootstrap 2.2.2" Label="Twitter.Bootstrap 2.2.2" Category="Package" />
+    <Node Id="twitter.bootstrap.mvc4 1.0.41" Label="twitter.bootstrap.mvc4 1.0.41" Category="Package" />
+    <Node Id="underscore.js 1.4.3" Label="underscore.js 1.4.3" Category="Package" />
+    <Node Id="WebActivator 1.0.0.0" Label="WebActivator 1.0.0.0" Category="Package" />
+    <Node Id="WebGrease 1.1.0" Label="WebGrease 1.1.0" Category="Package" />
+  </Nodes>
+  <Links>
+    <Link Source="AttributeRouting 3.5.6" Target="AttributeRouting.Core 3.5.6" Category="Package Dependency" />
+    <Link Source="AttributeRouting 3.5.6" Target="AttributeRouting.Core.Web 3.5.6" Category="Package Dependency" />
+    <Link Source="AttributeRouting 3.5.6" Target="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="AttributeRouting 3.5.6" Target="WebActivator 1.0.0.0" Category="Package Dependency" />
+    <Link Source="AttributeRouting.Core.Web 3.5.6" Target="AttributeRouting.Core 3.5.6" Category="Package Dependency" />
+    <Link Source="jquery.event.drag 2.0.0" Target="jQuery 1.8.3" Category="Package Dependency" />
+    <Link Source="jQuery.UI.Combined 1.8.20.1" Target="jQuery 1.8.3" Category="Package Dependency" />
+    <Link Source="jQuery.Validation 1.9.0.1" Target="jQuery 1.8.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc 4.0.20710.0" Target="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc 4.0.20710.0" Target="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Providers.LocalDB 1.1" Target="Microsoft.AspNet.Providers.Core 1.1" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.0.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.0.0" Target="WebGrease 1.1.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi 4.0.20710.0" Target="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Target="Microsoft.Net.Http 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Target="Newtonsoft.Json 5.0.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Target="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Target="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 2.0.20710.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 2.0.20710.0" Target="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package Dependency" />
+    <Link Source="Microsoft.jQuery.Unobtrusive.Ajax 2.0.20710.0" Target="jQuery 1.8.3" Category="Package Dependency" />
+    <Link Source="Microsoft.jQuery.Unobtrusive.Validation 2.0.20710.0" Target="jQuery.Validation 1.9.0.1" Category="Package Dependency" />
+    <Link Source="MongoRepository 1.4.1" Target="mongocsharpdriver 1.7" Category="Package Dependency" />
+    <Link Source="ServiceStack.Common 3.9.43" Target="ServiceStack.Text 3.9.43" Category="Package Dependency" />
+    <Link Source="ServiceStack.Redis 3.9.43" Target="ServiceStack.Common 3.9.43" Category="Package Dependency" />
+    <Link Source="SlickGrid 2.1.20121205" Target="jQuery 1.8.3" Category="Package Dependency" />
+    <Link Source="SlickGrid 2.1.20121205" Target="jquery.event.drag 2.0.0" Category="Package Dependency" />
+    <Link Source="twitter.bootstrap.mvc4 1.0.41" Target="html5shiv 0.1.0.6" Category="Package Dependency" />
+    <Link Source="twitter.bootstrap.mvc4 1.0.41" Target="Twitter.Bootstrap 2.2.2" Category="Package Dependency" />
+    <Link Source="twitter.bootstrap.mvc4 1.0.41" Target="navigationroutes.mvc4 1.0.41" Category="Package Dependency" />
+    <Link Source="twitter.bootstrap.mvc4 1.0.41" Target="Microsoft.AspNet.Web.Optimization 1.0.0" Category="Package Dependency" />
+    <Link Source="twitter.bootstrap.mvc4 1.0.41" Target="jQuery 1.8.3" Category="Package Dependency" />
+    <Link Source="twitter.bootstrap.mvc4 1.0.41" Target="Microsoft.jQuery.Unobtrusive.Ajax 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="twitter.bootstrap.mvc4 1.0.41" Target="Microsoft.jQuery.Unobtrusive.Validation 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="WebApp" Target="AttributeRouting 3.5.6" Category="Installed Package" />
+    <Link Source="WebApp" Target="CsvHelper 1.17.0" Category="Installed Package" />
+    <Link Source="WebApp" Target="EntityFramework 5.0.0" Category="Installed Package" />
+    <Link Source="WebApp" Target="jQuery.dateFormat 1.0.1" Category="Installed Package" />
+    <Link Source="WebApp" Target="jQuery.UI.Combined 1.8.20.1" Category="Installed Package" />
+    <Link Source="WebApp" Target="knockoutjs 2.1.0" Category="Installed Package" />
+    <Link Source="WebApp" Target="Microsoft.AspNet.Mvc 4.0.20710.0" Category="Installed Package" />
+    <Link Source="WebApp" Target="Microsoft.AspNet.Providers.LocalDB 1.1" Category="Installed Package" />
+    <Link Source="WebApp" Target="Microsoft.AspNet.WebApi 4.0.20710.0" Category="Installed Package" />
+    <Link Source="WebApp" Target="Modernizr 2.5.3" Category="Installed Package" />
+    <Link Source="WebApp" Target="MongoRepository 1.4.1" Category="Installed Package" />
+    <Link Source="WebApp" Target="ServiceStack.Redis 3.9.43" Category="Installed Package" />
+    <Link Source="WebApp" Target="SlickGrid 2.1.20121205" Category="Installed Package" />
+    <Link Source="WebApp" Target="twitter.bootstrap.mvc4 1.0.41" Category="Installed Package" />
+    <Link Source="WebApp" Target="underscore.js 1.4.3" Category="Installed Package" />
+  </Links>
+  <Categories>
+    <Category Id="Project" />
+    <Category Id="Package" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

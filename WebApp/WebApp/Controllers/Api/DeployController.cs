@@ -1,6 +1,7 @@
 ﻿using AttributeRouting;
 using AttributeRouting.Web.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -63,6 +64,35 @@ namespace WebApp.Controllers.Api
                 ProjectManagers = deploy.ProjectManager != null ? deploy.ProjectManager.Split(',') : new string[0],
                 Quails = deploy.Qa != null ? deploy.Qa.Split(',') : new string[0],
             };
+            if (deploy.Type.Equals("Hotfix", StringComparison.OrdinalIgnoreCase))
+            {
+                deploy.Hotfixes = new List<Hotfix>(1);
+                deploy.Hotfixes.Add(new Hotfix()
+                {
+                    BranchThatBrokeIt = deploy.BadBranch,
+                    ProdTicket = deploy.ProdTicket,
+                    Ticket = deploy.Ticket,
+                    Assessments = new Assessments()
+                    {
+                        Quails = new Assessment()
+                        {
+                            AffectedUserImpact = deploy.QaUserImpact,
+                            Culpability = deploy.QaTeamCulp,
+                            HudlWideImpact = deploy.QaHudlImpact,
+                            Initials = deploy.QaInitials
+                        },
+                        Developers = new Assessment()
+                        {
+                            AffectedUserImpact = deploy.DevUserImpact,
+                            Culpability = deploy.DevTeamCulp,
+                            HudlWideImpact = deploy.DevHudlImpact,
+                            Initials = deploy.DevInitials
+                        }
+                    },
+                    Notes = deploy.HotfixNotes,
+                    Special = deploy.Special
+                });
+            }
         }
     }
 }

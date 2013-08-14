@@ -50,15 +50,22 @@
     <Reference Include="AttributeRouting.Web.Mvc">
       <HintPath>..\packages\AttributeRouting.3.5.6\lib\net40\AttributeRouting.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="CsvHelper, Version=1.17.0.14431, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CsvHelper.1.17.0\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\packages\mongocsharpdriver.1.7\lib\net35\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson, Version=1.8.2.34, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\packages\mongocsharpdriver.1.7\lib\net35\MongoDB.Driver.dll</HintPath>
+    <Reference Include="MongoDB.Driver, Version=1.8.2.34, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="MongoRepository">
-      <HintPath>..\packages\MongoRepository.1.4.1\lib\MongoRepository.dll</HintPath>
+    <Reference Include="MongoRepository, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MongoRepository.1.5.2\lib\MongoRepository.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -178,10 +185,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Assessment.cs" />
+    <Compile Include="Models\Assessments.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Deploy.cs" />
     <Compile Include="Models\BlackMesaEntity.cs" />
+    <Compile Include="Models\DeployForExport.cs" />
     <Compile Include="Models\Deploys.cs" />
+    <Compile Include="Models\Hotfix.cs" />
     <Compile Include="Models\NewDeploy.cs" />
     <Compile Include="Models\People.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />
@@ -283,6 +294,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\deployform.js" />
+    <Content Include="Scripts\hotfix.js" />
     <Content Include="Scripts\jquery.simplemodal-1.4.4.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\html5shiv.js" />
@@ -304,6 +316,7 @@
     <Content Include="Content\tradegothic\TradeGothicLTStd-LightObl.otf" />
     <Content Include="Content\tradegothic\TradeGothicLTStd-Obl.otf" />
     <Content Include="Content\tradegothic\TradeGothicLTStd.otf" />
+    <Content Include="Documentation.chm" />
     <None Include="Properties\PublishProfiles\Shares.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.8.3.intellisense.js" />
@@ -380,6 +393,7 @@
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
     <Content Include="Views\Shared\_alerts.cshtml" />
     <Content Include="Views\Deploys\DeployDoc.cshtml" />
+    <Content Include="Views\Deploys\Hotfix.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
