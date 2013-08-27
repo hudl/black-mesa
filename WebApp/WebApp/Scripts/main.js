@@ -87,6 +87,7 @@
                 enableColumnReorder: false,
                 enableCellNavigation: true,
                 multiColumnSort: true,
+                syncColumnCellResize: true,
             });
 
             grid.onSort.subscribe(function (e, args) {
