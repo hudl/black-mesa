@@ -45,6 +45,7 @@
             }
 
             $.each(data.items, function (index, item) {
+                if (!item.people) return;
                 if (item.people["quails"])
                     item.qa = item.people["quails"].join(',');
                 if (item.people["developers"])
@@ -75,7 +76,7 @@
                 { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.Text, sortable: true },
                 { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.Text, sortable: true },
                 { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.Text, sortable: true },
-                { id: 'Notes', name: 'Notes', field: 'notes', width: 450, editor: Slick.Editors.Text, sortable: true }
+                { id: 'Notes', name: 'Notes', field: 'notes', width: 450, editor: Slick.Editors.Text, sortable: true },
             ];
 
             var dataView = new Slick.Data.DataView();
@@ -123,6 +124,7 @@
                 grid.render();
             });
             grid.onCellChange.subscribe(function (e, args) {
+                BlackMesa.hotfix().flattenHotfixData(args.item, grid.getData().getItemById(args.item.id));
                 $.post("/api/v1/deploys", args.item, function (data) {
                     toastr.info('Updated ' + grid.getColumns()[args.cell].id + " to " + $(grid.getCellNode(args.row, args.cell)).text());
                 });

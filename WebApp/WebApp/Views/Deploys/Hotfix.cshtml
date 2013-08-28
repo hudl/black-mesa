@@ -1,20 +1,62 @@
 ﻿<div id="hotfix" style="display: none;">
-    <div class="container">
+    <div class="form-horizontal" >
         <h1>Hotfix</h1>
-        Prod Ticket: <span id="prod-ticket"></span><br />
-        Dev Ticket: <span id="hotfix-view-ticket"></span><br />
-        Bad Branch: <span id="bad-branch"></span><br />
-        Notes: <span id="hotfix-view-notes"></span><br />
-        Special: <span id="hotfix-view-special"></span><br />
-        <h2>Dev</h2>
-        Team Culpability: <span id="dev-team-culp"></span><br />
-        Hudl-Wide Impact: <span id="dev-hudl-impact"></span><br />
-        Affected User Impact: <span id="dev-affected-users"></span><br />
-        Initials: <span id="dev-initials"></span><br />
-        <h2>QA</h2>
-        Team Culpability: <span id="qa-team-culp"></span><br />
-        Hudl-Wide Impact: <span id="qa-hudl-impact"></span><br />
-        Affected User Impact: <span id="qa-affected-users"></span><br />
-        Initials: <span id="qa-initials"></span>
+        <label class="control-label" for="prod-ticket">Prod Ticket</label>
+        <div class="controls">
+            <input type="number" id="prod-ticket" />
+            <span id="prod-ticket-link"></span>
+        </div>
+        <label class="control-label" for="hotfix-view-ticket">Dev Ticket</label>
+        <div class="controls">
+            <input type="text" id="hotfix-view-ticket" />
+            <span id="hotfix-view-ticket-link"></span>
+        </div>
+        <label class="control-label" for="bad-branch">Bad Branch</label>
+        <div class="controls">
+            <input type="text" id="bad-branch" />
+        </div>
+        <label class="control-label" for="hotfix-view-notes">Notes</label>
+        <div class="controls">
+            <input type="text" id="hotfix-view-notes" />
+        </div>
+        <label class="control-label" for="hotfix-view-special">Special</label>
+        <div class="controls">
+            <input type="text" id="hotfix-view-special" /><br />
+            <h2>Dev</h2>
+        </div>
+        <label class="control-label" for="dev-team-culp">Team Culpability</label>
+        <div class="controls">
+            <input type="number" id="dev-team-culp" />
+        </div>
+        <label class="control-label" for="dev-hudl-impact">Hudl-Wide Impact</label>
+        <div class="controls">
+            <input type="number" id="dev-hudl-impact" />
+        </div>
+        <label class="control-label" for="dev-affected-users">User Impact</label>
+        <div class="controls">
+            <input type="number" id="dev-affected-users" />
+        </div>
+        <label class="control-label" for="dev-initials">Initials</label>
+        <div class="controls">
+            <input type="text" id="dev-initials" /><br />
+            <h2>QA</h2>
+        </div>
+        <label class="control-label" for="qa-team-culp">Team Culpability</label>
+        <div class="controls">
+            <input type="number" id="qa-team-culp" />
+        </div>
+        <label class="control-label" for="qa-hudl-impact">Hudl-Wide Impact</label>
+        <div class="controls">
+            <input type="number" id="qa-hudl-impact" />
+        </div>
+        <label class="control-label" for="qa-affected-users">User Impact</label>
+        <div class="controls">
+            <input type="number" id="qa-affected-users" />
+        </div>
+        <label class="control-label" for="qa-initials">Initials</label>
+        <div class="controls">
+            <input type="text" id="qa-initials"/><br /><br />
+        <button type="button" class="btn btn-primary" id="hotfix-save">Save</button>
+        </div>
     </div>
 </div>
