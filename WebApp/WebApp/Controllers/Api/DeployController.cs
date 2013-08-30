@@ -91,7 +91,10 @@ namespace WebApp.Controllers.Api
                     },
                     Notes = deploy.HotfixNotes,
                     Special = deploy.Special,
-                    HotfixComponent = deploy.HotfixComponent
+                    HotfixComponent = deploy.HotfixComponent,
+                    TheProblem = deploy.TheProblem,
+                    TheFix = deploy.TheFix,
+                    HowMissed = deploy.HowMissed,
                 });
             }
         }

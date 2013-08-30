@@ -29,5 +29,14 @@ namespace WebApp.Models
 
         [BsonElement("ticket")]
         public string Ticket { get; set; }
+
+        [BsonElement("theProblem")]
+        public string TheProblem { get; set; }
+
+        [BsonElement("howMissed")]
+        public string HowMissed { get; set; }
+
+        [BsonElement("theFix")]
+        public string TheFix { get; set; }
     }
 }

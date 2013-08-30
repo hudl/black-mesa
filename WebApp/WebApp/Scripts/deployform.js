@@ -28,62 +28,24 @@
                             dialog.data.fadeIn();
                         });
                     });
-                    $('#dev').select2({
-                        data: { results: sortByRole(productTeamMembers, "Developers"), text: function (item) { return item.id; } },
-                        formatSelection: format,
-                        formatResult: formatDev,
-                        tags: {},
-                        width: "320px",
-                        placeholder: "Developer..."
-                    });
-                    $('#qa').select2({
-                        data: { results: sortByRole(productTeamMembers, "QA"), text: function (item) { return item.id; } },
-                        formatSelection: format,
-                        formatResult: formatQa,
-                        tags: {},
-                        width: "320px",
-                        placeholder: "Quality Assurance..."
-                    });
-                    $('#design').select2({
-                        data: { results: sortByRole(productTeamMembers, "Design"), text: function (item) { return item.id; } },
-                        formatSelection: format,
-                        formatResult: formatDes,
-                        tags: [],
-                        width: "320px",
-                        placeholder: "Designer..."
-                    });
-                    $('#codeReview').select2({
-                        data: { results: sortByRole(productTeamMembers, "Developers"), text: function (item) { return item.id; } },
-                        formatSelection: format,
-                        formatResult: formatDev,
-                        tags: [],
-                        width: "320px",
-                        placeholder: "Code Review Done By..."
-                    });
-                    $('#projectManager').select2({
-                        data: { results: sortByRole(productTeamMembers, "PM"), text: function (item) { return item.id; } },
-                        formatSelection: format,
-                        formatResult: formatPm,
-                        tags: [],
-                        width: "320px",
-                        placeholder: "Project Manager..."
-                    });
-                    $('#devInitials').select2({
-                        data: { results: sortByRole(productTeamMembers, "Developers"), text: function (item) { return item.id; } },
-                        formatSelection: format,
-                        formatResult: formatDev,
-                        tags: [],
-                        width: "320px",
-                        placeholder: "Developer..."
-                    });
-                    $('#qaInitials').select2({
-                        data: { results: sortByRole(productTeamMembers, "QA"), text: function (item) { return item.id; } },
-                        formatSelection: format,
-                        formatResult: formatQa,
-                        tags: [],
-                        width: "320px",
-                        placeholder: "Quality Assurance..."
-                    });
+                    function select2Options(group, fullName) {
+                        return {
+                            data: { results: sortByRole(productTeamMembers, group), text: function (item) { return item.id; } },
+                            formatSelection: format,
+                            formatResult: formatDev,
+                            tags: [],
+                            width: "320px",
+                            placeholder: fullName + "..."
+                        }
+                    };
+                    $('#dev').select2(select2Options("Developers", "Developer"));
+                    $('#qa').select2(select2Options("QA", "Quality Assurance"));
+                    $('#design').select2(select2Options("Design", "Designer"));
+                    $('#codeReview').select2(select2Options("Developers", "Code Review Done By"));
+                    $('#projectManager').select2(select2Options("PM", "Project Manager"));
+                    $('#devInitials').select2(select2Options("Developers", "Developer"));
+                    $('#qaInitials').select2(select2Options("QA", "Quality Assurance"));
+
                     $('#hotfixComponent').select2({
                         width: "320px"
                     });

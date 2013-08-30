@@ -20,6 +20,9 @@
                 postingData.hotfixNotes = structuredData.hotfixes[0].notes;
                 postingData.special = structuredData.hotfixes[0].special;
                 postingData.hotfixComponent = structuredData.hotfixes[0].hotfixComponent;
+                postingData.theProblem = structuredData.hotfixes[0].theProblem;
+                postingData.howMissed = structuredData.hotfixes[0].howMissed;
+                postingData.theFix = structuredData.hotfixes[0].theFix;
             }
 
             return {
@@ -38,7 +41,7 @@
         var hotfix = hotfixes[0];
         $('#hotfix').modal({
             minHeight: 300,
-            maxHeight: 800,
+            maxHeight: 900,
             minWidth: 1150,
             overlayClose: true,
             onOpen: function (dialog) {
@@ -75,10 +78,14 @@
                 $('#qa-affected-users').val(hotfix.assessments.quails.affectedUserImpact);
                 $('#qa-initials').val(hotfix.assessments.quails.initials);
                 $('#hotfix-view-component').val(hotfix.hotfixComponent);
+                $('#the-problem').val(hotfix.theProblem);
+                $('#how-missed').val(hotfix.howMissed);
+                $('#the-fix').val(hotfix.theFix);
 
                 $('#dev-team-culp,#dev-hudl-impact,#dev-affected-users,#qa-team-culp,#qa-hudl-impact,#qa-affected-users').each(function () {
                     applyHotfixRatingColor($(this));
                 });
+                showBadRatingsFields();
             }
         });
 
@@ -94,7 +101,22 @@
 
         $('#dev-team-culp,#dev-hudl-impact,#dev-affected-users,#qa-team-culp,#qa-hudl-impact,#qa-affected-users').on('change', function () {
             applyHotfixRatingColor($(this));
+            showBadRatingsFields();
         });
+
+        function showBadRatingsFields() {
+            var badRatings = false;
+            $('#dev-team-culp,#dev-hudl-impact,#dev-affected-users,#qa-team-culp,#qa-hudl-impact,#qa-affected-users').each(function () {
+                if ($(this).val() >= 4) {
+                    badRatings = true;
+                }
+            });
+            if (badRatings) {
+                $('#bad-rating-detail').show();
+            } else {
+                $('#bad-rating-detail').hide();
+            }
+        }
 
         $('#hotfix-save').click(function () {
             var data = window.grid.getData().getItemById(hotfixMongoId);
@@ -112,6 +134,9 @@
             data.hotfixes[0].assessments.quails.affectedUserImpact = $('#qa-affected-users').val();
             data.hotfixes[0].assessments.quails.initials = $('#qa-initials').val();
             data.hotfixes[0].hotfixComponent = $('#hotfix-view-component').val();
+            data.hotfixes[0].theProblem = $('#the-problem').val();
+            data.hotfixes[0].howMissed = $('#how-missed').val();
+            data.hotfixes[0].theFix = $('#the-fix').val();
             BlackMesa.hotfix().flattenHotfixData(data, data);
             $.post("/api/v1/deploys", data, function (response) {
                 toastr.info('Updated Hotfix Data');

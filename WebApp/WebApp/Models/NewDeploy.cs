@@ -26,5 +26,8 @@ namespace WebApp.Models
         public string BadBranch { get; set; }
         public string HotfixNotes { get; set; }
         public string Special { get; set; }
+        public string TheProblem { get; set; }
+        public string HowMissed { get; set; }
+        public string TheFix { get; set; }
     }
 }

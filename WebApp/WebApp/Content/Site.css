@@ -758,3 +758,11 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.form-large .control-label {
+    width: 200px;
+}
+
+.form-large .controls {
+    margin-left: 220px;
+}
