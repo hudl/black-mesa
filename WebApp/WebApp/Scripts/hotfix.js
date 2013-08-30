@@ -75,6 +75,10 @@
                 $('#qa-affected-users').val(hotfix.assessments.quails.affectedUserImpact);
                 $('#qa-initials').val(hotfix.assessments.quails.initials);
                 $('#hotfix-view-component').val(hotfix.hotfixComponent);
+
+                $('#dev-team-culp,#dev-hudl-impact,#dev-affected-users,#qa-team-culp,#qa-hudl-impact,#qa-affected-users').each(function () {
+                    applyHotfixRatingColor($(this));
+                });
             }
         });
 
@@ -86,6 +90,10 @@
         $('#hotfix-view-ticket').on('change', function () {
             var prodTicket = $('#hotfix-view-ticket').val() ? '<a href="http://jira/browse/' + $('#hotfix-view-ticket').val() + '" target="_blank">' + $('#hotfix-view-ticket').val() + '</a>' : "None";
             $('#hotfix-view-ticket-link').html(prodTicket);
+        });
+
+        $('#dev-team-culp,#dev-hudl-impact,#dev-affected-users,#qa-team-culp,#qa-hudl-impact,#qa-affected-users').on('change', function () {
+            applyHotfixRatingColor($(this));
         });
 
         $('#hotfix-save').click(function () {
@@ -109,6 +117,23 @@
                 toastr.info('Updated Hotfix Data');
             });
         });
+
+        function applyHotfixRatingColor(element) {
+            switch (element.val()) {
+                case "3":
+                    element.css("background-color", "#F7FE2E");
+                    break;
+                case "4":
+                    element.css("background-color", "#FAAC58");
+                    break;
+                case "5":
+                    element.css("background-color", "#FA5858");
+                    break;
+                default:
+                    element.css("background-color", "#FFFFFF");
+                    break;
+            }
+        }
     });
 
 })(window.hotfix, jQuery, _);
