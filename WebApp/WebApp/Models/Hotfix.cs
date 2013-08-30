@@ -21,6 +21,9 @@ namespace WebApp.Models
         [BsonElement("prodTicket")]
         public int? ProdTicket { get; set; }
 
+        [BsonElement("hotfixComponent")]
+        public string HotfixComponent { get; set; }
+
         [BsonElement("notes")]
         public string Notes { get; set; }
 

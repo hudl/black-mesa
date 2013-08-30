@@ -19,6 +19,7 @@
                 postingData.badBranch = structuredData.hotfixes[0].branchThatBrokeIt;
                 postingData.hotfixNotes = structuredData.hotfixes[0].notes;
                 postingData.special = structuredData.hotfixes[0].special;
+                postingData.hotfixComponent = structuredData.hotfixes[0].hotfixComponent;
             }
 
             return {
@@ -38,7 +39,7 @@
         $('#hotfix').modal({
             minHeight: 300,
             maxHeight: 800,
-            minWidth: 700,
+            minWidth: 1150,
             onOpen: function (dialog) {
                 dialog.overlay.fadeIn(200, function () {
                     dialog.container.slideDown(200, function () {
@@ -72,6 +73,7 @@
                 $('#qa-hudl-impact').val(hotfix.assessments.quails.hudlWideImpact);
                 $('#qa-affected-users').val(hotfix.assessments.quails.affectedUserImpact);
                 $('#qa-initials').val(hotfix.assessments.quails.initials);
+                $('#hotfix-view-component').val(hotfix.hotfixComponent);
             }
         });
 
@@ -100,6 +102,7 @@
             data.hotfixes[0].assessments.quails.hudlWideImpact = $('#qa-hudl-impact').val();
             data.hotfixes[0].assessments.quails.affectedUserImpact = $('#qa-affected-users').val();
             data.hotfixes[0].assessments.quails.initials = $('#qa-initials').val();
+            data.hotfixes[0].hotfixComponent = $('#hotfix-view-component').val();
             BlackMesa.hotfix().flattenHotfixData(data, data);
             $.post("/api/v1/deploys", data, function (response) {
                 toastr.info('Updated Hotfix Data');

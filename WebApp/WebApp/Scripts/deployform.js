@@ -84,6 +84,9 @@
                         width: "320px",
                         placeholder: "Quality Assurance..."
                     });
+                    $('#hotfixComponent').select2({
+                        width: "320px"
+                    });
                     $('#pullRequestId').change(prChanged);
 
                     $(function () {

@@ -21,7 +21,7 @@
         },
         JiraFormatter: function(row, cell, value, columnDef, dataContext) {
             var jiraUrl = columnDef.jiraBaseUrl + encodeURIComponent('labels = ' + value);
-            return '<a href="' + jiraUrl + '" target="_blank">tix<i class="icon-share-alt"></i></a>';
+            return '<a href="' + jiraUrl + '" target="_blank"><i class="icon-share-alt"></i></a>';
         },
         PullRequestFormatter: function(row, cell, value, columnDef, dataContext) {
             if (!value) {
@@ -69,8 +69,8 @@
                 { id: 'Type', name: 'Type', field: 'type', width: 90, formatter: Slick.Formatters.TypeFormatter, editor: Slick.Editors.Type, sortable: true },
                 { id: 'Project', name: 'Proj.', field: 'project', width: 90, editor: Slick.Editors.Project, sortable: true },
                 { id: 'Branch', name: 'Branch', field: 'branch', width: 270, editor: Slick.Editors.Text, sortable: true },
-                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 60, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text, sortable: true },
-                { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 50, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira, sortable: true },
+                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 50, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text, sortable: true },
+                { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 33, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira, sortable: true },
                 { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.Text, sortable: true },
                 { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.Text, sortable: true },
                 { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.Text, sortable: true },
@@ -142,6 +142,8 @@
             }
 
             window.grid = grid;
+
+            $("#deploys").find("*").css("font-size", "10px").css("font-family", "Sans-Serif").css("font-stretch", "condensed");
         });
     };
 })(window.BlackMesa, jQuery);

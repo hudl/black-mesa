@@ -14,6 +14,7 @@ namespace WebApp.Models
         public string ProjectManager { get; set; }
         public int? ProdTicket { get; set; }
         public string Ticket { get; set; }
+        public string HotfixComponent { get; set; }
         public int? QaTeamCulp { get; set; }
         public int? QaHudlImpact { get; set; }
         public int? QaUserImpact { get; set; }
