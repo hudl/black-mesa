@@ -40,6 +40,7 @@
             minHeight: 300,
             maxHeight: 800,
             minWidth: 1150,
+            overlayClose: true,
             onOpen: function (dialog) {
                 dialog.overlay.fadeIn(200, function () {
                     dialog.container.slideDown(200, function () {

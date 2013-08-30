@@ -648,7 +648,7 @@
           }
 
           return {
-              valid: true,
+              valid: $input.val().length > 0,
               msg: null
           };
       };
@@ -720,7 +720,7 @@
           }
 
           return {
-              valid: true,
+              valid: $input.val().length > 0,
               msg: null
           };
       };
@@ -864,7 +864,7 @@
           }
 
           return {
-              valid: true,
+              valid: $input.val().length > 0,
               msg: null
           };
       };
