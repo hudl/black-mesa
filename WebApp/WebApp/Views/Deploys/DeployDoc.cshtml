@@ -1,0 +1,399 @@
+﻿<div id="deploy-doc" style="display: none;">
+    <p>Not the deploy info you were looking for? Try changing the PR number first.</p>
+
+    <h2>Deploy Dumpster</h2>
+    <form action="/api/v1/deploys" method="POST" class="form-horizontal" id="deploy-doc-form">
+        <div class="control-group">
+            <label class="control-label" for="action">What are ya doin?</label>
+            <div class="controls">
+                <select id="anythingElse" name="action" data-hudl-required="true" data-desc="What are ya doin'?">
+                    <option>Deploy</option>
+                    <option>SQL Script</option>
+                    <option>Config Change</option>
+                    <option>Jobs</option>
+                </select>
+            </div>
+            <br />
+            <label class="control-label" for="component">Component</label>
+            <div class="controls">
+                <select id="component" name="component" data-hudl-required="true" data-desc="Component">
+                    <option>Hudl</option>
+                    <option>Jobs</option>
+                    <option>SQL</option>
+                    <option>Mongo</option>
+                    <option>VE</option>
+                    <option>Mercury</option>
+                    <option>MacMercury</option>
+                    <option>iOS</option>
+                    <option>Android</option>
+                    <option>Remotes</option>
+                    <option>Alyx</option>
+                    <option>Old Alyx</option>
+                    <option>AWS</option>
+                    <option>S3</option>
+                    <option>TeamCity</option>
+                    <option>Pro</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <br />
+            <label class="control-label" for="pullRequestId">PR</label>
+            <div class="controls">
+                <input type="number" id="pullRequestId" name="pullRequestId" placeholder="Pull Request # in Github" data-hudl-required="true" data-desc="Pull Request ID">
+                <center><img src="~/Images/spinner.gif" alt="Loading..." id="pull-request-spinner" style="display:none;" /></center>
+            </div>
+            <br />
+            <label class="control-label" for="branch">Branch</label>
+            <div class="controls">
+                <input type="text" id="branch" name="branch" placeholder="Name of the Github Branch..." data-hudl-required="true" data-desc="Branch Name">
+            </div>
+            <br />
+            <input type="hidden" id="type" name="type" data-hudl-required="true" data-desc="Type (Via the button flow)" data-hudl-remains-hidden="true" />
+            <label class="control-label">Bug Fix?</label>
+            <div class="controls">
+                <div class="btn-group" data-toggle="buttons-radio">
+                    <button type="button" class="btn btn-small" id="bug-fix-yes">Yes</button>
+                    <button type="button" class="btn btn-small" id="bug-fix-no">No</button>
+                </div>
+            </div>
+            <div id="maint-div" style="display: none;">
+                <br />
+                <label class="control-label">Behind-the-scenes?</label>
+                <div class="controls">
+                    <div class="btn-group" data-toggle="buttons-radio">
+                        <button type="button" class="btn btn-small" id="maint-yes">Yes</button>
+                        <button type="button" class="btn btn-small" id="maint-no">No</button>
+                    </div>
+                </div>
+            </div>
+            <div id="new-div" style="display: none;">
+                <br />
+                <label class="control-label">Brand new feature?</label>
+                <div class="controls">
+                    <div class="btn-group" data-toggle="buttons-radio">
+                        <button type="button" class="btn btn-small" id="new-yes">Yes</button>
+                        <button type="button" class="btn btn-small" id="new-no">No</button>
+                    </div>
+                </div>
+            </div>
+            <div id="time-frame-div" style="display: none;">
+                <br />
+                <label class="control-label">Time till bug fixed?</label>
+                <div class="controls">
+                    <select id="time-frame" name="time-frame" data-hudl-required="true" data-desc="Bug Catch Time Frame">
+                        <option value=""></option>
+                        <option value="0">Same day</option>
+                        <option value="1">1-3 days</option>
+                        <option value="2">3 days to a week</option>
+                        <option value="3">Longer than a week</option>
+                    </select>
+                </div>
+            </div>
+            <div id="how-bad-was-it-scores" style="display: none;">
+                <br />
+                <div id="bad-branch-div">
+                    <label class="control-label">Branch that broke it</label>
+                    <div class="controls">
+                        <input type="text" id="badBranch" name="badBranch" data-hudl-required="true" data-desc="Bad Branch Name" />
+                    </div>
+                </div>
+                <br />
+                <div id="prod-ticket-div">
+                    <label class="control-label">Prod-Ticket</label>
+                    <div class="controls">
+                        <input type="number" id="prodTicket" name="prodTicket" data-desc="Prod-Ticket Number" placeholder="Just the number" />
+                    </div>
+                </div>
+                <br />
+                <div id="ticket-div">
+                    <label class="control-label">Ticket</label>
+                    <div class="controls">
+                        <input type="text" id="ticket" name="ticket" data-desc="Ticket" placeholder="Project-Number (i.e. THOR-17620)" />
+                    </div>
+                </div>
+                <br />
+                <label class="control-label" for="hotfixComponent">Component</label>
+                <div class="controls">
+                    <select id="hotfixComponent" name="hotfixComponent" data-hudl-required="true" data-desc="Hotfix Component">
+                    <option>Sign Up</option>
+                    <option>Add Team</option>
+                    <option>Billing</option>
+                    <option>Video Playback</option>
+                    <option>Library Tree/Playlists</option>
+                    <option>Breakdown Data</option>
+                    <option>Overlays</option>
+                    <option>Manage Page</option>
+                    <option>Manage Roster</option>
+                    <option>Manage Coaches</option>
+                    <option>Manage Groups</option>
+                    <option>Manage Schedule</option>
+                    <option>Manage Library</option>
+                    <option>Manage Storage</option>
+                    <option>Manage Privacy</option>
+                    <option>Manage Breakdown Data</option>
+                    <option>Manage Seasons</option>
+                    <option>Team Page</option>
+                    <option>Athlete Page</option>
+                    <option>Highlights</option>
+                    <option>Prem HL - Team</option>
+                    <option>Prem HL - Athlete</option>
+                    <option>Prem HL - HTML5</option>
+                    <option>Filtering</option>
+                    <option>Reports</option>
+                    <option>Notes</option>
+                    <option>Walkthroughs</option>
+                    <option>Presentations</option>
+                    <option>Offline Presentations</option>
+                    <option>Push Recruiting</option>
+                    <option>Paid Rec Inboxes</option>
+                    <option>Paid Rec Search</option>
+                    <option>Paid Rec Boards</option>
+                    <option>Paid Rec Regional Pckg</option>
+                    <option>Paid Rec Team Pages</option>
+                    <option>Paid Rec Athlete Pages</option>
+                    <option>Paid Rec Thumbs</option>
+                    <option>Exchanges</option>
+                    <option>Pooled Exchange</option>
+                    <option>EO</option>
+                    <option>DVD Authoring</option>
+                    <option>DVD Fundraising</option>
+                    <option>Admin</option>
+                    <option>My Account</option>
+                    <option>Misc/Login/Other</option>
+                    <option>Attachments</option>
+                    <option>Permissions</option>
+                    <option>OVE</option>
+                    <option>Top Play</option>
+                    <option>Practice Scripts</option>
+                    <option>Online Basketball</option>
+                    <option>Mobile - iOS</option>
+                    <option>Mobile - Hudroid</option>
+                    <option>Pro Internal</option>
+                    <option>Pro Import</option>
+                    <option>Hudl Remotes</option>
+                    <option>Queues</option>
+                    <option>VE Download</option>
+                    <option>VE Publish</option>
+                    <option>VE Post Publish</option>
+                    <option>VE Export</option>
+                    <option>Mercury Add Video</option>
+                    <option>Mercury Review</option>
+                    <option>Mercury Organize</option>
+                    <option>Mercury Download</option>
+                    <option>Video Editor (app)</option>
+                    <option>Windows Mercury (app)</option>
+                    <option>Mac Mercury (app)</option>
+                    <option>Entire Site (rare)</option>
+                    <option>Possession Splitter</option>
+                    <option>Fundraising</option>
+                    <option>Public Pages</option>
+                    <option>Playbook</option>
+                    </select>
+                </div>
+                <br />
+                <div id="hotfix-notes-div">
+                    <label class="control-label">Hotfix Notes</label>
+                    <div class="controls">
+                        <textarea rows="3" id="hotfixNotes" name="hotfixNotes"></textarea>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div id="special-div">
+                    <label class="control-label">Special</label>
+                    <div class="controls">
+                        <textarea rows="3" id="special" name="special"></textarea>
+                    </div>
+                </div>
+                <br />
+                <label class="control-label">QA Hudl Impact</label>
+                <div class="controls">
+                    <select id="qaHudlImpact" name="qaHudlImpact" data-hudl-required="true" data-desc="QA - Hudl Impact">
+                        <option value=""></option>
+                        <option value="0">0 - None, it's impossible for users to be affected</option>
+                        <option value="1">1 - None, we discovered it internally before receiving any calls</option>
+                        <option value="2">2 - A couple of calls</option>
+                        <option value="3">3 - Support gets a number of calls - this happened to a majority of users OR at a prime time (not both)</option>
+                        <option value="4">4 - Support gets a lot of calls, it's a combo of a good % of users and prime usage</option>
+                        <option value="5">5 - Support is overwhelmed</option>
+                    </select>
+                </div>
+                <br />
+                <label class="control-label">QA Culpability</label>
+                <div class="controls">
+                    <select id="qaTeamCulp" name="qaTeamCulp" data-hudl-required="true" data-desc="QA - Team Culpability">
+                        <option value=""></option>
+                        <option value="0">0 - It was a third party that broke this. They suck.</option>
+                        <option value="1">1 - Not reasonable to have caught. Extremely isolated case or hardware-specific.</option>
+                        <option value="2">2 - Wouldn't expect to catch in a code review, and wasn't laid out in test plan.</option>
+                        <option value="3">3 - Reasonable to have caught in a code review or during the course of testing, but was not specifically in test plan.</option>
+                        <option value="4">4 - Probably should have been caught in a code review, or the item was in regression, but poorly worded/misunderstood/or not specific enough.</option>
+                        <option value="5">5 - Definitely should have been caught. Would have been obvious in a code review or was a clearly outlined part of the test plan.</option>
+                    </select>
+                </div>
+                <br />
+                <label class="control-label">QA User Impact</label>
+                <div class="controls">
+                    <select id="qaUserImpact" name="qaUserImpact" data-hudl-required="true" data-desc="QA - User Impact">
+                        <option value=""></option>
+                        <option value="0">0 - No users were affected, the problem was related to logging.</option>
+                        <option value="1">1 - Trivial - Cosmetic problems like mispealt words or misaligned text. Does not affect funtion.</option>
+                        <option value="2">2 - Minor - Minor loss of function, or other problem where easy workaround is present. Only affects one or two features of Hudl, or downtime shorter than time it takes to refresh page.</option>
+                        <option value="3">3 - Major - Major loss of function that is limited either by shorter downtime, or small scope (only a few features of Hudl go down).</option>
+                        <option value="4">4 - Critical - Minor data loss, short periods of being blocked from Hudl or major parts of Hudl.</option>
+                        <option value="5">5 - Blocker - Data loss. Blocked from Hudl completely. Or blocked from major part of Hudl.</option>
+                    </select>
+                </div>
+				<br />
+			    <label class="control-label">QA Member</label>
+			    <div class="controls">
+				    <input type="hidden" id="qaInitials" name="qaInitials" placeholder="Quality Assurance..." data-hudl-required="true" data-desc="QA Member">
+			    </div>
+			    <br />
+                <label class="control-label">Dev Hudl Impact</label>
+                <div class="controls">
+                    <select id="devHudlImpact" name="devHudlImpact" data-hudl-required="true" data-desc="Dev - Hudl Impact">
+                        <option value=""></option>
+                        <option value="0">0 - None, it's impossible for users to be affected</option>
+                        <option value="1">1 - None, we discovered it internally before receiving any calls</option>
+                        <option value="2">2 - A couple of calls</option>
+                        <option value="3">3 - Support gets a number of calls - this happened to a majority of users OR at a prime time (not both)</option>
+                        <option value="4">4 - Support gets a lot of calls, it's a combo of a good % of users and prime usage</option>
+                        <option value="5">5 - Support is overwhelmed</option>
+                    </select>
+                </div>
+                <br />
+                <label class="control-label">Dev Culpability</label>
+                <div class="controls">
+                    <select id="devTeamCulp" name="devTeamCulp" data-hudl-required="true" data-desc="Dev - Team Culpability">
+                        <option value=""></option>
+                        <option value="0">0 - It was a third party that broke this. They suck.</option>
+                        <option value="1">1 - Not reasonable to have caught. Extremely isolated case or hardware-specific.</option>
+                        <option value="2">2 - Wouldn't expect to catch in a code review, and wasn't laid out in test plan.</option>
+                        <option value="3">3 - Reasonable to have caught in a code review or during the course of testing, but was not specifically in test plan.</option>
+                        <option value="4">4 - Probably should have been caught in a code review, or the item was in regression, but poorly worded/misunderstood/or not specific enough.</option>
+                        <option value="5">5 - Definitely should have been caught. Would have been obvious in a code review or was a clearly outlined part of the test plan.</option>
+                    </select>
+                </div>
+                <br />
+                <label class="control-label">Dev User Impact</label>
+                <div class="controls">
+                    <select id="devUserImpact" name="devUserImpact" data-hudl-required="true" data-desc="Dev - User Impact">
+                        <option value=""></option>
+                        <option value="0">0 - No users were affected, the problem was related to logging.</option>
+                        <option value="1">1 - Trivial - Cosmetic problems like mispealt words or misaligned text. Does not affect funtion.</option>
+                        <option value="2">2 - Minor - Minor loss of function, or other problem where easy workaround is present. Only affects one or two features of Hudl, or downtime shorter than time it takes to refresh page.</option>
+                        <option value="3">3 - Major - Major loss of function that is limited either by shorter downtime, or small scope (only a few features of Hudl go down).</option>
+                        <option value="4">4 - Critical - Minor data loss, short periods of being blocked from Hudl or major parts of Hudl.</option>
+                        <option value="5">5 - Blocker - Data loss. Blocked from Hudl completely. Or blocked from major part of Hudl.</option>
+                    </select>
+                </div>
+				<br />
+			    <label class="control-label">Dev Member</label>
+			    <div class="controls">
+				    <input type="hidden" id="devInitials" name="devInitials" placeholder="Developer..." data-hudl-required="true" data-desc="Dev Member">
+			    </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <input type="hidden" id="jiraLabel" name="jiraLabel">
+            <input type="hidden" id="jiraTicketCount" name="jiraTicketCount">
+            <br />
+            <label class="control-label" for="project">Project</label>
+            <div class="controls">
+                <select id="project" name="project" data-hudl-required="true" data-desc="Project">
+                    <option value=""></option>
+                    <option>Admin</option>
+                    <option>Attachments</option>
+                    <option>Auto</option>
+                    <option>BBall</option>
+                    <option>Core</option>
+                    <option>DS</option>
+                    <option>DVD</option>
+                    <option>Fan</option>
+                    <option>Fundraising</option>
+                    <option>Hudroid</option>
+                    <option>Lifeguard</option>
+                    <option>MacMercury</option>
+                    <option>Mercury</option>
+                    <option>MODI</option>
+                    <option>Ops</option>
+                    <option>OVE</option>
+                    <option>Pro</option>
+                    <option>Recruit</option>
+                    <option>VE</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">QA</label>
+            <div class="controls">
+                <input type="hidden" id="qa" name="qa" placeholder="Quality Assurance..." data-hudl-required="true" data-desc="QA" data-hudl-remains-hidden="true">
+            </div>
+            <br />
+            <label class="control-label" for="dev">DEV</label>
+            <div class="controls">
+                <input type="hidden" id="dev" name="dev" placeholder="Developer..." data-hudl-required="true" data-desc="Developer" data-hudl-remains-hidden="true">
+            </div>
+            <br />
+            <label class="control-label" for="design">DES</label>
+            <div class="controls">
+                <input type="hidden" id="design" name="design" placeholder="Designer..." data-hudl-required="true" data-desc="Designer" data-hudl-remains-hidden="true">
+            </div>
+            <br />
+            <label class="control-label" for="codeReview">CR</label>
+            <div class="controls">
+                <input type="hidden" id="codeReview" name="codeReview" placeholder="Code Reviewer..." data-hudl-required="true" data-desc="Code Reviewer" data-hudl-remains-hidden="true">
+            </div>
+            <br />
+            <label class="control-label" for="codeReview">PM</label>
+            <div class="controls">
+                <input type="hidden" id="projectManager" name="projectManager" placeholder="Project Manager..." data-hudl-required="true" data-desc="Project Manager" data-hudl-remains-hidden="true">
+            </div>
+            <br />
+            <label class="control-label" for="notes">Notes</label>
+            <div class="controls">
+                <textarea rows="3" id="notes" name="notes"></textarea>
+            </div>
+            <br />
+            <label class="control-label" for="notes">Thread</label>
+            <div class="controls">
+                <select id="basecampThread" name="basecampThread" data-hudl-required="true" data-desc="Basecamp Thread Choice">
+                    <option value="-1"></option>
+                    <option value="0">I'll do it myself (I have an image)</option>
+                    <option value="1">Behind the Scenes</option>
+                    <option value="2">Field Sales</option>
+                    <option value="3">Test Thread</option>
+                </select>
+                <div id="basecamp-links" style="display: none;">
+                    <br />
+                    Links to Threads:
+								<br />
+                    <a href="@System.Configuration.ConfigurationManager.ConnectionStrings["BasecampBehind"].ConnectionString" target="_blank">Behind the Scenes</a><br />
+                    <a href="@System.Configuration.ConfigurationManager.ConnectionStrings["BasecampField"].ConnectionString" target="_blank">Field Sales</a><br />
+                </div>
+            </div>
+            <br />
+            <div id="basecamp-div">
+                <label class="control-label" for="notes">Post</label>
+                <div class="controls">
+                    <textarea rows="4" id="basecamp" name="basecamp"></textarea>
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="control-group">
+            <div class="controls" id="submit-controls">
+                <button type="submit" id="deploy-doc-submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    window.behindProject = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampBehindIds"].ConnectionString.Split(',')[0]
+    window.behindMessage = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampBehindIds"].ConnectionString.Split(',')[1]
+    window.fieldProject = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampFieldIds"].ConnectionString.Split(',')[0]
+    window.fieldMessage = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampFieldIds"].ConnectionString.Split(',')[1]
+    window.testProject = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampTestIds"].ConnectionString.Split(',')[0]
+    window.testMessage = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampTestIds"].ConnectionString.Split(',')[1]
+</script>

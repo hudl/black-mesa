@@ -41,15 +41,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AttributeRouting">
+      <HintPath>..\packages\AttributeRouting.Core.3.5.6\lib\net40\AttributeRouting.dll</HintPath>
+    </Reference>
+    <Reference Include="AttributeRouting.Web">
+      <HintPath>..\packages\AttributeRouting.Core.Web.3.5.6\lib\net40\AttributeRouting.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="AttributeRouting.Web.Mvc">
+      <HintPath>..\packages\AttributeRouting.3.5.6\lib\net40\AttributeRouting.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper, Version=1.17.0.14431, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CsvHelper.1.17.0\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\packages\mongocsharpdriver.1.7\lib\net35\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson, Version=1.8.2.34, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\packages\mongocsharpdriver.1.7\lib\net35\MongoDB.Driver.dll</HintPath>
+    <Reference Include="MongoDB.Driver, Version=1.8.2.34, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="MongoRepository">
-      <HintPath>..\packages\MongoRepository.1.4.1\lib\MongoRepository.dll</HintPath>
+    <Reference Include="MongoRepository, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MongoRepository.1.5.2\lib\MongoRepository.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\packages\ServiceStack.Common.3.9.43\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\packages\ServiceStack.Common.3.9.43\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\packages\ServiceStack.Redis.3.9.43\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.3.9.43\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -60,6 +92,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -72,9 +108,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -107,10 +140,6 @@
     <Reference Include="System.Web.Providers">
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
@@ -123,6 +152,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.0.0.0\lib\WebActivator.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
@@ -133,6 +165,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AttributeRoutingConfig.cs" />
     <Compile Include="App_Start\BootstrapBundleConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -140,17 +173,27 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BootstrapSupport\ControlGroupExtensions.cs" />
     <Compile Include="BootstrapSupport\ViewHelperExtensions.cs" />
+    <Compile Include="Controllers\Api\BasecampController.cs" />
+    <Compile Include="Controllers\Api\BaseController.cs" />
+    <Compile Include="Controllers\Api\GithubController.cs" />
+    <Compile Include="Controllers\Api\JiraController.cs" />
+    <Compile Include="Controllers\Api\PeopleController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Controllers\DeploysController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Api\DeploysController.cs" />
+    <Compile Include="Controllers\Api\DeployController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Assessment.cs" />
+    <Compile Include="Models\Assessments.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Deploy.cs" />
     <Compile Include="Models\BlackMesaEntity.cs" />
+    <Compile Include="Models\DeployForExport.cs" />
     <Compile Include="Models\Deploys.cs" />
+    <Compile Include="Models\Hotfix.cs" />
+    <Compile Include="Models\NewDeploy.cs" />
     <Compile Include="Models\People.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />
     <Compile Include="NavigationRoutes\NavigationExtensions.cs" />
@@ -175,6 +218,7 @@
     <Content Include="Content\images\header-columns-bg.gif" />
     <Content Include="Content\images\sort-asc.gif" />
     <Content Include="Content\images\sort-desc.gif" />
+    <Content Include="Content\select2.css" />
     <Content Include="Content\slick.columnpicker.css" />
     <Content Include="Content\slick.grid.css" />
     <Content Include="Content\slick.headerbuttons.css" />
@@ -238,6 +282,12 @@
     <Content Include="Content\toastr.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\black-mesa.PNG" />
+    <Content Include="Images\ratings.png" />
+    <Content Include="Images\select2-spinner.gif" />
+    <Content Include="Images\select2x2.png" />
+    <Content Include="Images\spinner.gif" />
+    <Content Include="Images\x.png" />
     <Content Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -245,6 +295,10 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\deployform.js" />
+    <Content Include="Scripts\hotfix.js" />
+    <Content Include="Scripts\jquery-1.7.js" />
+    <Content Include="Scripts\jquery.simplemodal-1.4.4.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="CodeTemplates\AddView\CSHTML\BootstrapForm.tt" />
@@ -265,11 +319,9 @@
     <Content Include="Content\tradegothic\TradeGothicLTStd-LightObl.otf" />
     <Content Include="Content\tradegothic\TradeGothicLTStd-Obl.otf" />
     <Content Include="Content\tradegothic\TradeGothicLTStd.otf" />
+    <Content Include="Documentation.chm" />
     <None Include="Properties\PublishProfiles\Shares.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <None Include="Scripts\jquery-1.8.3.intellisense.js" />
-    <Content Include="Scripts\jquery-1.8.3.js" />
-    <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.dateFormat-1.0.js" />
@@ -285,6 +337,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.columnpicker.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.pager.js" />
     <Content Include="Scripts\SlickGrid\Plugins\slick.autotooltips.js" />
@@ -307,7 +360,9 @@
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -337,6 +392,8 @@
     <Content Include="Views\Shared\_html5shiv.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
     <Content Include="Views\Shared\_alerts.cshtml" />
+    <Content Include="Views\Deploys\DeployDoc.cshtml" />
+    <Content Include="Views\Deploys\Hotfix.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -363,7 +420,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>38651</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:33365/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

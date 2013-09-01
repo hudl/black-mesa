@@ -16,7 +16,6 @@
         "Checkbox": CheckboxEditor,
         "PercentComplete": PercentCompleteEditor,
         "LongText": LongTextEditor,
-        "People": PeopleEditor,
         "Jira": JiraEditor,
         "Type": TypeEditor,
         "Action": ActionEditor,
@@ -516,77 +515,6 @@
     this.init();
   }
 
-  function PeopleEditor(args) {
-      var $input;
-      var defaultValue;
-      var scope = this;
-      var peopleKey;
-
-      this.init = function () {
-          peopleKey = args.column.peopleKey;
-          $input = $("<INPUT type=text class='editor-text' />")
-              .appendTo(args.container)
-              .bind("keydown.nav", function (e) {
-                  if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
-                      e.stopImmediatePropagation();
-                  }
-              })
-              .focus()
-              .select();
-      };
-
-      this.destroy = function () {
-          $input.remove();
-      };
-
-      this.focus = function () {
-          $input.focus();
-      };
-
-      this.getValue = function () {
-          return $input.val();
-      };
-
-      this.setValue = function (val) {
-          $input.val(val);
-      };
-
-      this.loadValue = function (item) {
-          defaultValue = item[args.column.field][peopleKey][0] || "";
-          $input.val(defaultValue);
-          $input[0].defaultValue = defaultValue;
-          $input.select();
-      };
-
-      this.serializeValue = function () {
-          return $input.val();
-      };
-
-      this.applyValue = function (item, state) {
-          item[args.column.field][peopleKey][0] = state;
-      };
-
-      this.isValueChanged = function () {
-          return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
-      };
-
-      this.validate = function () {
-          if (args.column.validator) {
-              var validationResults = args.column.validator($input.val());
-              if (!validationResults.valid) {
-                  return validationResults;
-              }
-          }
-
-          return {
-              valid: true,
-              msg: null
-          };
-      };
-
-      this.init();
-  }
-
   function JiraEditor(args) {
       var $input;
       var defaultValue;
@@ -662,15 +590,20 @@
       var scope = this;
 
       this.init = function () {
-          $input = $("<select><option>Fix</option><option>Hotfix</option><option>Enhancement</option><option>New Feature</option><option>Task</option><option>Rollback</option></select>")
+          $input = $('<input type="hidden" id="componentEditor" style="width:300px" />')
               .appendTo(args.container)
               .bind("keydown.nav", function (e) {
                   if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
                       e.stopImmediatePropagation();
                   }
-              })
-              .focus()
-              .select();
+              });
+          $input.select2({
+              tags: ["Fix", "Hotfix", "Enhancement", "New Feature", "Task", "Rollback"],
+              openOnEnter: false,
+              multiple: false,
+          })
+          .focus()
+          .select();
       };
 
       this.destroy = function () {
@@ -691,8 +624,6 @@
 
       this.loadValue = function (item) {
           defaultValue = item[args.column.field] || "";
-          $input.val(defaultValue);
-          $input[0].defaultValue = defaultValue;
           $input.select();
       };
 
@@ -717,7 +648,7 @@
           }
 
           return {
-              valid: true,
+              valid: $input.val().length > 0,
               msg: null
           };
       };
@@ -731,15 +662,20 @@
       var scope = this;
 
       this.init = function () {
-          $input = $("<select><option>Deploy</option><option>Script</option><option>App</option><option>Tool Fail</option><option>Other</option></select>")
+          $input = $('<input type="hidden" id="componentEditor" style="width:300px" />')
               .appendTo(args.container)
               .bind("keydown.nav", function (e) {
                   if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
                       e.stopImmediatePropagation();
                   }
-              })
-              .focus()
-              .select();
+              });
+          $input.select2({
+              tags: ["Deploy", "Script", "App", "Tool Fail", "Other"],
+              openOnEnter: false,
+              multiple: false,
+          })
+          .focus()
+          .select();
       };
 
       this.destroy = function () {
@@ -760,8 +696,6 @@
 
       this.loadValue = function (item) {
           defaultValue = item[args.column.field] || "";
-          $input.val(defaultValue);
-          $input[0].defaultValue = defaultValue;
           $input.select();
       };
 
@@ -786,7 +720,7 @@
           }
 
           return {
-              valid: true,
+              valid: $input.val().length > 0,
               msg: null
           };
       };
@@ -800,15 +734,20 @@
       var scope = this;
 
       this.init = function () {
-          $input = $("<select><option>Admin</option><option>Attachments</option><option>Auto</option><option>BBall</option><option>Core</option><option>DS</option><option>DVD</option><option>Fan</option><option>Lifeguard</option><option>MacMercury</option><option>Mercury</option><option>MODI</option><option>Ops</option><option>OVE</option><option>Pro</option><option>Recruit</option><option>VE</option></select>")
+          $input = $('<input type="hidden" id="componentEditor" style="width:300px" />')
               .appendTo(args.container)
               .bind("keydown.nav", function (e) {
                   if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
                       e.stopImmediatePropagation();
                   }
-              })
-              .focus()
-              .select();
+              });
+          $input.select2({
+              tags: ["Admin", "Attachments", "Auto", "BBall", "Core", "DS", "DVD", "Fan", "Football", "Fundraising", "Lifeguard", "MacMercury", "Mercury", "MODI", "Ops", "OVE", "Pro", "Recruit", "VE"],
+              openOnEnter: false,
+              multiple: false,
+          })
+          .focus()
+          .select();
       };
 
       this.destroy = function () {
@@ -829,8 +768,6 @@
 
       this.loadValue = function (item) {
           defaultValue = item[args.column.field] || "";
-          $input.val(defaultValue);
-          $input[0].defaultValue = defaultValue;
           $input.select();
       };
 
@@ -869,15 +806,20 @@
       var scope = this;
 
       this.init = function () {
-          $input = $("<select><option>Hudl</option><option>Jobs</option><option>SQL</option><option>Mongo</option><option>VE</option><option>Mercury</option><option>MacMercury</option><option>iOS</option><option>Android</option><option>Remotes</option><option>Alyx</option><option>Old Alyx</option><option>AWS</option><option>S3</option><option>TeamCity</option><option>Pro</option><option>Other</option></select>")
+          $input = $('<input type="hidden" id="componentEditor" style="width:300px" />')
               .appendTo(args.container)
               .bind("keydown.nav", function (e) {
                   if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
                       e.stopImmediatePropagation();
                   }
-              })
-              .focus()
-              .select();
+              });
+          $input.select2({
+              tags: ["Hudl", "Jobs", "SQL", "Mongo", "VE", "Mercury", "MacMercury", "iOS", "Android", "Remotes", "Alyx", "Old Alyx", "AWS", "S3", "TeamCity", "Pro", "Other"],
+              openOnEnter: false,
+              multiple: false,
+          })
+          .focus()
+          .select();
       };
 
       this.destroy = function () {
@@ -898,8 +840,6 @@
 
       this.loadValue = function (item) {
           defaultValue = item[args.column.field] || "";
-          $input.val(defaultValue);
-          $input[0].defaultValue = defaultValue;
           $input.select();
       };
 
@@ -924,7 +864,7 @@
           }
 
           return {
-              valid: true,
+              valid: $input.val().length > 0,
               msg: null
           };
       };

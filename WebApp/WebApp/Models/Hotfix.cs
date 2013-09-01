@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace DeployImporter
+namespace WebApp.Models
 {
     public class Hotfix
     {
@@ -21,10 +21,22 @@ namespace DeployImporter
         [BsonElement("prodTicket")]
         public int? ProdTicket { get; set; }
 
-        [BsonElement("ticket")]
-        public string Ticket { get; set; }
+        [BsonElement("hotfixComponent")]
+        public string HotfixComponent { get; set; }
 
         [BsonElement("notes")]
         public string Notes { get; set; }
+
+        [BsonElement("ticket")]
+        public string Ticket { get; set; }
+
+        [BsonElement("theProblem")]
+        public string TheProblem { get; set; }
+
+        [BsonElement("howMissed")]
+        public string HowMissed { get; set; }
+
+        [BsonElement("theFix")]
+        public string TheFix { get; set; }
     }
 }

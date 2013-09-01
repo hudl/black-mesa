@@ -66,6 +66,7 @@ namespace DeployImporter
                             Notes = hotfix.Notes,
                             ProdTicket = hotfix.PROD_Ticket_Num.Trim().TryParseInt(),
                             Special = hotfix.SPECIAL,
+                            Ticket = hotfix.TICKET,
                             Assessments = new Assessments
                                 {
                                     Developers = new Assessment
@@ -164,7 +165,7 @@ namespace DeployImporter
                 }
                 else if (lineNumber == 17)
                 {
-                    line = "ID,,,,,,,,,BRANCH,,,,,,,,,,,,,,,,,,COMPONENT,SPECIAL,DEV_Team_Culpability,DEV_Hudl_Wide_Impact,DEV_Affected_User_Impact,DEV_Initials,QA_Team_Culpability,QA_Hudl_Wide_Impact,QA_Affected_User_Impact,QA_Initials,,Breaker_Branch,PROD_Ticket_Num,PROD_Ticket,Notes";
+                    line = "ID,,,,,,,,,BRANCH,,,,,,,,,,,,,,,TICKET,,,COMPONENT,SPECIAL,DEV_Team_Culpability,DEV_Hudl_Wide_Impact,DEV_Affected_User_Impact,DEV_Initials,QA_Team_Culpability,QA_Hudl_Wide_Impact,QA_Affected_User_Impact,QA_Initials,,Breaker_Branch,PROD_Ticket_Num,PROD_Ticket,Notes";
                     builder.Append(line + "\n");
                 }
                 else if (lineNumber > 17)

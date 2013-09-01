@@ -85,10 +85,10 @@ h5, h6 {
     font-size: 1em;
 }
 
-    h5 a:link, h5 a:visited, h5 a:active {
-        padding: 0;
-        text-decoration: none;
-    }
+h5 a:link, h5 a:visited, h5 a:active {
+    padding: 0;
+    text-decoration: none;
+}
 
 
 /* main layout
@@ -524,6 +524,10 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
+#simplemodal-overlay {background-color:#000;}
+#simplemodal-container {background-color:#FFF; border:8px solid #444; padding:12px;}
+#simplemodal-container a.modalCloseImg {background:url(../Images/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+
 
 /* tables
 ----------------------------------------------------------*/
@@ -753,4 +757,12 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+}
+
+.form-large .control-label {
+    width: 200px;
+}
+
+.form-large .controls {
+    margin-left: 220px;
 }

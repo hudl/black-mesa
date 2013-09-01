@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoRepository;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace WebApp.Models
 {
@@ -40,6 +41,9 @@ namespace WebApp.Models
 
         [BsonElement("type")]
         public string Type { get; set; }
+
+        [BsonElement("hotfixes")]
+        public List<Hotfix> Hotfixes { get; set; }
 
         [BsonIgnore]
         public string Day

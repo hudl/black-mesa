@@ -2,12 +2,12 @@
 {
     @Scripts.Render("~/bundles/main")
 }
-<div class="header">
-  <div class="container">
-	<h1>Deploy</h1>
-  </div>
+<div class="header"></div>
+<div style="margin-left: 10px; margin-right: 10px;">
+    <a href="#" id="new-deploy">Add New Deploy</a>
+    <div id="deploys" style="height: 700px; width: auto;"></div>
+    <a href="#" id="load-all">Load All (Might be slow, there's a lot to load)</a><img src="~/Images/spinner.gif" id="row-loading-spinner" alt="Loading" style="display:none"/>
 </div>
 
-<div class="container">
-    <div id="deploys" style="height: 500px; width: 1400px;"></div>
-</div>
+@Html.Partial("DeployDoc")
+@Html.Partial("Hotfix")
