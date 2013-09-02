@@ -142,8 +142,6 @@
             }
 
             window.grid = grid;
-
-            $("#deploys").find("*").css("font-size", "10px").css("font-family", "Sans-Serif").css("font-stretch", "condensed");
         });
     };
 })(window.BlackMesa, jQuery);

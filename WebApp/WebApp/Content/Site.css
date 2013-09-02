@@ -766,3 +766,8 @@ tr.pager td {
 .form-large .controls {
     margin-left: 220px;
 }
+
+.slick-cell {
+    font-size: 10px;
+    font-family: Sans-Serif
+}

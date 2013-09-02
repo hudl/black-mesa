@@ -31,8 +31,8 @@
         });
     });
 
-    $('.hotfix').live('click', function () {
-        var hotfixMongoId = $(this).data("mongo-id");
+    $(document).live('click', '.hotfix', function (event) {
+        var hotfixMongoId = $(event.target).data("mongo-id");
         var hotfixes = window.grid.getData().getItemById(hotfixMongoId).hotfixes;
         if (hotfixes == undefined || hotfixes[0] == undefined) {
             toastr.error('This deploy didn\'t have associated hotfix data.');
