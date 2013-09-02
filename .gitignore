@@ -110,3 +110,6 @@ UpgradeLog*.XML
 WebApp/WebApp/Properties/PublishProfiles/Shares.pubxml
 WebApp/WebApp/ConnectionStrings.config
 DeployImporter/DeployImporter/ConnectionStrings.config
+TEMP_BlackMesa/
+WebApp/WebApp/BlackMesaDeploy
+build.ps1
