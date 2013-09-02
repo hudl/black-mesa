@@ -25,7 +25,8 @@ namespace WebApp
                 "~/Scripts/SlickGrid/slick.grid.js",
                 "~/Scripts/SlickGrid/slick.dataview.js",
                 "~/Scripts/SlickGrid/slick.editors.js",
-                "~/Scripts/SlickGrid/Plugins/slick.*"
+                "~/Scripts/SlickGrid/Plugins/slick.*",
+                "~/Scripts/slick-grid-custom-editor.js"
                 ));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
