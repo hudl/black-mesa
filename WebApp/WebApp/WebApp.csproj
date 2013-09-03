@@ -308,6 +308,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\deployform.js" />
+    <Content Include="Scripts\history.js" />
     <Content Include="Scripts\hotfix.js" />
     <Content Include="Scripts\jquery-1.7.js" />
     <Content Include="Scripts\jquery.simplemodal-1.4.4.js" />
@@ -407,6 +408,7 @@
     <Content Include="Views\Shared\_alerts.cshtml" />
     <Content Include="Views\Deploys\DeployDoc.cshtml" />
     <Content Include="Views\Deploys\Hotfix.cshtml" />
+    <Content Include="Views\Deploys\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

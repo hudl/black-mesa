@@ -18,6 +18,7 @@ namespace WebApp
                 "~/Scripts/toastr.js",
                 "~/Scripts/deployform.js",
                 "~/Scripts/hotfix.js",
+                "~/Scripts/history.js",
                 "~/Scripts/select2.js",
                 "~/Scripts/jquery.simplemodal-1.4.4.js",
                 "~/Scripts/jquery.event.drag.js",
