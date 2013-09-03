@@ -15,6 +15,25 @@
         loadData(false);
     });
 
+    $('#username').on('keyup', function () {
+        if ($('#username').val().length >= 2) {
+            $('#validated').removeClass('icon-remove').addClass('icon-ok');
+            BlackMesa.validated = true;
+        } else {
+            $('#validated').removeClass('icon-ok').addClass('icon-remove');
+            BlackMesa.validated = false;
+        }
+    });
+
+    _.each(BlackMesa.config.basecampThreads, function (basecampThread, index) {
+        $('#basecamp-links').append('<a href="' + basecampThread.url + '" target="_blank">' + basecampThread.name + '</a><br />');
+        $('#basecampThread').append($("<option></option>")
+                             .attr("value", basecampThread.threadId)
+                             .text(basecampThread.name));
+    });
+
+    $('#hotfix-thread').append('<a href="' + BlackMesa.config.hotfixThread + '" target="_blank">Post Here As Well!</a>');
+
     Slick.Formatters = _.extend(Slick.Formatters || {}, {
         DateTimeFormatter: function(row, cell, value, columnDef, dataContext) {
             return $.format.date(new Date(value), columnDef.dateFormat);

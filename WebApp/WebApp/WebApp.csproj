@@ -430,7 +430,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>38651</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:33365/</IISUrl>
+          <IISUrl>http://bc-pc.agilesports.local:33365/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
