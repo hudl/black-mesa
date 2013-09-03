@@ -33,8 +33,8 @@ namespace WebApp.Controllers.Api
             });
         }
 
-        [GET("/all")]
-        public ActionResult GetChanges()
+        [GET("all")]
+        public ActionResult GetAllChanges()
         {
             var historyRepo = new HistoryRepository();
             return JsonNet(new Histories()

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,24 +7,26 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public class History
+    [CollectionName("history")]
+    [BsonIgnoreExtraElements]
+    public class History : BlackMesaEntity
     {
-        [JsonProperty("person")]
+        [BsonElement("person")]
         public string Person { get; set; }
 
-        [JsonProperty("deployId")]
+        [BsonElement("deployId")]
         public string DeployId { get; set; }
 
-        [JsonProperty("dateTime")]
+        [BsonElement("dateTime")]
         public DateTime dateTime { get; set; }
 
-        [JsonProperty("propertyChanged")]
+        [BsonElement("propertyChanged")]
         public string PropertyChanged { get; set; }
 
-        [JsonProperty("oldValue")]
+        [BsonElement("oldValue")]
         public string OldValue { get; set; }
 
-        [JsonProperty("newValue")]
+        [BsonElement("newValue")]
         public string NewValue { get; set; }
     }
 }
