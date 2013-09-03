@@ -196,8 +196,6 @@
     <Compile Include="Models\DeployForExport.cs" />
     <Compile Include="Models\Deploys.cs" />
     <Compile Include="Models\GithubConfig.cs" />
-    <Compile Include="Models\Histories.cs" />
-    <Compile Include="Models\History.cs" />
     <Compile Include="Models\Hotfix.cs" />
     <Compile Include="Models\JiraConfig.cs" />
     <Compile Include="Models\NewDeploy.cs" />
@@ -214,7 +212,6 @@
     <Compile Include="Queries\GetConfigurationQuery.cs" />
     <Compile Include="Repositories\ConfigurationRepository.cs" />
     <Compile Include="Repositories\PrivateConfigRepository.cs" />
-    <Compile Include="Repositories\HistoryRepository.cs" />
     <Compile Include="Repositories\DeployRepository.cs" />
   </ItemGroup>
   <ItemGroup>
