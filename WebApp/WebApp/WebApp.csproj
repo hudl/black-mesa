@@ -185,17 +185,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountConfig.cs" />
     <Compile Include="Models\Assessment.cs" />
     <Compile Include="Models\Assessments.cs" />
+    <Compile Include="Models\BasecampConfig.cs" />
     <Compile Include="Models\BasecampThread.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Deploy.cs" />
     <Compile Include="Models\BlackMesaEntity.cs" />
     <Compile Include="Models\DeployForExport.cs" />
     <Compile Include="Models\Deploys.cs" />
+    <Compile Include="Models\GithubConfig.cs" />
+    <Compile Include="Models\Histories.cs" />
+    <Compile Include="Models\History.cs" />
     <Compile Include="Models\Hotfix.cs" />
+    <Compile Include="Models\JiraConfig.cs" />
     <Compile Include="Models\NewDeploy.cs" />
     <Compile Include="Models\People.cs" />
+    <Compile Include="Models\PrivateConfig.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />
     <Compile Include="NavigationRoutes\NavigationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,6 +213,8 @@
     </Compile>
     <Compile Include="Queries\GetConfigurationQuery.cs" />
     <Compile Include="Repositories\ConfigurationRepository.cs" />
+    <Compile Include="Repositories\PrivateConfigRepository.cs" />
+    <Compile Include="Repositories\HistoryRepository.cs" />
     <Compile Include="Repositories\DeployRepository.cs" />
   </ItemGroup>
   <ItemGroup>

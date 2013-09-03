@@ -2,7 +2,6 @@
 using AttributeRouting.Web.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,14 +16,14 @@ namespace WebApp.Controllers.Api
         [GET("tickets/{label}")]
         public ActionResult GetTicketsForLabel(string label)
         {
-            var source = GetPageSource(ConfigurationManager.ConnectionStrings["JiraTickets"].ConnectionString.Replace("{label}", label), GetHeaders());
+            var source = GetPageSource(PrivateConfig.JiraConfig.TicketsUrl.Replace("{label}", label), GetHeaders());
             return JsonNet(source, true);
         }
 
         private Dictionary<string, string> GetHeaders()
         {
-            var text = ConfigurationManager.ConnectionStrings["JiraAuth"];
-            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(text.ConnectionString);
+            var auth = PrivateConfig.JiraConfig.Username + ":" + PrivateConfig.JiraConfig.Password;
+            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(auth);
             string basicAuth = System.Convert.ToBase64String(toEncodeAsBytes);
             return new Dictionary<string, string>()
             {
