@@ -15,6 +15,16 @@
         loadData(false);
     });
 
+    $('#username').on('keyup', function () {
+        if ($('#username').val().length >= 2) {
+            $('#validated').removeClass('icon-remove').addClass('icon-ok');
+            BlackMesa.validated = true;
+        } else {
+            $('#validated').removeClass('icon-ok').addClass('icon-remove');
+            BlackMesa.validated = false;
+        }
+    });
+
     Slick.Formatters = _.extend(Slick.Formatters || {}, {
         DateTimeFormatter: function(row, cell, value, columnDef, dataContext) {
             return $.format.date(new Date(value), columnDef.dateFormat);
@@ -123,10 +133,34 @@
             grid.onSelectedRowsChanged.subscribe(function(e, args) {
                 grid.render();
             });
+
+            var oldValue;
+            grid.onBeforeEditCell.subscribe(function (e, args) {
+                if (!BlackMesa.validated) {
+                    return false;
+                } else {
+                    oldValue = {
+                        value: $(grid.getCellNode(args.row, args.cell)).text(),
+                        type: grid.getColumns()[args.cell].id,
+                        id: args.item.id
+                    }
+                }
+            });
             grid.onCellChange.subscribe(function (e, args) {
                 BlackMesa.hotfix().flattenHotfixData(args.item, grid.getData().getItemById(args.item.id));
                 $.post("/api/v1/deploys", args.item, function (data) {
-                    toastr.info('Updated ' + grid.getColumns()[args.cell].id + " to " + $(grid.getCellNode(args.row, args.cell)).text());
+                    var confirmedOldValue = "";
+                    if (oldValue.id === args.item.id && oldValue.type == grid.getColumns()[args.cell].id) {
+                        confirmedOldValue = oldValue.value;
+                    }
+                    toastr.info('Updated ' + grid.getColumns()[args.cell].id + " from " + confirmedOldValue + " to " + $(grid.getCellNode(args.row, args.cell)).text());
+                    $.post("api/v1/history", {
+                        person: $('#username').val(),
+                        deployId: args.item.id,
+                        propertyChanged: grid.getColumns()[args.cell].id,
+                        newValue: $(grid.getCellNode(args.row, args.cell)).text(),
+                        oldValue: confirmedOldValue
+                    });
                 });
             });
             grid.registerPlugin(new Slick.AutoTooltips());

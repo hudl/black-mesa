@@ -15,7 +15,7 @@ namespace WebApp.Repositories
         }
         public IEnumerable<History> GetAllHistory()
         {
-            return Collection.FindAll();
+            return Collection.FindAll().SetSortOrder(SortBy.Descending("dateTime"));
         }
     }
 }

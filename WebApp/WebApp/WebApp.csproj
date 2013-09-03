@@ -176,6 +176,7 @@
     <Compile Include="Controllers\Api\BasecampController.cs" />
     <Compile Include="Controllers\Api\BaseController.cs" />
     <Compile Include="Controllers\Api\GithubController.cs" />
+    <Compile Include="Controllers\Api\HistoryController.cs" />
     <Compile Include="Controllers\Api\JiraController.cs" />
     <Compile Include="Controllers\Api\PeopleController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
@@ -193,6 +194,8 @@
     <Compile Include="Models\BlackMesaEntity.cs" />
     <Compile Include="Models\DeployForExport.cs" />
     <Compile Include="Models\Deploys.cs" />
+    <Compile Include="Models\Histories.cs" />
+    <Compile Include="Models\History.cs" />
     <Compile Include="Models\Hotfix.cs" />
     <Compile Include="Models\NewDeploy.cs" />
     <Compile Include="Models\People.cs" />
@@ -206,6 +209,7 @@
     </Compile>
     <Compile Include="Queries\GetConfigurationQuery.cs" />
     <Compile Include="Repositories\ConfigurationRepository.cs" />
+    <Compile Include="Repositories\HistoryRepository.cs" />
     <Compile Include="Repositories\DeployRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +224,7 @@
     <Content Include="Content\images\sort-asc.gif" />
     <Content Include="Content\images\sort-desc.gif" />
     <Content Include="Content\select2.css" />
+    <Content Include="Content\select2.png" />
     <Content Include="Content\slick.columnpicker.css" />
     <Content Include="Content\slick.grid.css" />
     <Content Include="Content\slick.headerbuttons.css" />

@@ -19,22 +19,23 @@ namespace WebApp.Controllers.Api
         public ActionResult ChangedMade(History history)
         {
             var historyRepo = new HistoryRepository();
+            history.dateTime = DateTime.Now;
             historyRepo.Collection.Insert(history);
             return JsonNet(new { success = true });
         }
 
         [GET("/")]
-        public ActionResult GetChanges()
+        public ActionResult GetRecentHistory()
         {
             var historyRepo = new HistoryRepository();
             return JsonNet(new Histories()
             {
-                Items = historyRepo.GetRecentHistory(DateTime.UtcNow.AddMonths(-1))
+                Items = historyRepo.GetRecentHistory(DateTime.UtcNow.AddDays(-7))
             });
         }
 
         [GET("all")]
-        public ActionResult GetAllChanges()
+        public ActionResult GetAllHistory()
         {
             var historyRepo = new HistoryRepository();
             return JsonNet(new Histories()
