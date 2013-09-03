@@ -3,12 +3,6 @@
     var productTeamMembers;
 
     $(function () {
-        _.each(BlackMesa.config.basecampThreads, function (basecampThread, index) {
-            $('#basecamp-links').append('<a href="' + basecampThread.url + '" target="_blank">' + basecampThread.name + '</a><br />');
-            $('#basecampThread').append($("<option></option>")
-                                 .attr("value", basecampThread.threadId)
-                                 .text(basecampThread.name));
-        });
         $.getJSON('/api/v1/people', function (data) {
             productTeamMembers = data["accounts"];
             productTeamMembers = _.sortBy(productTeamMembers, function (user) { return user.Name; });

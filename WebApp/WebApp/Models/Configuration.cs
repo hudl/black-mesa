@@ -19,6 +19,9 @@ namespace WebApp.Models
         [JsonProperty("gitHubPullRequestBaseUrl")]
         public string GitHubPullRequestBaseUrl { get; set; }
 
+        [JsonProperty("hotfixThread")]
+        public string HotfixThread { get; set; }
+
         [JsonProperty("basecampThreads")]
         public ICollection<BasecampThread> BasecampThreads { get; set; }
     }
