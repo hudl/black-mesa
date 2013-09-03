@@ -64,7 +64,7 @@ namespace WebApp.Controllers.Api
                 ProjectManagers = deploy.ProjectManager != null ? deploy.ProjectManager.Split(',') : new string[0],
                 Quails = deploy.Qa != null ? deploy.Qa.Split(',') : new string[0],
             };
-            if (deploy.Type.Equals("Hotfix", StringComparison.OrdinalIgnoreCase))
+            if (deploy.Type != null && deploy.Type.Equals("Hotfix", StringComparison.OrdinalIgnoreCase))
             {
                 deploy.Hotfixes = new List<Hotfix>(1);
                 deploy.Hotfixes.Add(new Hotfix()
