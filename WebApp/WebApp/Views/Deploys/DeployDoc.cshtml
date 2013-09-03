@@ -361,16 +361,11 @@
                 <select id="basecampThread" name="basecampThread" data-hudl-required="true" data-desc="Basecamp Thread Choice">
                     <option value="-1"></option>
                     <option value="0">I'll do it myself (I have an image)</option>
-                    <option value="1">Behind the Scenes</option>
-                    <option value="2">Field Sales</option>
-                    <option value="3">Test Thread</option>
                 </select>
                 <div id="basecamp-links" style="display: none;">
                     <br />
-                    Links to Threads:
-								<br />
-                    <a href="@System.Configuration.ConfigurationManager.ConnectionStrings["BasecampBehind"].ConnectionString" target="_blank">Behind the Scenes</a><br />
-                    <a href="@System.Configuration.ConfigurationManager.ConnectionStrings["BasecampField"].ConnectionString" target="_blank">Field Sales</a><br />
+                        Links to Threads:
+					<br />
                 </div>
             </div>
             <br />
@@ -389,11 +384,3 @@
         </div>
     </form>
 </div>
-<script>
-    window.behindProject = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampBehindIds"].ConnectionString.Split(',')[0]
-    window.behindMessage = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampBehindIds"].ConnectionString.Split(',')[1]
-    window.fieldProject = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampFieldIds"].ConnectionString.Split(',')[0]
-    window.fieldMessage = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampFieldIds"].ConnectionString.Split(',')[1]
-    window.testProject = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampTestIds"].ConnectionString.Split(',')[0]
-    window.testMessage = @System.Configuration.ConfigurationManager.ConnectionStrings["BasecampTestIds"].ConnectionString.Split(',')[1]
-</script>

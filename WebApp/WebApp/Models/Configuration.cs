@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoRepository;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace WebApp.Models
 {
@@ -17,5 +18,8 @@ namespace WebApp.Models
 
         [JsonProperty("gitHubPullRequestBaseUrl")]
         public string GitHubPullRequestBaseUrl { get; set; }
+
+        [JsonProperty("basecampThreads")]
+        public ICollection<BasecampThread> BasecampThreads { get; set; }
     }
 }

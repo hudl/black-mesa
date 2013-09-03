@@ -3,6 +3,12 @@
     var productTeamMembers;
 
     $(function () {
+        _.each(BlackMesa.config.basecampThreads, function (basecampThread, index) {
+            $('#basecamp-links').append('<a href="' + basecampThread.url + '" target="_blank">' + basecampThread.name + '</a><br />');
+            $('#basecampThread').append($("<option></option>")
+                                 .attr("value", basecampThread.threadId)
+                                 .text(basecampThread.name));
+        });
         $.getJSON('/api/v1/people', function (data) {
             productTeamMembers = data["accounts"];
             productTeamMembers = _.sortBy(productTeamMembers, function (user) { return user.Name; });
@@ -146,26 +152,24 @@
 			        var basecampPost = $('#basecampThread').val();
 			        if (basecampPost > 0) {
 			            var project, message;
-			            if (basecampPost == 1) {
-			                project = window.behindProject;
-			                message = window.behindMessage;
-			            } else if (basecampPost == 2) {
-			                project = window.fieldProject;
-			                message = window.fieldMessage;
-			            } else if (basecampPost == 3) {
-			                project = window.testProject;
-			                message = window.testMessage;
+			            _.each(BlackMesa.config.basecampThreads, function (basecampThread, index) {
+			                if (basecampThread.threadId == basecampPost) {
+			                    project = basecampThread.projectId;
+			                    message = basecampThread.threadId;
+			                }
+			            });
+			            if (message && project) {
+			                $.post("/api/v1/basecamp",
+                                {
+                                    content: $('#basecamp').val(),
+                                    project: project,
+                                    message: message
+                                },
+                                function (data) {
+                                    location.reload(true);
+                                }
+                            );
 			            }
-			            $.post("/api/v1/basecamp",
-                            {
-                                content: $('#basecamp').val(),
-                                project: project,
-                                message: message
-                            },
-                            function (data) {
-                                location.reload(true);
-                            }
-                        );
 			        } else {
 			            location.reload(true);
 			        }
