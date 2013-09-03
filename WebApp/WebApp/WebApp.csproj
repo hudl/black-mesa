@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="Models\Assessment.cs" />
     <Compile Include="Models\Assessments.cs" />
+    <Compile Include="Models\BasecampThread.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Deploy.cs" />
     <Compile Include="Models\BlackMesaEntity.cs" />
@@ -338,6 +339,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\slick-grid-custom-editor.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.columnpicker.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.pager.js" />
     <Content Include="Scripts\SlickGrid\Plugins\slick.autotooltips.js" />
