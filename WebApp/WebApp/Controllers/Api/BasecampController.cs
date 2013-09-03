@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,9 +19,9 @@ namespace WebApp.Controllers.Api
         [POST("/"), ValidateInput(false)]
         public ActionResult PostBasecampMessage(string project, string message, string content)
         {
-            var usersRaw = GetPageSource(ConfigurationManager.ConnectionStrings["BasecampGetAccesses"].ConnectionString.Replace("{project}", project), GetHeaders());
+            var usersRaw = GetPageSource(PrivateConfig.BasecampConfig.GetAccessesUrl.Replace("{project}", project), GetHeaders());
             var users = JsonConvert.DeserializeObject<List<BasecampUser>>(usersRaw);
-            return JsonNet(PostMessage(ConfigurationManager.ConnectionStrings["BasecampPost"].ConnectionString.Replace("{project}", project).Replace("{message}", message), content, users, GetHeaders()));
+            return JsonNet(PostMessage(PrivateConfig.BasecampConfig.PostUrl.Replace("{project}", project).Replace("{message}", message), content, users, GetHeaders()));
         }
 
         private string PostMessage(string url, string content, List<BasecampUser> usersToShare, Dictionary<string, string> headers)
@@ -41,7 +40,7 @@ namespace WebApp.Controllers.Api
                     content = content,
                     subscribers = usersToShare.Select(user => user.id).ToList()
                 });
-                client.Headers["User-Agent"] = System.Configuration.ConfigurationManager.ConnectionStrings["User-Agent"].ConnectionString;
+                client.Headers["User-Agent"] = PrivateConfig.UserAgent;
                 client.Headers["Content-Type"] = "application/json; charset=utf-8";
                 return client.UploadString(new Uri(url), postData);
             }
@@ -49,8 +48,8 @@ namespace WebApp.Controllers.Api
 
         private Dictionary<string, string> GetHeaders()
         {
-            var text = ConfigurationManager.ConnectionStrings["BasecampAuth"];
-            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(text.ConnectionString);
+            var auth = PrivateConfig.BasecampConfig.Username + ":" + PrivateConfig.BasecampConfig.Password;
+            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(auth);
             string basicAuth = System.Convert.ToBase64String(toEncodeAsBytes);
             return new Dictionary<string, string>()
             {

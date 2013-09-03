@@ -2,7 +2,6 @@
 using AttributeRouting.Web.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -18,7 +17,7 @@ namespace WebApp.Controllers.Api
         public ActionResult GithubUsernames()
         {
             //TODO: Redis cache for 10 minutes so we don't keep pinging the AD server.
-            return JsonNet(GetPageSource(ConfigurationManager.ConnectionStrings["ADServer"].ConnectionString, null), true);
+            return JsonNet(GetPageSource(PrivateConfig.AdServer, null), true);
         }
     }
 }

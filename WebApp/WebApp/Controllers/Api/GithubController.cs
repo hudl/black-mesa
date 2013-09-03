@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -21,28 +20,28 @@ namespace WebApp.Controllers.Api
         [GET("pullRequest/{pr}/branch")]
         public ActionResult GetPullRequestBranch(string pr)
         {
-            var source = GetPageSource(ConfigurationManager.ConnectionStrings["GitHubPrBranch"].ConnectionString.Replace("{pr}", pr), GetHeaders());
+            var source = GetPageSource(PrivateConfig.GithubConfig.PullRequestBranchUrl.Replace("{pr}", pr), GetHeaders());
             return JsonNet(source, true);
         }
 
         [GET("pullRequest/{pr}/comments")]
         public ActionResult GetPullRequestComments(string pr)
         {
-            var source = GetPageSource(ConfigurationManager.ConnectionStrings["GitHubPrComments"].ConnectionString.Replace("{pr}", pr), GetHeaders());
+            var source = GetPageSource(PrivateConfig.GithubConfig.PullRequestCommentsUrl.Replace("{pr}", pr), GetHeaders());
             return JsonNet(source, true);
         }
 
         [GET("commits")]
         public ActionResult GetRecentRequestsToMaster()
         {
-            var source = GetPageSource(ConfigurationManager.ConnectionStrings["GitHubCommits"].ConnectionString, GetHeaders());
+            var source = GetPageSource(PrivateConfig.GithubConfig.RecentCommitsUrl, GetHeaders());
             return JsonNet(source, true);
         }
 
         private Dictionary<string, string> GetHeaders()
         {
-            var text = ConfigurationManager.ConnectionStrings["GitHubAuth"];
-            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(text.ConnectionString);
+            var auth = PrivateConfig.GithubConfig.Username + ":" + PrivateConfig.GithubConfig.Password;
+            byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(auth);
             string basicAuth = System.Convert.ToBase64String(toEncodeAsBytes);
             return new Dictionary<string, string>()
             {

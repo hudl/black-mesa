@@ -8,12 +8,21 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebApp.Models;
+using WebApp.Repositories;
 
 namespace WebApp.Controllers.Api
 {
     [RouteArea("api/v1")]
     public class BaseController : Controller
     {
+        protected static PrivateConfig PrivateConfig { get; private set; }
+
+        public BaseController()
+        {
+            PrivateConfig = new PrivateConfigRepository().GetPrivateConfig();
+        }
+
         protected string GetPageSource(string url, Dictionary<string, string> headers)
         {
             try
@@ -28,7 +37,7 @@ namespace WebApp.Controllers.Api
                         }
                     }
                     client.Headers["Content-Type"] = "application/json; charset=utf-8";
-                    client.Headers["User-Agent"] = System.Configuration.ConfigurationManager.ConnectionStrings["User-Agent"].ConnectionString;
+                    client.Headers["User-Agent"] = PrivateConfig.UserAgent;
                     return client.DownloadString(url);
                 }
             }
