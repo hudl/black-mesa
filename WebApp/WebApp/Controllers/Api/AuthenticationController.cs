@@ -23,6 +23,7 @@ namespace WebApp.Controllers.Api
         [POST("authenticate")]
         public ActionResult Login(string username, string password)
         {
+            ServicePointManager.ServerCertificateValidationCallback = OnServerCertificateValidationCallback;
             AuthResponse data;
             using (WebClient client = new WebClient())
             {
@@ -46,6 +47,31 @@ namespace WebApp.Controllers.Api
                 HttpContext.Response.Cookies.Add(cookie);
             }
             return JsonNet(data);
+        }
+
+        private bool OnServerCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            if (sslPolicyErrors == SslPolicyErrors.None)
+            {
+                return true;
+            }
+
+            var request = sender as HttpWebRequest;
+
+            if (request == null)
+            {
+                var message = String.Format(
+                    "OnServerCertificateValidationCallback: expected 'sender' to be HttpWebRequest, but it was {0}", sender == null ? "null" : sender.GetType().Name);
+                throw new ArgumentException(message, "sender");
+            }
+
+            // tyson.stewart 28 December 2012 - This needs to be expanded to handle multiple certificates if we use
+            //   more than just one web service (via HTTPS)
+            var certificateIsValid = request.RequestUri.Equals(PrivateConfig.Authorization.Uri)
+                && String.Equals(PrivateConfig.Authorization.Certificate.Subject, certificate.Subject)
+                && String.Equals(PrivateConfig.Authorization.Certificate.Serial, certificate.GetSerialNumberString());
+
+            return certificateIsValid;
         }
 
         private class AuthResponse
