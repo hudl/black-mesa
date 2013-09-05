@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebApp.Attributes;
 using WebApp.Models;
 using WebApp.Repositories;
 
 namespace WebApp.Controllers.Api
 {
+    [CookieAuthenticated]
     [RoutePrefix("deploys")]
     public class DeployController : BaseController
     {

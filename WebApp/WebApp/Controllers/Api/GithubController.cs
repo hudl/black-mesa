@@ -11,9 +11,11 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebApp.Attributes;
 
 namespace WebApp.Controllers.Api
 {
+    [CookieAuthenticated]
     [RoutePrefix("github")]
     public class GithubController : BaseController
     {

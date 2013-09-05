@@ -15,16 +15,6 @@
         loadData(false);
     });
 
-    $('#username').on('keyup', function () {
-        if ($('#username').val().length >= 2) {
-            $('#validated').removeClass('icon-remove').addClass('icon-ok');
-            BlackMesa.validated = true;
-        } else {
-            $('#validated').removeClass('icon-ok').addClass('icon-remove');
-            BlackMesa.validated = false;
-        }
-    });
-
     _.each(BlackMesa.config.basecampThreads, function (basecampThread, index) {
         $('#basecamp-links').append('<a href="' + basecampThread.url + '" target="_blank">' + basecampThread.name + '</a><br />');
         $('#basecampThread').append($("<option></option>")
@@ -145,14 +135,10 @@
 
             var oldValue;
             grid.onBeforeEditCell.subscribe(function (e, args) {
-                if (!BlackMesa.validated) {
-                    return false;
-                } else {
-                    oldValue = {
-                        value: $(grid.getCellNode(args.row, args.cell)).text(),
-                        type: grid.getColumns()[args.cell].id,
-                        id: args.item.id
-                    }
+                oldValue = {
+                    value: $(grid.getCellNode(args.row, args.cell)).text(),
+                    type: grid.getColumns()[args.cell].id,
+                    id: args.item.id
                 }
             });
             grid.onCellChange.subscribe(function (e, args) {
@@ -162,12 +148,13 @@
                     if (oldValue.id === args.item.id && oldValue.type == grid.getColumns()[args.cell].id) {
                         confirmedOldValue = oldValue.value;
                     }
-                    toastr.info('Updated ' + grid.getColumns()[args.cell].id + " from " + confirmedOldValue + " to " + $(grid.getCellNode(args.row, args.cell)).text());
+                    var newValue = grid.getData().getItemById(args.item.id)[grid.getColumns()[args.cell].field];
+                    toastr.info('Updated ' + grid.getColumns()[args.cell].id + " from " + confirmedOldValue + " to " + newValue);
                     $.post("api/v1/history", {
-                        person: $('#username').val(),
+                        person: BlackMesa.username,
                         deployId: args.item.id,
                         propertyChanged: grid.getColumns()[args.cell].id,
-                        newValue: $(grid.getCellNode(args.row, args.cell)).text(),
+                        newValue: newValue,
                         oldValue: confirmedOldValue
                     });
                 });

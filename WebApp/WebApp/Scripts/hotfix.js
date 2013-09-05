@@ -31,7 +31,8 @@
         });
     });
 
-    $(document).live('click', '.hotfix', function (event) {
+    $(document).on('click', '.hotfix', function (event) {
+        event.preventDefault();
         var hotfixMongoId = $(event.target).data("mongo-id");
         if (!hotfixMongoId) {
             return;

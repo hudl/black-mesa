@@ -9,9 +9,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebApp.Attributes;
 
 namespace WebApp.Controllers.Api
 {
+    [CookieAuthenticated]
     [RoutePrefix("basecamp")]
     public class BasecampController : BaseController
     {

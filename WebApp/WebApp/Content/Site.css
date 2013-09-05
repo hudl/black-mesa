@@ -772,13 +772,6 @@ tr.pager td {
     font-family: Sans-Serif
 }
 
-#history {
-    overflow: scroll;
-    background-color: white;
-    display: block;
-    position: absolute;
-    right: 0px;
-    top: 10px;
-    bottom: 10px;
-    width: 300px;
+.login {
+	width: 500px;
 }

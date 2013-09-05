@@ -20,6 +20,7 @@ namespace WebApp.Models
         public BasecampConfig BasecampConfig { get; set; }
         public JiraConfig JiraConfig { get; set; }
         public string AdServer { get; set; }
+        public string AuthServer { get; set; }
         public string UserAgent { get; set; }
     }
 }

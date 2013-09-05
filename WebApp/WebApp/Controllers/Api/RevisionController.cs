@@ -7,13 +7,15 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
+using WebApp.Attributes;
 using WebApp.Models;
 using WebApp.Repositories;
 
 namespace WebApp.Controllers.Api
 {
+    [CookieAuthenticated]
     [RoutePrefix("history")]
-    public class HistoryController : BaseController
+    public class RevisionController : BaseController
     {
         [POST("/")]
         public ActionResult ChangedMade(History history)

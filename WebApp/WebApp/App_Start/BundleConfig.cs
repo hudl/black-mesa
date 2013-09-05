@@ -24,7 +24,28 @@ namespace WebApp
                 "~/Scripts/app.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/main").Include(
-                "~/Scripts/main.js"));
+                "~/Scripts/SlickGrid/slick.core.js",
+                "~/Scripts/SlickGrid/slick.grid.js",
+                "~/Scripts/SlickGrid/slick.dataview.js",
+                "~/Scripts/SlickGrid/slick.editors.js",
+                "~/Scripts/SlickGrid/Plugins/slick.*",
+                "~/Scripts/main.js",
+                "~/Scripts/slick-grid-custom-editor.js",
+                "~/Scripts/toastr.js",
+                "~/Scripts/deployform.js",
+                "~/Scripts/hotfix.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/login").Include(
+                "~/Scripts/login.js",
+                "~/Scripts/toastr.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/history").Include(
+                "~/Scripts/SlickGrid/slick.core.js",
+                "~/Scripts/SlickGrid/slick.grid.js",
+                "~/Scripts/SlickGrid/slick.dataview.js",
+                "~/Scripts/SlickGrid/slick.editors.js",
+                "~/Scripts/SlickGrid/Plugins/slick.*",
+                "~/Scripts/history.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

@@ -8,8 +8,17 @@ using System.Text;
 
 namespace DeployImporter
 {
+    /// <summary>
+    /// If you have to maintain this, I apologize, this was written as a use once tool to import data.
+    /// </summary>
     class Program
     {
+        static Dictionary<string, string> initialsToName = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "MS", "Matt Sheets" },
+            { "KD", "Kyle Deterding" },
+        };
+
         static void Main(string[] args)
         {
             Console.WriteLine("Do you have the latest deploy_doc.csv and hotfix_doc.csv in the folder than this exe is in? Press enter when you do");
@@ -19,6 +28,21 @@ namespace DeployImporter
             var finalDeploys = new List<Deploy>();
             foreach (var deploy in deploys)
             {
+                var des = deploy.DES.Trim();
+                var dev = deploy.DEV.Trim();
+                var cr = deploy.DEVCR.Trim();
+                var pm = deploy.PM.Trim();
+                var qa = deploy.QA.Trim();
+                if (initialsToName.ContainsKey(des))
+                    des = initialsToName[des];
+                if (initialsToName.ContainsKey(dev))
+                    dev = initialsToName[dev];
+                if (initialsToName.ContainsKey(cr))
+                    cr = initialsToName[cr];
+                if (initialsToName.ContainsKey(pm))
+                    pm = initialsToName[pm];
+                if (initialsToName.ContainsKey(qa))
+                    qa = initialsToName[qa];
                 finalDeploys.Add(new Deploy
                 {
                     Action = deploy.ACTION.Trim(),
@@ -32,11 +56,11 @@ namespace DeployImporter
                     Type = deploy.TYPE.Trim(),
                     People = new People
                         {
-                            Designers = new List<string> { deploy.DES.Trim() },
-                            Developers = new List<string> { deploy.DEV.Trim() },
-                            CodeReviewers = new List<string> { deploy.DEVCR.Trim() },
-                            ProjectManagers = new List<string> { deploy.PM.Trim() },
-                            Quails = new List<string> { deploy.QA.Trim() },
+                            Designers = new List<string> { des },
+                            Developers = new List<string> { dev },
+                            CodeReviewers = new List<string> { cr },
+                            ProjectManagers = new List<string> { pm },
+                            Quails = new List<string> { qa },
                         },
                 });
             }

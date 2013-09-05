@@ -11,11 +11,15 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApp.Models;
 using AttributeRouting.Web.Mvc;
+using WebApp.Controllers.Api;
+using WebApp.Attributes;
+using MongoDB.Bson;
 
 
 namespace WebApp.Controllers
 {
-    public class HomeController : Controller
+    [CookieAuthenticated]
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -43,13 +47,13 @@ namespace WebApp.Controllers
 
         public ContentResult Config()
         {
-            var getConfigurationQuery = new GetConfigurationQuery();
-            var configuration = getConfigurationQuery.Get();
+            var authCookie = HttpContext.Request.Cookies[CookieAuthenticatedAttribute.CookieName].Value;
+            var displayName = new SessionRepository().GetById(new ObjectId(authCookie)).DisplayName;
             return new ContentResult
-                {
-                    Content = @"(function(blackmesa){blackmesa.config=" + JsonConvert.SerializeObject(configuration) + @";})(window.BlackMesa);",
-                    ContentType = "text/javascript"
-                };
+            {
+                Content = @"(function(blackmesa){blackmesa.username='" + displayName + @"';})(window.BlackMesa);",
+                ContentType = "text/javascript"
+            };
         }
     }
 }

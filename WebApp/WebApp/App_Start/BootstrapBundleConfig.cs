@@ -15,19 +15,9 @@ namespace WebApp
                 "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js",
                 "~/Scripts/jquery.dateFormat-1.0.js",
                 "~/Scripts/underscore.js",
-                "~/Scripts/toastr.js",
-                "~/Scripts/deployform.js",
-                "~/Scripts/hotfix.js",
-                "~/Scripts/history.js",
                 "~/Scripts/select2.js",
                 "~/Scripts/jquery.simplemodal-1.4.4.js",
-                "~/Scripts/jquery.event.drag.js",
-                "~/Scripts/SlickGrid/slick.core.js",
-                "~/Scripts/SlickGrid/slick.grid.js",
-                "~/Scripts/SlickGrid/slick.dataview.js",
-                "~/Scripts/SlickGrid/slick.editors.js",
-                "~/Scripts/SlickGrid/Plugins/slick.*",
-                "~/Scripts/slick-grid-custom-editor.js"
+                "~/Scripts/jquery.event.drag.js"
                 ));
 
             bundles.Add(new StyleBundle("~/content/css").Include(

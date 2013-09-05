@@ -25,6 +25,7 @@
     @RenderBody()
     @Scripts.Render("~/js")
     @Scripts.Render("~/bundles/app")
+    <script type="text/javascript" src="@Url.Action("Config", "Config")"></script>
     <script type="text/javascript" src="@Url.Action("Config", "Home")"></script>
     @RenderSection("Scripts", required: false)
 </body>

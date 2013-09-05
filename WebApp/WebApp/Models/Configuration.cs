@@ -22,6 +22,9 @@ namespace WebApp.Models
         [JsonProperty("hotfixThread")]
         public string HotfixThread { get; set; }
 
+        [JsonProperty("loginServer")]
+        public string LoginServer { get; set; }
+
         [JsonProperty("basecampThreads")]
         public ICollection<BasecampThread> BasecampThreads { get; set; }
     }
