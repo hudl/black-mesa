@@ -23,15 +23,13 @@ namespace WebApp.Controllers.Api
         [POST("authenticate")]
         public ActionResult Login(string username, string password)
         {
-            // TODO: Don't just disable security, store a certificate in the private config.
-            ServicePointManager.ServerCertificateValidationCallback = delegate(object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
             AuthResponse data;
             using (WebClient client = new WebClient())
             {
                 var postData = JsonConvert.SerializeObject(new { username = username, password = password });
                 client.Headers["User-Agent"] = PrivateConfig.UserAgent;
                 client.Headers["Content-Type"] = "application/json; charset=utf-8";
-                var rawData = client.UploadString(PrivateConfig.AuthServer, postData);
+                var rawData = client.UploadString(PrivateConfig.Authorization.Uri, postData);
                 data = JsonConvert.DeserializeObject<AuthResponse>(rawData);
             }
             if (data != null && data.Success)
