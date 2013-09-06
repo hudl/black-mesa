@@ -19,7 +19,7 @@ namespace WebApp.Controllers.Api
         public ActionResult GithubUsernames()
         {
             //TODO: Redis cache for 10 minutes so we don't keep pinging the AD server.
-            return JsonNet(GetPageSource(PrivateConfig.AdServer, null), true);
+            return JsonNet(GetPageSource(PrivateConfig.ActiveDirectory.Uri.ToString(), null), true);
         }
     }
 }

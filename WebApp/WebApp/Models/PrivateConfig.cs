@@ -19,8 +19,8 @@ namespace WebApp.Models
         public GithubConfig GithubConfig { get; set; }
         public BasecampConfig BasecampConfig { get; set; }
         public JiraConfig JiraConfig { get; set; }
-        public string AdServer { get; set; }
-        public AuthorizationConfig Authorization { get; set; }
         public string UserAgent { get; set; }
+        public ConnectionConfig Authorization { get; set; }
+        public ConnectionConfig ActiveDirectory { get; set; }
     }
 }

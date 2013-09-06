@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public class AuthorizationConfig
+    public class ConnectionConfig
     {
         public string Host { get; set; }
         public string Path { get; set; }

@@ -193,7 +193,7 @@
     <Compile Include="Models\AccountConfig.cs" />
     <Compile Include="Models\Assessment.cs" />
     <Compile Include="Models\Assessments.cs" />
-    <Compile Include="Models\AuthorizationConfig.cs" />
+    <Compile Include="Models\ConnectionConfig.cs" />
     <Compile Include="Models\BasecampConfig.cs" />
     <Compile Include="Models\BasecampThread.cs" />
     <Compile Include="Models\BlackMesaIdentity.cs" />

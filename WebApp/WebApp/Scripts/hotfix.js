@@ -75,7 +75,7 @@
                     ticket = "None";
                 }
                 $('#hotfix-view-ticket-link').html(ticket);
-
+                $('#hotfix-branch-name').text(deploy.branch);
                 $('#prod-ticket').val(hotfix.prodTicket);
                 $('#hotfix-view-ticket').val(hotfix.ticket);
                 $('#bad-branch').val(hotfix.branchThatBrokeIt);
