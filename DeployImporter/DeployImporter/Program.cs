@@ -15,9 +15,19 @@ namespace DeployImporter
     {
         static Dictionary<string, string> initialsToName = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            { "MS", "Matt Sheets" },
-            { "KD", "Kyle Deterding" },
+            { "Initials", "Full Name" },
         };
+        static void insertIntoNameArray(string name, string[] names, int index)
+        {
+            if (initialsToName.ContainsKey(name.Trim()))
+            {
+                names[index] = initialsToName[name.Trim()];
+            }
+            else if (String.IsNullOrWhiteSpace(name) || name.Equals("none", StringComparison.OrdinalIgnoreCase))
+            {
+                names[index] = "None";
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -28,21 +38,41 @@ namespace DeployImporter
             var finalDeploys = new List<Deploy>();
             foreach (var deploy in deploys)
             {
-                var des = deploy.DES.Trim();
-                var dev = deploy.DEV.Trim();
-                var cr = deploy.DEVCR.Trim();
-                var pm = deploy.PM.Trim();
-                var qa = deploy.QA.Trim();
-                if (initialsToName.ContainsKey(des))
-                    des = initialsToName[des];
-                if (initialsToName.ContainsKey(dev))
-                    dev = initialsToName[dev];
-                if (initialsToName.ContainsKey(cr))
-                    cr = initialsToName[cr];
-                if (initialsToName.ContainsKey(pm))
-                    pm = initialsToName[pm];
-                if (initialsToName.ContainsKey(qa))
-                    qa = initialsToName[qa];
+                var desArray = deploy.DES.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
+                var devArray = deploy.DEV.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
+                var crArray = deploy.DEVCR.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
+                var pmArray = deploy.PM.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
+                var qaArray = deploy.QA.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
+                int index = 0;
+                foreach (string name in desArray)
+                {
+                    insertIntoNameArray(name, desArray, index);
+                    index++;
+                }
+                index = 0;
+                foreach (string name in devArray)
+                {
+                    insertIntoNameArray(name, devArray, index);
+                    index++;
+                }
+                index = 0;
+                foreach (string name in crArray)
+                {
+                    insertIntoNameArray(name, crArray, index);
+                    index++;
+                }
+                index = 0;
+                foreach (string name in pmArray)
+                {
+                    insertIntoNameArray(name, pmArray, index);
+                    index++;
+                }
+                index = 0;
+                foreach (string name in qaArray)
+                {
+                    insertIntoNameArray(name, qaArray, index);
+                    index++;
+                }
                 finalDeploys.Add(new Deploy
                 {
                     Action = deploy.ACTION.Trim(),
@@ -56,11 +86,11 @@ namespace DeployImporter
                     Type = deploy.TYPE.Trim(),
                     People = new People
                         {
-                            Designers = new List<string> { des },
-                            Developers = new List<string> { dev },
-                            CodeReviewers = new List<string> { cr },
-                            ProjectManagers = new List<string> { pm },
-                            Quails = new List<string> { qa },
+                            Designers = desArray.ToList(),
+                            Developers = devArray.ToList(),
+                            CodeReviewers = crArray.ToList(),
+                            ProjectManagers = pmArray.ToList(),
+                            Quails = qaArray.ToList(),
                         },
                 });
             }
