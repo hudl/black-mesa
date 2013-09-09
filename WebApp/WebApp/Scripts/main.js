@@ -72,7 +72,7 @@
 
             var columns = [
                 { id: 'Day', name: 'Day', field: 'day', width: 35 },
-                { id: 'DeployTime', name: 'Time', field: 'deployTime', width: 90, editor: Slick.Editors.NoBlankTextEditor, formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, sortable: true },
+                { id: 'DeployTime', name: 'Time', field: 'deployTime', width: 90, editor: Slick.Editors.HudlDateEditor, formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, sortable: true },
                 { id: 'Action', name: 'Action', field: 'action', width: 50, editor: Slick.Editors.Action, sortable: true },
                 { id: 'Component', name: 'Comp.', field: 'component', width: 60, editor: Slick.Editors.Component, sortable: true },
                 { id: 'Type', name: 'Type', field: 'type', width: 90, formatter: Slick.Formatters.TypeFormatter, editor: Slick.Editors.Type, sortable: true },

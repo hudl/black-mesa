@@ -6,6 +6,7 @@
         "Component": ComponentEditor,
         "Project": ProjectEditor,
         "NoBlankTextEditor": NoBlankTextEditor,
+        "HudlDateEditor": HudlDateEditor,
     })
 
     function JiraEditor(args) {
@@ -395,6 +396,75 @@
                 })
                 .focus()
                 .select();
+        };
+
+        this.destroy = function () {
+            $input.remove();
+        };
+
+        this.focus = function () {
+            $input.focus();
+        };
+
+        this.getValue = function () {
+            return $input.val();
+        };
+
+        this.setValue = function (val) {
+            $input.val(val);
+        };
+
+        this.loadValue = function (item) {
+            defaultValue = item[args.column.field] || "";
+            $input.val(defaultValue);
+            $input[0].defaultValue = defaultValue;
+            $input.select();
+        };
+
+        this.serializeValue = function () {
+            return $input.val();
+        };
+
+        this.applyValue = function (item, state) {
+            item[args.column.field] = state;
+        };
+
+        this.isValueChanged = function () {
+            return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+        };
+
+        this.validate = function () {
+            if (args.column.validator) {
+                var validationResults = args.column.validator($input.val());
+                if (!validationResults.valid) {
+                    return validationResults;
+                }
+            }
+
+            var valid = $input.val().length > 0;
+            if (!valid) warnFieldIsEmpty();
+
+            return {
+                valid: valid,
+                msg: null
+            };
+        };
+
+        this.init();
+    }
+
+    function HudlDateEditor(args) {
+        this.init = function () {
+            $input = $("<INPUT type=text class='editor-text' />")
+                .appendTo(args.container)
+                .bind("keydown.nav", function (e) {
+                    if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                        e.stopImmediatePropagation();
+                    }
+                })
+                .focus()
+                .select();
+            toastr.warning('The format of this must be exactly<br />YYYY-MM-DDTHH:MM:SS.SSSZ<br />with the "T" and "Z" always in those spots.<br />Also the "updated" text might look weird for this.', 'Be careful');
         };
 
         this.destroy = function () {
