@@ -116,7 +116,7 @@ namespace WebApp.Controllers.Api
 
             // tyson.stewart 28 December 2012 - This needs to be expanded to handle multiple certificates if we use
             //   more than just one web service (via HTTPS)
-            var certificateIsValid = request.RequestUri.Equals(PrivateConfig.Authorization.Uri)
+            var certificateIsValid = (request.RequestUri.Equals(PrivateConfig.Authorization.Uri) || request.RequestUri.Equals(PrivateConfig.ActiveDirectory.Uri))
                 && String.Equals(PrivateConfig.Authorization.Certificate.Subject, certificate.Subject)
                 && String.Equals(PrivateConfig.Authorization.Certificate.Serial, certificate.GetSerialNumberString());
 

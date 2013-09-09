@@ -153,6 +153,7 @@
             $.post("/api/v1/deploys", data, function (response) {
                 toastr.info('Updated Hotfix Data');
             });
+            $.modal.close(); // closes all modals. There will only ever be 1, so this will just have to work. Only way documented to do it.
         });
 
         function applyHotfixRatingColor(element) {

@@ -72,20 +72,20 @@
 
             var columns = [
                 { id: 'Day', name: 'Day', field: 'day', width: 35 },
-                { id: 'DeployTime', name: 'Time', field: 'deployTime', width: 90, formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, sortable: true },
+                { id: 'DeployTime', name: 'Time', field: 'deployTime', width: 90, editor: Slick.Editors.NoBlankTextEditor, formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, sortable: true },
                 { id: 'Action', name: 'Action', field: 'action', width: 50, editor: Slick.Editors.Action, sortable: true },
                 { id: 'Component', name: 'Comp.', field: 'component', width: 60, editor: Slick.Editors.Component, sortable: true },
                 { id: 'Type', name: 'Type', field: 'type', width: 90, formatter: Slick.Formatters.TypeFormatter, editor: Slick.Editors.Type, sortable: true },
                 { id: 'Project', name: 'Proj.', field: 'project', width: 90, editor: Slick.Editors.Project, sortable: true },
-                { id: 'Branch', name: 'Branch', field: 'branch', width: 270, editor: Slick.Editors.Text, sortable: true },
-                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 50, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.Text, sortable: true },
+                { id: 'Branch', name: 'Branch', field: 'branch', width: 270, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 50, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 33, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira, sortable: true },
-                { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.Text, sortable: true },
-                { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.Text, sortable: true },
-                { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.Text, sortable: true },
-                { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.Text, sortable: true },
-                { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.Text, sortable: true },
-                { id: 'Notes', name: 'Notes', field: 'notes', width: 450, editor: Slick.Editors.Text, sortable: true },
+                { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'Notes', name: 'Notes', field: 'notes', width: 450, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
             ];
 
             var dataView = new Slick.Data.DataView();
