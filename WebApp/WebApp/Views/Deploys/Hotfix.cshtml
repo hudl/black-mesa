@@ -1,0 +1,88 @@
+﻿<div id="hotfix" style="display: none;">
+    <div class="form-horizontal form-large" >
+        <h1>Hotfix - <span id="hotfix-branch-name"></span></h1>
+        <label class="control-label" for="prod-ticket">Prod Ticket</label>
+        <div class="controls">
+            <input type="number" id="prod-ticket" />
+            <span id="prod-ticket-link"></span>
+        </div>
+        <label class="control-label" for="hotfix-view-ticket">Dev Ticket</label>
+        <div class="controls">
+            <input type="text" id="hotfix-view-ticket" />
+            <span id="hotfix-view-ticket-link"></span>
+        </div>
+        <label class="control-label" for="bad-branch">Branch that broke it</label>
+        <div class="controls">
+            <input type="text" id="bad-branch" />
+        </div>
+        <label class="control-label" for="hotfix-view-component">Hotfix Component</label>
+        <div class="controls">
+            <input type="text" id="hotfix-view-component" />
+        </div>
+        <label class="control-label" for="hotfix-view-notes">Notes</label>
+        <div class="controls">
+            <input type="text" id="hotfix-view-notes" />
+        </div>
+        <label class="control-label" for="hotfix-view-special">Special</label>
+        <div class="controls">
+            <input type="text" id="hotfix-view-special" /><br />
+            <h2>Dev</h2>
+        </div>
+        <label class="control-label" for="dev-team-culp">Team Culpability</label>
+        <div class="controls">
+            <input type="number" min="1" max="5" id="dev-team-culp" />
+        </div>
+        <label class="control-label" for="dev-hudl-impact">Hudl-Wide Impact</label>
+        <div class="controls">
+            <input type="number" min="1" max="5" id="dev-hudl-impact" />
+        </div>
+        <label class="control-label" for="dev-affected-users">Affected-User Impact</label>
+        <div class="controls">
+            <input type="number" min="1" max="5" id="dev-affected-users" />
+        </div>
+        <label class="control-label" for="dev-initials">Initials</label>
+        <div class="controls">
+            <input type="text" id="dev-initials" /><br />
+            <h2>QA</h2>
+        </div>
+        <label class="control-label" for="qa-team-culp">Team Culpability</label>
+        <div class="controls">
+            <input type="number" min="1" max="5" id="qa-team-culp" />
+        </div>
+        <label class="control-label" for="qa-hudl-impact">Hudl-Wide Impact</label>
+        <div class="controls">
+            <input type="number" min="1" max="5" id="qa-hudl-impact" />
+        </div>
+        <label class="control-label" for="qa-affected-users">Affected-User Impact</label>
+        <div class="controls">
+            <input type="number" min="1" max="5" id="qa-affected-users" />
+        </div>
+        <label class="control-label" for="qa-initials">Initials</label>
+        <div class="controls">
+            <input type="text" id="qa-initials"/><br />
+        </div>
+        <div id="bad-rating-detail" style="display: block">
+            <div class="controls">
+                <h2>Details</h2>
+            </div>
+            <div id="hotfix-thread" class="controls">
+            </div>
+            <label class="control-label" for="the-problem">The Problem</label>
+            <div class="controls">
+                <textarea id="the-problem" style="width: 320px" rows="3"></textarea>
+            </div>
+            <label class="control-label" for="how-missed">How This Was Missed</label>
+            <div class="controls">
+                <textarea id="how-missed" style="width: 320px" rows="3"></textarea>
+            </div>
+            <label class="control-label" for="the-fix">The Fix</label>
+            <div class="controls">
+                <textarea id="the-fix" style="width: 320px" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="controls">
+            <br /><button type="button" class="btn btn-primary" id="hotfix-save">Save</button>
+        </div>
+        <img src="~/Images/ratings.png" style="position: absolute; top: 100px; right: 50px" />
+    </div>
+</div>

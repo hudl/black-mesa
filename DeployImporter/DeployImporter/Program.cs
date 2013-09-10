@@ -1,48 +1,106 @@
-﻿using CsvHelper;
+﻿using System.Globalization;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace DeployImporter
 {
+    /// <summary>
+    /// If you have to maintain this, I apologize, this was written as a use once tool to import data.
+    /// </summary>
     class Program
     {
+        static Dictionary<string, string> initialsToName = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "Initials", "Full Name" },
+        };
+        static void insertIntoNameArray(string name, string[] names, int index)
+        {
+            if (initialsToName.ContainsKey(name.Trim()))
+            {
+                names[index] = initialsToName[name.Trim()];
+            }
+            else if (String.IsNullOrWhiteSpace(name) || name.Equals("none", StringComparison.OrdinalIgnoreCase))
+            {
+                names[index] = "None";
+            }
+        }
+
+        static string cleanName(string name)
+        {
+            return name.Trim().Replace("-", "None").Replace("N/A", "None").Replace(',', '/').Replace('-', '/');
+        }
+
         static void Main(string[] args)
         {
+            Console.WriteLine("Do you have the latest deploy_doc.csv and hotfix_doc.csv in the folder than this exe is in? Press enter when you do");
+            Console.Read();
             var deploys = doDeployDoc();
             var hotfixes = doHotfixDoc();
-            List<Deploy> finalDeploys = new List<Deploy>();
-            foreach (DeployDTO deploy in deploys)
+            var finalDeploys = new List<Deploy>();
+            foreach (var deploy in deploys)
             {
+                var desArray = cleanName(deploy.DES).Split('/');
+                var devArray = cleanName(deploy.DEV).Split('/');
+                var crArray = cleanName(deploy.DEVCR).Split('/');
+                var pmArray = cleanName(deploy.PM).Split('/');
+                var qaArray = cleanName(deploy.QA).Split('/');
+                int index = 0;
+                foreach (string name in desArray)
+                {
+                    insertIntoNameArray(name, desArray, index);
+                    index++;
+                }
+                index = 0;
+                foreach (string name in devArray)
+                {
+                    insertIntoNameArray(name, devArray, index);
+                    index++;
+                }
+                index = 0;
+                foreach (string name in crArray)
+                {
+                    insertIntoNameArray(name, crArray, index);
+                    index++;
+                }
+                index = 0;
+                foreach (string name in pmArray)
+                {
+                    insertIntoNameArray(name, pmArray, index);
+                    index++;
+                }
+                index = 0;
+                foreach (string name in qaArray)
+                {
+                    insertIntoNameArray(name, qaArray, index);
+                    index++;
+                }
                 finalDeploys.Add(new Deploy
                 {
-                    Action = deploy.ACTION,
-                    Branch = deploy.BRANCH,
-                    Component = deploy.COMPONENT,
-                    DateTime = deploy.DATE_TIME,
-                    Day = deploy.Day,
-                    Des = deploy.DES,
-                    Dev = deploy.DEV,
-                    DevCodeReview = deploy.DEVCR,
+                    Action = deploy.ACTION.Trim(),
+                    Branch = deploy.BRANCH.Trim(),
+                    Component = deploy.COMPONENT.Trim(),
+                    DeployTime = deploy.DATE_TIME.Trim().TryParseDateTime(),
                     LineNumber = deploy.ID,
-                    IsHotfix = false,
-                    Jira = "http://jira/secure/IssueNavigator.jspa?reset=true&jqlQuery=labels+%3D+" + deploy.BRANCH,
                     Notes = deploy.NOTES,
-                    Project = deploy.PROJECT,
-                    ProjectManager = deploy.PM,
-                    PullRequest = deploy.PR,
-                    PullRequestLink = "https://github.com/hudl/hudl/pull/" + deploy.PR,
-                    QA = deploy.QA,
-                    Type = deploy.TYPE
+                    Project = deploy.PROJECT.Trim(),
+                    PullRequestId = deploy.PR.Trim().TryParseInt(),
+                    Type = deploy.TYPE.Trim(),
+                    People = new People
+                        {
+                            Designers = desArray.ToList(),
+                            Developers = devArray.ToList(),
+                            CodeReviewers = crArray.ToList(),
+                            ProjectManagers = pmArray.ToList(),
+                            Quails = qaArray.ToList(),
+                        },
                 });
             }
             var i = 0;
-            foreach (HotfixDTO hotfix in hotfixes)
+            foreach (var hotfix in hotfixes)
             {
                 Deploy deploy = null;
                 if (hotfix.BRANCH.ToLower().Contains("(2nd pr)"))
@@ -61,29 +119,44 @@ namespace DeployImporter
                 }
                 else
                 {
-                    deploy.BranchThatBrokeIt = hotfix.Breaker_Branch;
-                    deploy.DevAffectedUserImpact = hotfix.DEV_Affected_User_Impact;
-                    deploy.DevHudlWideImpact = hotfix.DEV_Hudl_Wide_Impact;
-                    deploy.DevInitials = hotfix.DEV_Initials;
-                    deploy.DevTeamCulpability = hotfix.DEV_Team_Culpability;
-                    deploy.HfNotes = hotfix.Notes;
-                    deploy.IsHotfix = true;
-                    deploy.ProdTicket = "http://jira/browse/PROD-" + hotfix.PROD_Ticket_Num;
-                    deploy.ProdTicketNum = hotfix.PROD_Ticket_Num;
-                    deploy.QaAffectedUserImpact = hotfix.QA_Affected_User_Impact;
-                    deploy.QaHudlWideImpact = hotfix.QA_Hudl_Wide_Impact;
-                    deploy.QaInitials = hotfix.QA_Initials;
-                    deploy.QaTeamCulpability = hotfix.QA_Team_Culpability;
-                    deploy.Special = hotfix.SPECIAL;
+                    deploy.Hotfixes.Add(new Hotfix
+                        {
+                            BranchThatBrokeIt = hotfix.Breaker_Branch.Trim(),
+                            Notes = hotfix.Notes,
+                            ProdTicket = hotfix.PROD_Ticket_Num.Trim().TryParseInt(),
+                            Special = hotfix.SPECIAL,
+                            Ticket = hotfix.TICKET,
+                            Assessments = new Assessments
+                                {
+                                    Developers = new Assessment
+                                        {
+                                            Culpability = hotfix.DEV_Team_Culpability.Trim().TryParseDecimal(),
+                                            HudlWideImpact = hotfix.DEV_Hudl_Wide_Impact.Trim().TryParseDecimal(),
+                                            AffectedUserImpact = hotfix.DEV_Affected_User_Impact.Trim().TryParseDecimal(),
+                                            Initials = hotfix.DEV_Initials.Trim(),
+                                        },
+                                    Quails = new Assessment
+                                        {
+                                            Culpability = hotfix.QA_Team_Culpability.Trim().TryParseDecimal(),
+                                            HudlWideImpact = hotfix.QA_Hudl_Wide_Impact.Trim().TryParseDecimal(),
+                                            AffectedUserImpact = hotfix.QA_Affected_User_Impact.Trim().TryParseDecimal(),
+                                            Initials = hotfix.QA_Initials.Trim(),
+                                        }
+                                }
+                        });
                 }
             }
             Console.WriteLine(i + " unmatched hotfixes");
             var repo = new DeployRepository();
+            i = 0;
             foreach (Deploy d in finalDeploys)
             {
-                repo.UpdateSomething(d);
+                Console.WriteLine("Updating Entry " + ++i +" of " + finalDeploys.Count);
+                repo.Upsert(d);
             }
         }
+
+
 
         public static List<DeployDTO> doDeployDoc()
         {
@@ -151,7 +224,7 @@ namespace DeployImporter
                 }
                 else if (lineNumber == 17)
                 {
-                    line = "ID,,,,,,,,,BRANCH,,,,,,,,,,,,,,,,,,COMPONENT,SPECIAL,DEV_Team_Culpability,DEV_Hudl_Wide_Impact,DEV_Affected_User_Impact,DEV_Initials,QA_Team_Culpability,QA_Hudl_Wide_Impact,QA_Affected_User_Impact,QA_Initials,,Breaker_Branch,PROD_Ticket_Num,PROD_Ticket,Notes";
+                    line = "ID,,,,,,,,,BRANCH,,,,,,,,,,,,,,,TICKET,,,COMPONENT,SPECIAL,DEV_Team_Culpability,DEV_Hudl_Wide_Impact,DEV_Affected_User_Impact,DEV_Initials,QA_Team_Culpability,QA_Hudl_Wide_Impact,QA_Affected_User_Impact,QA_Initials,,Breaker_Branch,PROD_Ticket_Num,PROD_Ticket,Notes";
                     builder.Append(line + "\n");
                 }
                 else if (lineNumber > 17)
