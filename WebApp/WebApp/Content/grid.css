@@ -1,0 +1,4 @@
+﻿#deploys { font-family: 'Arial Narrow', sans-serif; }
+.slick-header-column {  background-color: #222; color: #eee; font-weight: bold; }
+.slick-row.odd { background-color: #fbfbfb; }
+#deploys .slick-cell.selected { background-color: #b0e0e6; }

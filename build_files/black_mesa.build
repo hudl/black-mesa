@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="hudl">  
+  <property name="teamcity_dotnet_tools_version" value="4.0"/> <!-- force MSBuild 4.0 -->
+  <property name="tempDir" value="${codeDir}\TEMP_BlackMesa" />
+  <property name="compiledDir" value="${codeDir}\WebApp\WebApp\BlackMesaDeploy" />
+  <property name="payload" value="${tempDir}\${branch}_${buildNumber}.zip" />
+  
+  <target name="GenerateConnectionStrings" description="Creates the ConnectionStrings.config file">
+	<touch file="${codeDir}\WebApp\WebApp\ConnectionStrings.config" />
+	<echo file="${codeDir}\WebApp\WebApp\ConnectionStrings.config">&lt;?xml version=&quot;1.0&quot;?&gt;&lt;connectionStrings&gt;&lt;add name=&quot;MongoServerSettings&quot; connectionString=&quot;&quot; /&gt;&lt;/connectionStrings&gt;</echo>
+	<xmlpoke file="${codeDir}\WebApp\WebApp\ConnectionStrings.config" xpath="/connectionStrings/add[@name='MongoServerSettings']/@connectionString" value="${mongoConnectionString}" />
+  </target>
+  
+  <target name="Build" description="Build Black-Mesa" depends="GenerateConnectionStrings">    
+    <msbuild failonerror="true" project="${codeDir}\WebApp\WebApp.sln" target="Rebuild">
+      <property name="Configuration" value="Release" />
+      <property name="DeployOnBuild" value="true" />
+      <property name="PublishProfile" value="Local" />
+      <property name="VisualStudioVersion" value="11.0" />
+      <property name="WarningLevel" value="0" />
+	  <property name="NuGetRepo" value="${nugetRepo}" />
+    </msbuild>
+
+    <zip zipfile="${payload}">
+      <fileset basedir="${compiledDir}" prefix="BlackMesa" failonempty="true">
+        <include name="**/*" />
+      </fileset>
+    </zip>
+  </target>  
+</project>

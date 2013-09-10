@@ -1,52 +1,70 @@
-﻿using MongoDB.Bson;
+﻿using System.Collections.Generic;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoRepository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeployImporter
 {
     [CollectionName("deploys")]
     class Deploy : IEntity
     {
+        public Deploy()
+        {
+            Hotfixes = new List<Hotfix>();
+            People = new People();
+        }
+
+        public static class Fields
+        {
+            public const string LineNumber = "lineNumber";
+            public const string DeployTime = "deployTime";
+            public const string Action = "action";
+            public const string Component = "component";
+            public const string Type = "type";
+            public const string Project = "project";
+            public const string Branch = "branch";
+            public const string PullRequestId = "pullRequestId";
+            public const string People = "people";
+            public const string Notes = "notes";
+            public const string Hotfixes = "hotfixes";
+        }
+
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfNull]
         public string Id { get; set; }
+
+        [BsonElement(Fields.LineNumber)]
         public string LineNumber { get; set; }
-        public string Day { get; set; }
-        public string DateTime { get; set; }
+
+        [BsonElement(Fields.DeployTime)]
+        public DateTime? DeployTime { get; set; }
+
+        [BsonElement(Fields.Action)]
         public string Action { get; set; }
+
+        [BsonElement(Fields.Component)]
         public string Component { get; set; }
+
+        [BsonElement(Fields.Type)]
         public string Type { get; set; }
+
+        [BsonElement(Fields.Project)]
         public string Project { get; set; }
+
+        [BsonElement(Fields.Branch)]
         public string Branch { get; set; }
-        public string PullRequest { get; set; }
-        public string PullRequestLink{ get; set; }
-        public string Jira { get; set; }
-        public string QA { get; set; }
-        public string Des { get; set; }
-        public string Dev { get; set; }
-        public string DevCodeReview { get; set; }
-        public string ProjectManager { get; set; }
+
+        [BsonElement(Fields.PullRequestId)]
+        public int? PullRequestId { get; set; }
+
+        [BsonElement(Fields.People)]
+        public People People { get; set; }
+
+        [BsonElement(Fields.Notes)]
         public string Notes { get; set; }
 
-        public bool IsHotfix { get; set; }
-
-        public string Special { get; set; }
-        public string DevTeamCulpability { get; set; }
-        public string DevHudlWideImpact { get; set; }
-        public string DevAffectedUserImpact { get; set; }
-        public string DevInitials { get; set; }
-        public string QaTeamCulpability { get; set; }
-        public string QaHudlWideImpact { get; set; }
-        public string QaAffectedUserImpact { get; set; }
-        public string QaInitials { get; set; }
-        public string BranchThatBrokeIt { get; set; }
-        public string ProdTicketNum { get; set; }
-        public string ProdTicket { get; set; }
-        public string HfNotes { get; set; }
+        [BsonElement(Fields.Hotfixes)]
+        public List<Hotfix> Hotfixes { get; set; }
     }
 }
