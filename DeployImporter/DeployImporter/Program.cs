@@ -29,6 +29,11 @@ namespace DeployImporter
             }
         }
 
+        static string cleanName(string name)
+        {
+            return name.Trim().Replace("-", "None").Replace("N/A", "None").Replace(',', '/').Replace('-', '/');
+        }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Do you have the latest deploy_doc.csv and hotfix_doc.csv in the folder than this exe is in? Press enter when you do");
@@ -38,11 +43,11 @@ namespace DeployImporter
             var finalDeploys = new List<Deploy>();
             foreach (var deploy in deploys)
             {
-                var desArray = deploy.DES.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
-                var devArray = deploy.DEV.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
-                var crArray = deploy.DEVCR.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
-                var pmArray = deploy.PM.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
-                var qaArray = deploy.QA.Trim().Replace("N/A", "None").Replace(',', '/').Replace('-', '/').Split('/');
+                var desArray = cleanName(deploy.DES).Split('/');
+                var devArray = cleanName(deploy.DEV).Split('/');
+                var crArray = cleanName(deploy.DEVCR).Split('/');
+                var pmArray = cleanName(deploy.PM).Split('/');
+                var qaArray = cleanName(deploy.QA).Split('/');
                 int index = 0;
                 foreach (string name in desArray)
                 {

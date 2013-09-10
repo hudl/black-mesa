@@ -215,20 +215,31 @@
 
     function prChanged() {
         $('#pull-request-spinner').show();
+        var itemsToDisable = [
+            $('#qa'),
+            $('#de'),
+            $('#dev'),
+            $('#branch'),
+            $('#jiraLabel'),
+            $('#codeReview'),
+            $('#projectManager'),
+            $('#notes')
+        ];
+        _.each(itemsToDisable, function (item) {
+            item.prop('disabled', true);
+        });
+
         $.getJSON('/api/v1/github/pullRequest/' + $('#pullRequestId').val() + '/branch', function (data) {
             $.getJSON('/api/v1/github/pullRequest/' + $('#pullRequestId').val() + '/comments', function (comments) {
+                _.each(itemsToDisable, function (item) {
+                    item.prop('disabled', false);
+                });
+                $('#pull-request-spinner').hide();
+
                 if (comments != undefined && comments.length > 0) {
                     data.codeReview = comments[0].user.login;
                 }
-                $('#pull-request-spinner').hide();
-                $('#qa').prop('disabled', false);
-                $('#de').prop('disabled', false);
-                $('#dev').prop('disabled', false);
-                $('#branch').prop('disabled', false);
-                $('#jiraLabel').prop('disabled', false);
-                $('#codeReview').prop('disabled', false);
-                $('#projectManager').prop('disabled', false);
-                $('#notes').prop('disabled', false);
+
                 if (data != undefined) {
                     $('#branch').val('').val(data.head.ref);
                     $('#jiraLabel').val('').val(data.head.ref);
@@ -264,7 +275,20 @@
                     });
                     $('#pullRequestId').val('').attr('placeholder', 'Invalid Pull Request ID');
                 }
+            })
+            .error(function () {
+                $('#pull-request-spinner').hide();
+                _.each(itemsToDisable, function (item) {
+                    item.prop('disabled', false);
+                });
+                alert('Invalid PR');
             });
+        }).error(function () {
+            $('#pull-request-spinner').hide();
+            _.each(itemsToDisable, function (item) {
+                item.prop('disabled', false);
+            });
+            alert('Invalid PR');
         });
     };
 
