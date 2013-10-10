@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
+using MongoDB.Bson;
 using WebApp.Attributes;
 using WebApp.Models;
 using WebApp.Repositories;
@@ -23,7 +24,7 @@ namespace WebApp.Controllers.Api
             var repository = new DeployRepository();
             return JsonNet(new Deploys
             {
-                Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2), MaxReturnSize).ToArray()
+                Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2), MaxReturnSize).Where(x => x.DateDeleted == null).ToArray()
             });
         }
 
@@ -53,6 +54,21 @@ namespace WebApp.Controllers.Api
             deploy.DeployTime = DateTime.Now;
             var repository = new DeployRepository();
             repository.Add(deploy);
+            return JsonNet(new { success = true });
+        }
+
+        [DELETE("{id}")]
+        public ActionResult Delete(string id)
+        {
+            
+            var repository = new DeployRepository();
+            var first = repository.FirstOrDefault(x => x.Id == id);
+            if (first != null)
+            {
+                first.DateDeleted = DateTime.UtcNow;
+                repository.Update(first);
+            }
+
             return JsonNet(new { success = true });
         }
 

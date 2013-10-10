@@ -1,7 +1,6 @@
 ﻿using System;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoRepository;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace WebApp.Models
@@ -20,6 +19,9 @@ namespace WebApp.Models
 
         [BsonElement("component")]
         public string Component { get; set; }
+
+        [BsonElement("dateDeleted")]
+        public DateTime? DateDeleted { get; set; }
 
         [BsonElement("deployTime")]
         public DateTime? DeployTime { get; set; }

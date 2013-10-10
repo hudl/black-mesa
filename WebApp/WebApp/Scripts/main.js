@@ -86,7 +86,24 @@
                 { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'Notes', name: 'Notes', field: 'notes', width: 450, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'Delete', name: 'Delete', width: 50, formatter: buttonFormatter }
             ];
+            
+            function buttonFormatter(row, cell, value, columnDef, dataContext) {
+                var button = "<input class='btn btn-danger del' type='button' id='" + dataContext.id + "' />";
+                return button;
+            }
+
+            $('.del').live('click', function() {
+                var id = $(this).attr('id');
+
+                $.ajax({
+                    url: 'api/v1/deploys/' + id,
+                    type: 'DELETE'
+                });
+                dataView.deleteItem(id);
+                grid.invalidate();
+            });
 
             var dataView = new Slick.Data.DataView();
 
