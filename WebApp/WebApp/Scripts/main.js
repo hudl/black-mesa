@@ -86,11 +86,17 @@
                 { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'Notes', name: 'Notes', field: 'notes', width: 450, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
-                { id: 'Delete', name: 'Delete', width: 50, formatter: buttonFormatter }
+                { id: 'Delete', name: 'Delete', width: 75, formatter: buttonFormatter }
             ];
             
             function buttonFormatter(row, cell, value, columnDef, dataContext) {
-                var button = "<input class='btn btn-danger del' type='button' id='" + dataContext.id + "' />";
+                var style = "width: 60px;" +
+                    "height: 25px;" +
+                    "font-size: 12px;" +
+                    "font-weight: 100;" +
+                    "margin-left: 5px;" +
+                    "padding: 0px;";
+                var button = "<input class='btn btn-danger del' style='"+ style + "' type='button' id='" + dataContext.id + "' value='DELETE'/>";
                 return button;
             }
 
@@ -115,7 +121,8 @@
                 enableCellNavigation: true,
                 multiColumnSort: true,
                 syncColumnCellResize: true,
-            });
+                rowHeight: 40,
+        });
 
             grid.onSort.subscribe(function (e, args) {
                 var cols = args.sortCols;
