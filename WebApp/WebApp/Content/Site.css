@@ -775,3 +775,11 @@ tr.pager td {
 .login {
 	width: 500px;
 }
+
+.del {
+    visibility: hidden;
+}
+
+.slick-cell:hover .del{
+    visibility: visible;
+}

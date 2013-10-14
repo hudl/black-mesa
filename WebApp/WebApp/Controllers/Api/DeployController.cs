@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
+using ServiceStack.Text;
 using WebApp.Attributes;
 using WebApp.Models;
 using WebApp.Repositories;
+using log4net;
 
 namespace WebApp.Controllers.Api
 {
@@ -16,6 +18,7 @@ namespace WebApp.Controllers.Api
     public class DeployController : BaseController
     {
         private const int MaxReturnSize = 100;
+        private static readonly ILog log = LogManager.GetLogger(typeof (DeployController));
 
         [GET("/")]
         public ActionResult Get()
@@ -23,7 +26,7 @@ namespace WebApp.Controllers.Api
             var repository = new DeployRepository();
             return JsonNet(new Deploys
             {
-                Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2), MaxReturnSize).ToArray()
+                Items = repository.GetSince(DateTime.UtcNow.AddMonths(-2), MaxReturnSize).Where(x => x.DateDeleted == null).ToArray()
             });
         }
 
@@ -53,6 +56,22 @@ namespace WebApp.Controllers.Api
             deploy.DeployTime = DateTime.Now;
             var repository = new DeployRepository();
             repository.Add(deploy);
+            return JsonNet(new { success = true });
+        }
+
+        [DELETE("{id}")]
+        public ActionResult Delete(string id)
+        {
+            
+            var repository = new DeployRepository();
+            var first = repository.FirstOrDefault(x => x.Id == id);
+            if (first != null)
+            {
+                log.InfoFormat("Deleting {0}\n{1}", first.Id, first.ToJson());
+                first.DateDeleted = DateTime.UtcNow;
+                repository.Update(first);
+            }
+
             return JsonNet(new { success = true });
         }
 

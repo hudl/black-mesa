@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq.Expressions;
+using System.Web.Mvc;
 using Newtonsoft.Json;
 using WebApp.Queries;
 using WebApp.Repositories;
@@ -47,6 +48,12 @@ namespace WebApp.Controllers
 
         public ContentResult Config()
         {
+
+            if (HttpContext.Request.Cookies[CookieAuthenticatedAttribute.CookieName] == null)
+            {
+                return null;
+            }
+
             var authCookie = HttpContext.Request.Cookies[CookieAuthenticatedAttribute.CookieName].Value;
             var displayName = new SessionRepository().GetById(new ObjectId(authCookie)).DisplayName;
             return new ContentResult
