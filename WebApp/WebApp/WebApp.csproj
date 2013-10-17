@@ -346,6 +346,9 @@
     <Content Include="Content\tradegothic\TradeGothicLTStd-Obl.otf" />
     <Content Include="Content\tradegothic\TradeGothicLTStd.otf" />
     <Content Include="Documentation.chm" />
+    <Content Include="log4net.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\Shares.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
