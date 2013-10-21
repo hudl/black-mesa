@@ -245,7 +245,25 @@
                     }
                 });
             $input.select2({
-                tags: ["Admin", "Attachments", "Auto", "BBall", "Core", "DS", "DVD", "Fan", "Football", "Fundraising", "Lifeguard", "MacMercury", "Mercury", "MODI", "Ops", "OVE", "Pro", "Recruit", "VE"],
+                tags: [
+					'Basketball',
+					'Campaigns',
+					'Content',
+					'Core',
+					'DesignStudio',
+					'DevTools',
+					'Football',
+					'FrontEnd',
+					'Infrastructure',
+					'Insiders',
+					'Mobile',
+					'Platform',
+					'Pro',
+					'Profiles',
+					'Public',
+					'Recruit',
+					'ThickClient'
+				],
                 openOnEnter: false,
                 multiple: false,
             })
