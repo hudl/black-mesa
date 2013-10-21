@@ -253,7 +253,7 @@
 					'DesignStudio',
 					'DevTools',
 					'Football',
-					'Frontend',
+					'FrontEnd',
 					'Infrastructure',
 					'Insiders',
 					'Mobile',
