@@ -90,17 +90,6 @@
                 }
 
                 window.grid = grid;
-
-
-
-
-                _.each(data.items, function (history) {
-                    historyDiv.append(historyItem.replace("{Person}", history.person)
-                                                    .replace("{Property}", history.propertyChanged)
-                                                    .replace("{OldValue}", history.oldValue)
-                                                    .replace("{NewValue}", history.newValue)
-                                                    .replace("{DeployId}", history.deployId));
-                });
             });
         }
     });
