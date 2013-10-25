@@ -328,9 +328,6 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="CodeTemplates\AddView\CSHTML\BootstrapForm.tt" />
-    <Content Include="ConnectionStrings.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\tradegothic\TradeGothicLTStd-Bd2.otf" />
     <Content Include="Content\tradegothic\TradeGothicLTStd-Bd2Obl.otf" />
     <Content Include="Content\tradegothic\TradeGothicLTStd-BdCn20.otf" />
