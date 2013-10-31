@@ -181,6 +181,7 @@
     <Compile Include="Controllers\Api\BaseController.cs" />
     <Compile Include="Controllers\Api\ComponentController.cs" />
     <Compile Include="Controllers\Api\GithubController.cs" />
+    <Compile Include="Controllers\Api\ProjectController.cs" />
     <Compile Include="Controllers\Api\RevisionController.cs" />
     <Compile Include="Controllers\Api\JiraController.cs" />
     <Compile Include="Controllers\Api\PeopleController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\DeployController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -217,6 +219,7 @@
     <Compile Include="Models\NewDeploy.cs" />
     <Compile Include="Models\People.cs" />
     <Compile Include="Models\PrivateConfig.cs" />
+    <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />
     <Compile Include="NavigationRoutes\NavigationExtensions.cs" />
@@ -232,6 +235,7 @@
     <Compile Include="Repositories\PrivateConfigRepository.cs" />
     <Compile Include="Repositories\HistoryRepository.cs" />
     <Compile Include="Repositories\DeployRepository.cs" />
+    <Compile Include="Repositories\ProjectRepository.cs" />
     <Compile Include="Repositories\SessionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -368,6 +372,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\projects.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\slick-grid-custom-editor.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.columnpicker.js" />
@@ -429,6 +434,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\History\Index.cshtml" />
     <Content Include="Views\Components\Index.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,27 +13,27 @@ using WebApp.Repositories;
 namespace WebApp.Controllers.Api
 {
     [CookieAuthenticated]
-    [RoutePrefix("components")]
-    public class ComponentController : BaseController
+    [RoutePrefix("projects")]
+    public class ProjectController : BaseController
     {
         [GET("/")]
-        public ActionResult GetComponents()
+        public ActionResult GetProjects()
         {
-            return JsonNet(new ComponentRepository().GetAll());
+            return JsonNet(new ProjectRepository().GetAll());
         }
 
         [POST("/")]
-        public ActionResult AddComponent(string component)
+        public ActionResult AddProject(string project)
         {
-            new ComponentRepository().Add(new Component(component));
+            new ProjectRepository().Add(new Project(project));
 
-            return new RedirectResult("/Components");
+            return new RedirectResult("/Projects");
         }
 
         [DELETE("{id}")]
         public ActionResult Delete(string id)
         {
-            var repo = new ComponentRepository();
+            var repo = new ProjectRepository();
             repo.Delete(new ObjectId(id));
 
             return JsonNet(new {success = true});
