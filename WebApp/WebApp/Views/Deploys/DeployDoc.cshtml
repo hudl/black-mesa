@@ -1,4 +1,5 @@
-﻿<div id="deploy-doc" style="display: none;">
+﻿@using WebApp.Models
+<div id="deploy-doc" style="display: none;">
     <p>Not the deploy info you were looking for? Try changing the PR number first.</p>
 
     <h2>Deploy Dumpster</h2>
@@ -17,23 +18,10 @@
             <label class="control-label" for="component">Component</label>
             <div class="controls">
                 <select id="component" name="component" data-hudl-required="true" data-desc="Component">
-                    <option>Hudl</option>
-                    <option>Jobs</option>
-                    <option>SQL</option>
-                    <option>Mongo</option>
-                    <option>VE</option>
-                    <option>Mercury</option>
-                    <option>MacMercury</option>
-                    <option>iOS</option>
-                    <option>Android</option>
-                    <option>Remotes</option>
-                    <option>Alyx</option>
-                    <option>Old Alyx</option>
-                    <option>AWS</option>
-                    <option>S3</option>
-                    <option>TeamCity</option>
-                    <option>Pro</option>
-                    <option>Other</option>
+                    @foreach (var c in (List<Component>) ViewBag.Components)
+                    {
+                        <option>@c.Name</option>
+                    }
                 </select>
             </div>
             <br />

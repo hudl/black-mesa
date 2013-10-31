@@ -310,6 +310,12 @@
         var $input;
         var defaultValue;
         var scope = this;
+        var components = [];
+        $.get('/api/v1/components', function(data) {
+            for (var d in data) {
+                components.push(data[d].name);
+            }
+        });
 
         this.init = function () {
             $input = $('<input type="hidden" id="componentEditor" style="width:300px" />')
@@ -320,7 +326,7 @@
                     }
                 });
             $input.select2({
-                tags: ["Hudl", "Jobs", "SQL", "Mongo", "VE", "Mercury", "MacMercury", "iOS", "Android", "Remotes", "Alyx", "Old Alyx", "AWS", "S3", "TeamCity", "Pro", "Other"],
+                tags: components,
                 openOnEnter: false,
                 multiple: false,
             })

@@ -179,11 +179,13 @@
     <Compile Include="Controllers\Api\AuthenticationController.cs" />
     <Compile Include="Controllers\Api\BasecampController.cs" />
     <Compile Include="Controllers\Api\BaseController.cs" />
+    <Compile Include="Controllers\Api\ComponentController.cs" />
     <Compile Include="Controllers\Api\GithubController.cs" />
     <Compile Include="Controllers\Api\RevisionController.cs" />
     <Compile Include="Controllers\Api\JiraController.cs" />
     <Compile Include="Controllers\Api\PeopleController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
+    <Compile Include="Controllers\ComponentsController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\DeploysController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
@@ -196,6 +198,7 @@
     <Compile Include="Models\AccountConfig.cs" />
     <Compile Include="Models\Assessment.cs" />
     <Compile Include="Models\Assessments.cs" />
+    <Compile Include="Models\Component.cs" />
     <Compile Include="Models\ConnectionConfig.cs" />
     <Compile Include="Models\BasecampConfig.cs" />
     <Compile Include="Models\BasecampThread.cs" />
@@ -224,6 +227,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Queries\GetConfigurationQuery.cs" />
+    <Compile Include="Repositories\ComponentRepository.cs" />
     <Compile Include="Repositories\ConfigurationRepository.cs" />
     <Compile Include="Repositories\PrivateConfigRepository.cs" />
     <Compile Include="Repositories\HistoryRepository.cs" />
@@ -319,6 +323,7 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\components.js" />
     <Content Include="Scripts\deployform.js" />
     <Content Include="Scripts\history.js" />
     <Content Include="Scripts\hotfix.js" />
@@ -423,6 +428,7 @@
     <Content Include="Views\Deploys\Hotfix.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\History\Index.cshtml" />
+    <Content Include="Views\Components\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
