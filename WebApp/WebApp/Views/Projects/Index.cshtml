@@ -1,0 +1,17 @@
+﻿@using WebApp.Models
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/projects")
+}
+
+<h1>Projects</h1>
+<form id="project-form" action="/api/v1/projects" method="POST" >
+    <input id="project-name" name="project"></input>
+    <button class="btn btn-primary">New</button>
+</form>
+<ul id="project-list">
+    @foreach(var p in (List<Project>)ViewBag.Projects){
+        <li><h2>@p.Name</h2><button id="@p.Id" class="btn btn-danger delete">Delete</button></li>
+    }
+</ul>
