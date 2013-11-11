@@ -37,18 +37,18 @@
             </div>
             <br />
             <input type="hidden" id="type" name="type" data-hudl-required="true" data-desc="Type (Via the button flow)" data-hudl-remains-hidden="true" />
-            <label class="control-label">Bug Fix?</label>
+            <label class="control-label" for="bug-fix">Bug Fix?</label>
             <div class="controls">
-                <div class="btn-group" data-toggle="buttons-radio">
+                <div name="bug-fix" class="btn-group" data-toggle="buttons-radio">
                     <button type="button" class="btn btn-small" id="bug-fix-yes">Yes</button>
                     <button type="button" class="btn btn-small" id="bug-fix-no">No</button>
                 </div>
             </div>
             <div id="hotfix-choice" style="display: none;">
                 <br />
-                <label class="control-label">Hotfix?</label>
+                <label class="control-label" for="hotfix-choice-div">Hotfix?</label>
                 <div class="controls">
-                    <div class="btn-group" data-toggle="buttons-radio">
+                    <div name="hotfix-choice-div" class="btn-group" data-toggle="buttons-radio">
                         <button type="button" class="btn btn-small" id="hotfix-yes">Yes</button>
                         <button type="button" class="btn btn-small" id="hotfix-no">No</button>
                     </div>
@@ -72,19 +72,6 @@
                         <button type="button" class="btn btn-small" id="new-yes">Yes</button>
                         <button type="button" class="btn btn-small" id="new-no">No</button>
                     </div>
-                </div>
-            </div>
-            <div id="time-frame-div" style="display: none;">
-                <br />
-                <label class="control-label">Time till bug fixed?</label>
-                <div class="controls">
-                    <select id="time-frame" name="time-frame" data-hudl-required="true" data-desc="Bug Catch Time Frame">
-                        <option value=""></option>
-                        <option value="0">Same day</option>
-                        <option value="1">1-3 days</option>
-                        <option value="2">3 days to a week</option>
-                        <option value="3">Longer than a week</option>
-                    </select>
                 </div>
             </div>
             <div id="how-bad-was-it-scores" style="display: none;">

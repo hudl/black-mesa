@@ -54,8 +54,6 @@
                     $(function () {
                         $('#bug-fix-yes').click(function () {
                             $('#hotfix-choice').show();
-                            $('#time-frame-div').show();
-                            $('#time-frame-div').prop('required', true);
                             $('#maint-div').hide();
                             $('#maint-div').prop('required', false);
                             $('#new-div').hide();
@@ -63,7 +61,6 @@
                         });
                         $('#bug-fix-no').click(function () {
                             $('#hotfix-choice').hide();
-                            $('#time-frame-div').hide();
                             $('#how-bad-was-it-scores').hide();
                             $('#maint-div').show();
                         });
