@@ -11,7 +11,7 @@
     <button class="btn btn-primary">New</button>
 </form>
 <ul id="project-list">
-    @foreach(var p in (List<Project>)ViewBag.Projects){
+    @foreach(var p in ((List<Project>)ViewBag.Projects).OrderBy(x => x.Name)){
         <li><h2>@p.Name</h2><button id="@p.Id" class="btn btn-danger delete">Delete</button></li>
     }
 </ul>
