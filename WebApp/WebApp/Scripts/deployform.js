@@ -53,17 +53,24 @@
 
                     $(function () {
                         $('#bug-fix-yes').click(function () {
-                            $('#time-frame-div').show();
-                            $('#time-frame-div').prop('required', true);
+                            $('#hotfix-choice').show();
                             $('#maint-div').hide();
                             $('#maint-div').prop('required', false);
                             $('#new-div').hide();
                             $('#new-div').prop('required', false);
                         });
                         $('#bug-fix-no').click(function () {
-                            $('#time-frame-div').hide();
+                            $('#hotfix-choice').hide();
                             $('#how-bad-was-it-scores').hide();
                             $('#maint-div').show();
+                        });
+                        $('#hotfix-yes').click(function() {
+                            $('#type').val("Hotfix");
+                            $('#how-bad-was-it-scores').show();
+                        });
+                        $('#hotfix-no').click(function() {
+                            $('#type').val("Fix");
+                            $('#how-bad-was-it-scores').hide();
                         });
                         $('#maint-yes').click(function () {
                             $('#new-div').hide();
@@ -77,16 +84,6 @@
                         });
                         $('#new-no').click(function () {
                             $('#type').val("Enhancement");
-                        });
-                        $('#time-frame').change(function () {
-                            var timeFrame = $('#time-frame').val();
-                            if (timeFrame < 2) { // Same day or 1-3 Days.
-                                $('#how-bad-was-it-scores').show();
-                                $('#type').val("Hotfix");
-                            } else {
-                                $('#how-bad-was-it-scores').hide();
-                                $('#type').val("Fix");
-                            }
                         });
                         $('#basecampThread').change(function () {
                             if ($('#basecampThread').val() == '0') {
