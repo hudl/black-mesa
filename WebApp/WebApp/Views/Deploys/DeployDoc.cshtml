@@ -18,7 +18,7 @@
             <label class="control-label" for="component">Component</label>
             <div class="controls">
                 <select id="component" name="component" data-hudl-required="true" data-desc="Component">
-                    @foreach (var c in (List<Component>) ViewBag.Components)
+                    @foreach (var c in ((List<Component>) ViewBag.Components).OrderBy(x => x.Name))
                     {
                         <option>@c.Name</option>
                     }
