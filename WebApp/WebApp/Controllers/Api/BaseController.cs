@@ -1,4 +1,5 @@
-﻿using AttributeRouting;
+﻿using System.Configuration;
+using AttributeRouting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -23,6 +24,10 @@ namespace WebApp.Controllers.Api
         public BaseController()
         {
             PrivateConfig = new PrivateConfigRepository().GetPrivateConfig();
+#if DEBUG
+            PrivateConfig.Authorization.Host = ConfigurationManager.ConnectionStrings["InternalHostString"].ConnectionString;
+            PrivateConfig.ActiveDirectory.Host = ConfigurationManager.ConnectionStrings["InternalHostString"].ConnectionString;
+#endif
         }
 
         protected string GetPageSource(string url, Dictionary<string, string> headers)
