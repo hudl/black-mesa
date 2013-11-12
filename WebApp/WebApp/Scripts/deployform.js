@@ -28,23 +28,23 @@
                             dialog.data.fadeIn();
                         });
                     });
-                    function select2Options(group, fullName) {
+                    function select2Options(group, fullName, formatter) {
                         return {
                             data: { results: sortByRole(productTeamMembers, group), text: function (item) { return item.id; } },
                             formatSelection: format,
-                            formatResult: formatDev,
+                            formatResult: formatter,
                             tags: [],
                             width: "320px",
                             placeholder: fullName + "..."
                         }
                     };
-                    $('#dev').select2(select2Options("Developers", "Developer"));
-                    $('#qa').select2(select2Options("QA", "Quality Assurance"));
-                    $('#design').select2(select2Options("Design", "Designer"));
-                    $('#codeReview').select2(select2Options("Developers", "Code Review Done By"));
-                    $('#projectManager').select2(select2Options("PM", "Project Manager"));
-                    $('#devInitials').select2(select2Options("Developers", "Developer"));
-                    $('#qaInitials').select2(select2Options("QA", "Quality Assurance"));
+                    $('#dev').select2(select2Options("Developers", "Developer", formatDev));
+                    $('#qa').select2(select2Options("QA", "Quality Assurance", formatQa));
+                    $('#design').select2(select2Options("Design", "Designer", formatDes));
+                    $('#codeReview').select2(select2Options("Developers", "Code Review Done By", formatDev));
+                    $('#projectManager').select2(select2Options("PM", "Project Manager", formatPm));
+                    $('#devInitials').select2(select2Options("Developers", "Developer", formatDev));
+                    $('#qaInitials').select2(select2Options("QA", "Quality Assurance", formatQa));
 
                     $('#hotfixComponent').select2({
                         width: "320px"
