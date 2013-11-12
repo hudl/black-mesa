@@ -25,8 +25,8 @@ namespace WebApp.Controllers.Api
         {
             PrivateConfig = new PrivateConfigRepository().GetPrivateConfig();
 #if DEBUG
-            PrivateConfig.Authorization.Host = ConfigurationManager.ConnectionStrings["DebugConnectionString"].ConnectionString;
-            PrivateConfig.ActiveDirectory.Host = ConfigurationManager.ConnectionStrings["DebugConnectionString"].ConnectionString;
+            PrivateConfig.Authorization.Host = ConfigurationManager.ConnectionStrings["InternalHostString"].ConnectionString;
+            PrivateConfig.ActiveDirectory.Host = ConfigurationManager.ConnectionStrings["InternalHostString"].ConnectionString;
 #endif
         }
 
