@@ -97,6 +97,8 @@
                         $('#deploy-doc-form').submit(function (evt) {
                             evt.preventDefault();
                             evt.stopPropagation();
+                            $('#deploy-doc-submit').hide();
+                            $('#deploy-doc-submit-spinner').show();
                             var deployDocForm = $('#deploy-doc-form');
                             var complete = true;
                             var incompleteForms = new Array();
@@ -120,6 +122,8 @@
                             } else {
                                 submitDeployDoc(deployDocForm);
                             }
+                            $('#deploy-doc-submit-spinner').hide();
+                            $('#deploy-doc-submit').show();
                             return false;
                         });
                     });
