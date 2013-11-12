@@ -97,6 +97,8 @@
                         $('#deploy-doc-form').submit(function (evt) {
                             evt.preventDefault();
                             evt.stopPropagation();
+                            $('#deploy-doc-submit').hide();
+                            $('#deploy-doc-submit-spinner').show();
                             var deployDocForm = $('#deploy-doc-form');
                             var complete = true;
                             var incompleteForms = new Array();
@@ -116,6 +118,9 @@
                                 var sumbitAnyway = confirm("You didn't fill out\n" + str + "\nSubmit anyway??")
                                 if (sumbitAnyway) {
                                     submitDeployDoc(deployDocForm);
+                                } else {
+                                    $('#deploy-doc-submit-spinner').hide();
+                                    $('#deploy-doc-submit').show();
                                 }
                             } else {
                                 submitDeployDoc(deployDocForm);
@@ -167,6 +172,8 @@
 			    } else {
 			        alert("I failed, I'm so sorry");
 			    }
+			    $('#deploy-doc-submit-spinner').hide();
+			    $('#deploy-doc-submit').show();
 			}
 		);
     }
