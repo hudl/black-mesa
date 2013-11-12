@@ -118,12 +118,13 @@
                                 var sumbitAnyway = confirm("You didn't fill out\n" + str + "\nSubmit anyway??")
                                 if (sumbitAnyway) {
                                     submitDeployDoc(deployDocForm);
+                                } else {
+                                    $('#deploy-doc-submit-spinner').hide();
+                                    $('#deploy-doc-submit').show();
                                 }
                             } else {
                                 submitDeployDoc(deployDocForm);
                             }
-                            $('#deploy-doc-submit-spinner').hide();
-                            $('#deploy-doc-submit').show();
                             return false;
                         });
                     });
@@ -171,6 +172,8 @@
 			    } else {
 			        alert("I failed, I'm so sorry");
 			    }
+			    $('#deploy-doc-submit-spinner').hide();
+			    $('#deploy-doc-submit').show();
 			}
 		);
     }
