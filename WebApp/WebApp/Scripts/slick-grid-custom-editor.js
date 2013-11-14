@@ -13,6 +13,12 @@
         "HudlDateEditor": HudlDateEditor,
     })
 
+    var people = [];
+    var qaTags = [];
+    var pmTags = [];
+    var devTags = [];
+    var designerTags = [];
+
     function JiraEditor(args) {
         var $input;
         var defaultValue;
@@ -474,25 +480,8 @@
         var $input;
         var defaultValue;
         var scope = this;
-        var people = [];
-        var peopleTags = [];
-        $.get('/api/v1/people', function (data) {
-            people = data["accounts"];
-            people = _.sortBy(people, function (user) { return user.Name; });
-            var nonqa = [];
-            peopleTags.push("None");
-            _.each(people, function(user) {
-                if (_.contains(user.Groups, "QA")) {
-                    peopleTags.push(user.Name);
-                } else {
-                    nonqa.push(user.Name);
-                }
-            });
 
-            _.each(nonqa, function(user) {
-                peopleTags.push(user);
-            });
-        });
+        populatePeople();
 
         this.init = function () {
             $input = $('<input type="hidden" id="quailEditor" style="width:300px" />')
@@ -503,7 +492,7 @@
                     }
                 });
             $input.select2({
-                tags: peopleTags,
+                tags: qaTags,
                 openOnEnter: false,
                 multiple: true,
             })
@@ -568,25 +557,8 @@
         var $input;
         var defaultValue;
         var scope = this;
-        var people = [];
-        var peopleTags = [];
-        $.get('/api/v1/people', function (data) {
-            people = data["accounts"];
-            people = _.sortBy(people, function (user) { return user.Name; });
-            var nondesigner = [];
-            peopleTags.push("None");
-            _.each(people, function (user) {
-                if (_.contains(user.Groups, "Design")) {
-                    peopleTags.push(user.Name);
-                } else {
-                    nondesigner.push(user.Name);
-                }
-            });
 
-            _.each(nondesigner, function (user) {
-                peopleTags.push(user);
-            });
-        });
+        populatePeople();
 
         this.init = function () {
             $input = $('<input type="hidden" id="quailEditor" style="width:300px" />')
@@ -597,7 +569,7 @@
                     }
                 });
             $input.select2({
-                tags: peopleTags,
+                tags: designerTags,
                 openOnEnter: false,
                 multiple: true,
             })
@@ -662,25 +634,8 @@
         var $input;
         var defaultValue;
         var scope = this;
-        var people = [];
-        var peopleTags = [];
-        $.get('/api/v1/people', function (data) {
-            people = data["accounts"];
-            people = _.sortBy(people, function (user) { return user.Name; });
-            var nondev = [];
-            peopleTags.push("None");
-            _.each(people, function (user) {
-                if (_.contains(user.Groups, "Developers")) {
-                    peopleTags.push(user.Name);
-                } else {
-                    nondev.push(user.Name);
-                }
-            });
 
-            _.each(nondev, function (user) {
-                peopleTags.push(user);
-            });
-        });
+        populatePeople();
 
         this.init = function () {
             $input = $('<input type="hidden" id="devEditor" style="width:300px" />')
@@ -691,7 +646,7 @@
                     }
                 });
             $input.select2({
-                tags: peopleTags,
+                tags: devTags,
                 openOnEnter: false,
                 multiple: true,
             })
@@ -756,25 +711,8 @@
         var $input;
         var defaultValue;
         var scope = this;
-        var people = [];
-        var peopleTags = [];
-        $.get('/api/v1/people', function (data) {
-            people = data["accounts"];
-            people = _.sortBy(people, function (user) { return user.Name; });
-            var nonpm = [];
-            peopleTags.push("None");
-            _.each(people, function (user) {
-                if (_.contains(user.Groups, "PM")) {
-                    peopleTags.push(user.Name);
-                } else {
-                    nondev.push(user.Name);
-                }
-            });
 
-            _.each(nonpm, function (user) {
-                peopleTags.push(user);
-            });
-        });
+        populatePeople();
 
         this.init = function () {
             $input = $('<input type="hidden" id="devEditor" style="width:300px" />')
@@ -785,7 +723,7 @@
                     }
                 });
             $input.select2({
-                tags: peopleTags,
+                tags: pmTags,
                 openOnEnter: false,
                 multiple: true,
             })
@@ -844,6 +782,72 @@
         };
 
         this.init();
+    }
+    
+    function populatePeople() {
+        if (people.length == 0) {
+            $.get('/api/v1/people', function (data) {
+                people = data["accounts"];
+                people = _.sortBy(people, function (user) { return user.Name; });
+                var nonqa = [];
+                var nondev = [];
+                var nonpm = [];
+                var nondesigner = [];
+                
+                qaTags.push("None");
+                devTags.push("None");
+                designerTags.push("None");
+                pmTags.push("None");
+                
+                // QA
+                _.each(people, function (user) {
+                    if (_.contains(user.Groups, "QA")) {
+                        qaTags.push(user.Name);
+                    } else {
+                        nonqa.push(user.Name);
+                    }
+                });
+                _.each(nonqa, function (user) {
+                    qaTags.push(user);
+                });
+                
+                // Dev
+                _.each(people, function (user) {
+                    if (_.contains(user.Groups, "Developers")) {
+                        devTags.push(user.Name);
+                    } else {
+                        nondev.push(user.Name);
+                    }
+                });
+                _.each(nonqa, function (user) {
+                    devTags.push(user);
+                });
+
+                // Designer
+                _.each(people, function (user) {
+                    if (_.contains(user.Groups, "Design")) {
+                        designerTags.push(user.Name);
+                    } else {
+                        nondesigner.push(user.Name);
+                    }
+                });
+                _.each(nonqa, function (user) {
+                    designerTags.push(user);
+                });
+
+                // PM
+                _.each(people, function (user) {
+                    if (_.contains(user.Groups, "PM")) {
+                        pmTags.push(user.Name);
+                    } else {
+                        nonpm.push(user.Name);
+                    }
+                });
+                _.each(nonqa, function (user) {
+                    pmTags.push(user);
+                });
+            });
+        }
     }
 
     function HudlDateEditor(args) {
