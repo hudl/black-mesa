@@ -18,6 +18,7 @@
     var pmTags = [];
     var devTags = [];
     var designerTags = [];
+    var peopleIsLoading = false;
 
     function JiraEditor(args) {
         var $input;
@@ -785,9 +786,11 @@
     }
     
     function populatePeople() {
-        if (people.length == 0) {
+        if (people.length == 0 && peopleIsLoading !== true) {
+            peopleIsLoading = true;
             $.get('/api/v1/people', function (data) {
                 people = data["accounts"];
+                peopleIsLoading = false;
                 people = _.sortBy(people, function (user) { return user.Name; });
                 var nonqa = [];
                 var nondev = [];
