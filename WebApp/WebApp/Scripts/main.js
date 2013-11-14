@@ -80,11 +80,11 @@
                 { id: 'Branch', name: 'Branch', field: 'branch', width: 270, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 50, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 33, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira, sortable: true },
-                { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
-                { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
-                { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
-                { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
-                { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.QuailEditor, sortable: true },
+                { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.DesignerEditor, sortable: true },
+                { id: 'Developers', name: 'DEV', field: 'dev', width: 100, editor: Slick.Editors.DevEditor, sortable: true },
+                { id: 'CodeReviewers', name: 'CR', field: 'codeReview', width: 100, editor: Slick.Editors.DevEditor, sortable: true },
+                { id: 'ProjectManagers', name: 'PM', field: 'pm', width: 100, editor: Slick.Editors.ProjectManagerEditor, sortable: true },
                 { id: 'Notes', name: 'Notes', field: 'notes', width: 450, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'Delete', name: 'Delete', width: 75, formatter: buttonFormatter }
             ];

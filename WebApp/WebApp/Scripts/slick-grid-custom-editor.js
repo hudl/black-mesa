@@ -6,6 +6,10 @@
         "Component": ComponentEditor,
         "Project": ProjectEditor,
         "NoBlankTextEditor": NoBlankTextEditor,
+        "QuailEditor": QuailEditor,
+        "DesignerEditor": DesignerEditor,
+        "DevEditor": DevEditor,
+        "ProjectManagerEditor": ProjectManagerEditor,
         "HudlDateEditor": HudlDateEditor,
     })
 
@@ -431,6 +435,382 @@
             defaultValue = item[args.column.field] || "";
             $input.val(defaultValue);
             $input[0].defaultValue = defaultValue;
+            $input.select();
+        };
+
+        this.serializeValue = function () {
+            return $input.val();
+        };
+
+        this.applyValue = function (item, state) {
+            item[args.column.field] = state;
+        };
+
+        this.isValueChanged = function () {
+            return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+        };
+
+        this.validate = function () {
+            if (args.column.validator) {
+                var validationResults = args.column.validator($input.val());
+                if (!validationResults.valid) {
+                    return validationResults;
+                }
+            }
+
+            var valid = $input.val().length > 0;
+            if (!valid) warnFieldIsEmpty();
+
+            return {
+                valid: valid,
+                msg: null
+            };
+        };
+
+        this.init();
+    }
+    
+    function QuailEditor(args) {
+        var $input;
+        var defaultValue;
+        var scope = this;
+        var people = [];
+        var peopleTags = [];
+        $.get('/api/v1/people', function (data) {
+            people = data["accounts"];
+            people = _.sortBy(people, function (user) { return user.Name; });
+            var nonqa = [];
+            peopleTags.push("None");
+            _.each(people, function(user) {
+                if (_.contains(user.Groups, "QA")) {
+                    peopleTags.push(user.Name);
+                } else {
+                    nonqa.push(user.Name);
+                }
+            });
+
+            _.each(nonqa, function(user) {
+                peopleTags.push(user);
+            });
+        });
+
+        this.init = function () {
+            $input = $('<input type="hidden" id="quailEditor" style="width:300px" />')
+                .appendTo(args.container)
+                .bind("keydown.nav", function (e) {
+                    if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                        e.stopImmediatePropagation();
+                    }
+                });
+            $input.select2({
+                tags: peopleTags,
+                openOnEnter: false,
+                multiple: true,
+            })
+            .focus()
+            .select();
+        };
+
+        this.destroy = function () {
+            $input.remove();
+        };
+
+        this.focus = function () {
+            $input.focus();
+        };
+
+        this.getValue = function () {
+            return $input.val();
+        };
+
+        this.setValue = function (val) {
+            $input.val(val);
+        };
+
+        this.loadValue = function (item) {
+            defaultValue = item[args.column.field] || "";
+            $input.select();
+        };
+
+        this.serializeValue = function () {
+            return $input.val();
+        };
+
+        this.applyValue = function (item, state) {
+            item[args.column.field] = state;
+        };
+
+        this.isValueChanged = function () {
+            return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+        };
+
+        this.validate = function () {
+            if (args.column.validator) {
+                var validationResults = args.column.validator($input.val());
+                if (!validationResults.valid) {
+                    return validationResults;
+                }
+            }
+
+            var valid = $input.val().length > 0;
+            if (!valid) warnFieldIsEmpty();
+
+            return {
+                valid: valid,
+                msg: null
+            };
+        };
+
+        this.init();
+    }
+    
+    function DesignerEditor(args) {
+        var $input;
+        var defaultValue;
+        var scope = this;
+        var people = [];
+        var peopleTags = [];
+        $.get('/api/v1/people', function (data) {
+            people = data["accounts"];
+            people = _.sortBy(people, function (user) { return user.Name; });
+            var nondesigner = [];
+            peopleTags.push("None");
+            _.each(people, function (user) {
+                if (_.contains(user.Groups, "Design")) {
+                    peopleTags.push(user.Name);
+                } else {
+                    nondesigner.push(user.Name);
+                }
+            });
+
+            _.each(nondesigner, function (user) {
+                peopleTags.push(user);
+            });
+        });
+
+        this.init = function () {
+            $input = $('<input type="hidden" id="quailEditor" style="width:300px" />')
+                .appendTo(args.container)
+                .bind("keydown.nav", function (e) {
+                    if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                        e.stopImmediatePropagation();
+                    }
+                });
+            $input.select2({
+                tags: peopleTags,
+                openOnEnter: false,
+                multiple: true,
+            })
+            .focus()
+            .select();
+        };
+
+        this.destroy = function () {
+            $input.remove();
+        };
+
+        this.focus = function () {
+            $input.focus();
+        };
+
+        this.getValue = function () {
+            return $input.val();
+        };
+
+        this.setValue = function (val) {
+            $input.val(val);
+        };
+
+        this.loadValue = function (item) {
+            defaultValue = item[args.column.field] || "";
+            $input.select();
+        };
+
+        this.serializeValue = function () {
+            return $input.val();
+        };
+
+        this.applyValue = function (item, state) {
+            item[args.column.field] = state;
+        };
+
+        this.isValueChanged = function () {
+            return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+        };
+
+        this.validate = function () {
+            if (args.column.validator) {
+                var validationResults = args.column.validator($input.val());
+                if (!validationResults.valid) {
+                    return validationResults;
+                }
+            }
+
+            var valid = $input.val().length > 0;
+            if (!valid) warnFieldIsEmpty();
+
+            return {
+                valid: valid,
+                msg: null
+            };
+        };
+
+        this.init();
+    }
+    
+    function DevEditor(args) {
+        var $input;
+        var defaultValue;
+        var scope = this;
+        var people = [];
+        var peopleTags = [];
+        $.get('/api/v1/people', function (data) {
+            people = data["accounts"];
+            people = _.sortBy(people, function (user) { return user.Name; });
+            var nondev = [];
+            peopleTags.push("None");
+            _.each(people, function (user) {
+                if (_.contains(user.Groups, "Developers")) {
+                    peopleTags.push(user.Name);
+                } else {
+                    nondev.push(user.Name);
+                }
+            });
+
+            _.each(nondev, function (user) {
+                peopleTags.push(user);
+            });
+        });
+
+        this.init = function () {
+            $input = $('<input type="hidden" id="devEditor" style="width:300px" />')
+                .appendTo(args.container)
+                .bind("keydown.nav", function (e) {
+                    if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                        e.stopImmediatePropagation();
+                    }
+                });
+            $input.select2({
+                tags: peopleTags,
+                openOnEnter: false,
+                multiple: true,
+            })
+            .focus()
+            .select();
+        };
+
+        this.destroy = function () {
+            $input.remove();
+        };
+
+        this.focus = function () {
+            $input.focus();
+        };
+
+        this.getValue = function () {
+            return $input.val();
+        };
+
+        this.setValue = function (val) {
+            $input.val(val);
+        };
+
+        this.loadValue = function (item) {
+            defaultValue = item[args.column.field] || "";
+            $input.select();
+        };
+
+        this.serializeValue = function () {
+            return $input.val();
+        };
+
+        this.applyValue = function (item, state) {
+            item[args.column.field] = state;
+        };
+
+        this.isValueChanged = function () {
+            return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+        };
+
+        this.validate = function () {
+            if (args.column.validator) {
+                var validationResults = args.column.validator($input.val());
+                if (!validationResults.valid) {
+                    return validationResults;
+                }
+            }
+
+            var valid = $input.val().length > 0;
+            if (!valid) warnFieldIsEmpty();
+
+            return {
+                valid: valid,
+                msg: null
+            };
+        };
+
+        this.init();
+    }
+    
+    function ProjectManagerEditor(args) {
+        var $input;
+        var defaultValue;
+        var scope = this;
+        var people = [];
+        var peopleTags = [];
+        $.get('/api/v1/people', function (data) {
+            people = data["accounts"];
+            people = _.sortBy(people, function (user) { return user.Name; });
+            var nonpm = [];
+            peopleTags.push("None");
+            _.each(people, function (user) {
+                if (_.contains(user.Groups, "PM")) {
+                    peopleTags.push(user.Name);
+                } else {
+                    nondev.push(user.Name);
+                }
+            });
+
+            _.each(nonpm, function (user) {
+                peopleTags.push(user);
+            });
+        });
+
+        this.init = function () {
+            $input = $('<input type="hidden" id="devEditor" style="width:300px" />')
+                .appendTo(args.container)
+                .bind("keydown.nav", function (e) {
+                    if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                        e.stopImmediatePropagation();
+                    }
+                });
+            $input.select2({
+                tags: peopleTags,
+                openOnEnter: false,
+                multiple: true,
+            })
+            .focus()
+            .select();
+        };
+
+        this.destroy = function () {
+            $input.remove();
+        };
+
+        this.focus = function () {
+            $input.focus();
+        };
+
+        this.getValue = function () {
+            return $input.val();
+        };
+
+        this.setValue = function (val) {
+            $input.val(val);
+        };
+
+        this.loadValue = function (item) {
+            defaultValue = item[args.column.field] || "";
             $input.select();
         };
 
