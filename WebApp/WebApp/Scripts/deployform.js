@@ -239,6 +239,11 @@
     }
 
     function prChanged() {
+        var pullRequestId = $('#pullRequestId');
+        if (pullRequestId.val() < 1) {
+            pullRequestId.val('').attr('placeholder', 'Invalid Pull Request ID');
+            return;
+        }
         $('#pull-request-spinner').show();
         var itemsToDisable = [
             $('#qa'),
@@ -254,7 +259,7 @@
             item.prop('disabled', true);
         });
 
-        var baseUrl = '/api/v1/github/' + $('#repos').val() + '/pullRequest/' + $('#pullRequestId').val();
+        var baseUrl = '/api/v1/github/' + $('#repos').val() + '/pullRequest/' + pullRequestId.val();
         $.getJSON(baseUrl + '/branch', function (data) {
             $.getJSON(baseUrl + '/comments', function (comments) {
                 _.each(itemsToDisable, function (item) {
@@ -296,7 +301,7 @@
                         }
                     });
                 } else {
-                    $('#pullRequestId').val('').attr('placeholder', 'Invalid Pull Request ID');
+                   pullRequestId.val('').attr('placeholder', 'Invalid Pull Request ID');
                 }
             })
             .error(function () {
