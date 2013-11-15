@@ -19,17 +19,26 @@ namespace WebApp.Controllers.Api
     [RoutePrefix("github")]
     public class GithubController : BaseController
     {
-        [GET("pullRequest/{pr}/branch")]
-        public ActionResult GetPullRequestBranch(string pr)
+        [GET("repos")]
+        public ActionResult GetAllRepositories()
         {
-            var source = GetPageSource(PrivateConfig.GithubConfig.PullRequestBranchUrl.Replace("{pr}", pr), GetHeaders());
+            var source = GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos", GetHeaders());
             return JsonNet(source, true);
         }
 
-        [GET("pullRequest/{pr}/comments")]
-        public ActionResult GetPullRequestComments(string pr)
+        [GET("{repo}/pullRequest/{pr}/branch")]
+        public ActionResult GetPullRequestBranch(string repo, string pr)
         {
-            var source = GetPageSource(PrivateConfig.GithubConfig.PullRequestCommentsUrl.Replace("{pr}", pr), GetHeaders());
+            var url = PrivateConfig.GithubConfig.BaseUrl + "/" + repo +"/pulls/" + pr;
+            var source = GetPageSource(url, GetHeaders());
+            return JsonNet(source, true);
+        }
+
+        [GET("{repo}/pullRequest/{pr}/comments")]
+        public ActionResult GetPullRequestComments(string repo, string pr)
+        {
+            var url = PrivateConfig.GithubConfig.BaseUrl + "/" + repo + "/pulls/" + pr + "/comments";
+            var source = GetPageSource(url, GetHeaders());
             return JsonNet(source, true);
         }
 
