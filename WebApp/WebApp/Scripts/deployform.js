@@ -218,6 +218,9 @@
     }
 
     function prChanged() {
+        if ($('#pullRequestId').val() < 1) {
+            $('#pullRequestId').val(1);
+        }
         $('#pull-request-spinner').show();
         var itemsToDisable = [
             $('#qa'),
