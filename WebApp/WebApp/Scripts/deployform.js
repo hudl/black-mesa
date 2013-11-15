@@ -254,8 +254,9 @@
             item.prop('disabled', true);
         });
 
-        $.getJSON('/api/v1/github/' + $('#repos').val() + '/pullRequest/' + $('#pullRequestId').val() + '/branch', function (data) {
-            $.getJSON('/api/v1/github/'  + $('#repos').val() + '/pullRequest/' + $('#pullRequestId').val() + '/comments', function (comments) {
+        var baseUrl = '/api/v1/github/' + $('#repos').val() + '/pullRequest/' + $('#pullRequestId').val();
+        $.getJSON(baseUrl + '/branch', function (data) {
+            $.getJSON(baseUrl + '/comments', function (comments) {
                 _.each(itemsToDisable, function (item) {
                     item.prop('disabled', false);
                 });
