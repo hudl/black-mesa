@@ -18,6 +18,8 @@ namespace WebApp.Controllers
 
         public ActionResult Item(string id)
         {
+            var components = new ComponentRepository().GetAll();
+            ViewBag.Components = components;
             return View("Index");
         }
     }
