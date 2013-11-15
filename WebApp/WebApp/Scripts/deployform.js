@@ -3,6 +3,26 @@
     var productTeamMembers;
 
     $(function () {
+        $.getJSON('/api/v1/github/repos', function (data) {
+            var repos = [];
+            _.each(data, function(repo) {
+                repos.push(repo.name);
+            });
+
+            repos = _.sortBy(repos, function(repo) {
+                return repo.toUpperCase();
+            });
+
+            var repoSelect = $('#repos');
+            $.each(repos, function (i) {
+                if (repos[i] === 'hudl') {
+                    repoSelect.append('<option selected="selected">hudl</option>');
+                } else {
+                    repoSelect.append('<option>' + repos[i] + '</option>');
+                }
+            });
+        });
+
         $.getJSON('/api/v1/people', function (data) {
             productTeamMembers = data["accounts"];
             productTeamMembers = _.sortBy(productTeamMembers, function (user) { return user.Name; });
@@ -49,6 +69,7 @@
                     $('#hotfixComponent').select2({
                         width: "320px"
                     });
+                    $('#repos').change(prChanged);
                     $('#pullRequestId').change(prChanged);
 
                     $(function () {
@@ -238,8 +259,9 @@
             item.prop('disabled', true);
         });
 
-        $.getJSON('/api/v1/github/pullRequest/' + pullRequestId.val() + '/branch', function (data) {
-            $.getJSON('/api/v1/github/pullRequest/' + pullRequestId.val() + '/comments', function (comments) {
+        var baseUrl = '/api/v1/github/' + $('#repos').val() + '/pullRequest/' + pullRequestId.val();
+        $.getJSON(baseUrl + '/branch', function (data) {
+            $.getJSON(baseUrl + '/comments', function (comments) {
                 _.each(itemsToDisable, function (item) {
                     item.prop('disabled', false);
                 });
@@ -279,10 +301,7 @@
                         }
                     });
                 } else {
-                    $('#deploy-doc-form').each(function () {
-                        this.reset();
-                    });
-                    pullRequestId.val('').attr('placeholder', 'Invalid Pull Request ID');
+                   pullRequestId.val('').attr('placeholder', 'Invalid Pull Request ID');
                 }
             })
             .error(function () {
