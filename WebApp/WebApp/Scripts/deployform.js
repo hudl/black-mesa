@@ -75,15 +75,17 @@
                     $(function () {
                         $('#bug-fix-yes').click(function () {
                             $('#hotfix-choice').show();
-                            $('#maint-div').hide();
-                            $('#maint-div').prop('required', false);
-                            $('#new-div').hide();
-                            $('#new-div').prop('required', false);
+                            $('#feature-choice').hide();
+                            $('#new-feature').removeClass('active');
+                            $('#enhancement').removeClass('active');
+                            $('#task').removeClass('active');
                         });
                         $('#bug-fix-no').click(function () {
                             $('#hotfix-choice').hide();
                             $('#how-bad-was-it-scores').hide();
-                            $('#maint-div').show();
+                            $('#feature-choice').show();
+                            $('#hotfix-yes').removeClass('active');
+                            $('#hotfix-no').removeClass('active');
                         });
                         $('#hotfix-yes').click(function() {
                             $('#type').val("Hotfix");
@@ -93,18 +95,14 @@
                             $('#type').val("Fix");
                             $('#how-bad-was-it-scores').hide();
                         });
-                        $('#maint-yes').click(function () {
-                            $('#new-div').hide();
-                            $('#type').val("Task");
-                        });
-                        $('#maint-no').click(function () {
-                            $('#new-div').show();
-                        });
-                        $('#new-yes').click(function () {
+                        $('#new-feature').click(function() {
                             $('#type').val("New Feature");
                         });
-                        $('#new-no').click(function () {
+                        $('#enhancement').click(function() {
                             $('#type').val("Enhancement");
+                        });
+                        $('#task').click(function() {
+                            $('#type').val("Task");
                         });
                         $('#basecampThread').change(function () {
                             if ($('#basecampThread').val() == '0') {
