@@ -31,7 +31,7 @@ namespace WebApp.Controllers
         public void DataExport()
         {
             var repo = new DeployRepository();
-            var deploys = repo.Collection.FindAll().ToList();
+            var deploys = repo.Collection.FindAll().Where(x => !x.DateDeleted.HasValue).ToList();
             StringBuilder strBuilder = new StringBuilder();
             StringWriter str = new StringWriter(strBuilder);
             using (var csv = new CsvWriter(str))
