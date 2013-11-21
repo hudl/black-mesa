@@ -1,5 +1,8 @@
-﻿using System.Linq.Expressions;
+﻿using System.Drawing;
+using System.Globalization;
+using System.Linq.Expressions;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using WebApp.Queries;
 using WebApp.Repositories;
@@ -27,11 +30,37 @@ namespace WebApp.Controllers
             return RedirectToRoute(new {controller = "Deploys", action = "Index"});
         }
 
-        [GET("export")]
-        public void DataExport()
+        [GET("export/alltime")]
+        public void ExportAllTime()
         {
             var repo = new DeployRepository();
             var deploys = repo.Collection.FindAll().Where(x => !x.DateDeleted.HasValue).ToList();
+            WriteTsv(deploys, "AllTimeDeploys.tsv");
+        }
+
+        [GET("export/lastmonth")]
+        public void ExportLastMonth()
+        {
+            var now = DateTime.Now;
+            var isJanuary = now.Month - 1 == 0;
+            var month = isJanuary ? 12 : now.Month - 1;
+            var year = isJanuary ? now.Year - 1 : now.Year;
+            var repo = new DeployRepository();
+            var deploys = repo.Collection.FindAll().Where(x => !x.DateDeleted.HasValue && x.DeployTime.HasValue && x.DeployTime.Value.Month == month && x.DeployTime.Value.Year == year).ToList();
+            WriteTsv(deploys, String.Format("Deploys{0}{1}.tsv", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month), year));
+        }
+
+        [GET("export/currentmonth")]
+        public void ExportCurrentMonth()
+        {
+            var now = DateTime.Now;
+            var repo = new DeployRepository();
+            var deploys = repo.Collection.FindAll().Where(x => !x.DateDeleted.HasValue && x.DeployTime.HasValue && x.DeployTime.Value.Month == now.Month && x.DeployTime.Value.Year == now.Year).ToList();
+            WriteTsv(deploys, String.Format("CurrentDeploys{0}{1}.tsv", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(now.Month), now.Year));
+        }
+
+        public void WriteTsv(List<Deploy> deploys, String filename)
+        {
             StringBuilder strBuilder = new StringBuilder();
             StringWriter str = new StringWriter(strBuilder);
             using (var csv = new CsvWriter(str))
@@ -40,7 +69,7 @@ namespace WebApp.Controllers
                 csv.Configuration.IsCaseSensitive = false;
                 csv.WriteRecords<DeployForExport>(DeployForExport.convertDeploysForExport(deploys));
             }
-            Response.AddHeader("Content-disposition", "attachment; filename=deployData.tsv");
+            Response.AddHeader("Content-disposition", String.Format("attachment; filename={0}", filename));
             Response.ContentType = "application/octet-stream";
             Response.Write(str.ToString());
             Response.End();
