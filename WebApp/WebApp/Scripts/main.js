@@ -46,6 +46,12 @@
             }
             return value;
         },
+        RepositoryFormatter: function(row, cell, value, columnDef, dataContext) {
+            if (value === undefined) {
+                return 'hudl';
+            }
+            return value;
+        }
     });
     
     function loadData(loadAll) {
@@ -76,6 +82,7 @@
                 { id: 'Day', name: 'Day', field: 'day', width: 35 },
                 { id: 'DeployTime', name: 'Time', field: 'deployTime', width: 90, editor: Slick.Editors.HudlDateEditor, formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, sortable: true },
                 { id: 'Action', name: 'Action', field: 'action', width: 50, editor: Slick.Editors.Action, sortable: true },
+                { id: 'Repository', name: 'Repo', field: 'repository', width: 75, formatter: Slick.Formatters.RepositoryFormatter, editor: Slick.Editors.RepositoryEditor, sortable: true},
                 { id: 'Component', name: 'Comp.', field: 'component', width: 60, editor: Slick.Editors.Component, sortable: true },
                 { id: 'Type', name: 'Type', field: 'type', width: 90, formatter: Slick.Formatters.TypeFormatter, editor: Slick.Editors.Type, sortable: true },
                 { id: 'Project', name: 'Proj.', field: 'project', width: 90, editor: Slick.Editors.Project, sortable: true },

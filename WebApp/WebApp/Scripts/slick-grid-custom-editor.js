@@ -11,6 +11,7 @@
         "DevEditor": DevEditor,
         "ProjectManagerEditor": ProjectManagerEditor,
         "HudlDateEditor": HudlDateEditor,
+        "RepositoryEditor": RepositoryEditor,
     })
 
     var people = [];
@@ -19,6 +20,7 @@
     var devTags = [];
     var designerTags = [];
     var peopleIsLoading = false;
+    var repositories = [];
 
     function JiraEditor(args) {
         var $input;
@@ -727,6 +729,97 @@
                 tags: pmTags,
                 openOnEnter: false,
                 multiple: true,
+            })
+            .focus()
+            .select();
+        };
+
+        this.destroy = function () {
+            $input.remove();
+        };
+
+        this.focus = function () {
+            $input.focus();
+        };
+
+        this.getValue = function () {
+            return $input.val();
+        };
+
+        this.setValue = function (val) {
+            $input.val(val);
+        };
+
+        this.loadValue = function (item) {
+            defaultValue = item[args.column.field] || "";
+            $input.select();
+        };
+
+        this.serializeValue = function () {
+            return $input.val();
+        };
+
+        this.applyValue = function (item, state) {
+            item[args.column.field] = state;
+        };
+
+        this.isValueChanged = function () {
+            return (!($input.val() == "" && defaultValue == null)) && ($input.val() != defaultValue);
+        };
+
+        this.validate = function () {
+            if (args.column.validator) {
+                var validationResults = args.column.validator($input.val());
+                if (!validationResults.valid) {
+                    return validationResults;
+                }
+            }
+
+            var valid = $input.val().length > 0;
+            if (!valid) warnFieldIsEmpty();
+
+            return {
+                valid: valid,
+                msg: null
+            };
+        };
+
+        this.init();
+    }
+    
+    function RepositoryEditor(args) {
+        var $input;
+        var defaultValue;
+        var scope = this;
+        var isLoading = false;
+        
+        if (repositories.length == 0 && isLoading !== true) {
+            isLoading = true;
+            $.getJSON('/api/v1/github/repos', function (data) {
+                var repos = [];
+                _.each(data, function (repo) {
+                    repos.push(repo.name);
+                });
+
+                repositories = _.sortBy(repos, function (repo) {
+                    return repo.toUpperCase();
+                });
+                isLoading = false;
+            });
+        }
+
+        this.init = function () {
+            $input = $('<input type="hidden" id="repositoryEditor" style="width:300px" />')
+                .appendTo(args.container)
+                .bind("keydown.nav", function (e) {
+                    if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
+                        e.stopImmediatePropagation();
+                    }
+                });
+            $input.select2({
+                tags: repositories,
+                openOnEnter: false,
+                multiple: false,
             })
             .focus()
             .select();
