@@ -41,9 +41,10 @@ namespace WebApp.Controllers
         [GET("export/lastmonth")]
         public void ExportLastMonth()
         {
-            var now = DateTime.UtcNow;
-            var month = now.Month - 1 == 0 ? 12 : now.Month - 1;
-            var year = now.Month - 1 == 0 ? now.Year - 1 : now.Year;
+            var now = DateTime.Now;
+            var isJanuary = now.Month - 1 == 0;
+            var month = isJanuary ? 12 : now.Month - 1;
+            var year = isJanuary ? now.Year - 1 : now.Year;
             var repo = new DeployRepository();
             var deploys = repo.Collection.FindAll().Where(x => !x.DateDeleted.HasValue && x.DeployTime.HasValue && x.DeployTime.Value.Month == month && x.DeployTime.Value.Year == year).ToList();
             WriteTsv(deploys, String.Format("Deploys{0}{1}.tsv", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month), year));
@@ -52,7 +53,7 @@ namespace WebApp.Controllers
         [GET("export/currentmonth")]
         public void ExportCurrentMonth()
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             var repo = new DeployRepository();
             var deploys = repo.Collection.FindAll().Where(x => !x.DateDeleted.HasValue && x.DeployTime.HasValue && x.DeployTime.Value.Month == now.Month && x.DeployTime.Value.Year == now.Year).ToList();
             WriteTsv(deploys, String.Format("CurrentDeploys{0}{1}.tsv", CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(now.Month), now.Year));
