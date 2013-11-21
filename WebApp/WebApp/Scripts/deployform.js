@@ -13,7 +13,7 @@
                 return repo.toUpperCase();
             });
 
-            var repoSelect = $('#repos');
+            var repoSelect = $('#repository');
             $.each(repos, function (i) {
                 if (repos[i] === 'hudl') {
                     repoSelect.append('<option selected="selected">hudl</option>');
@@ -69,7 +69,7 @@
                     $('#hotfixComponent').select2({
                         width: "320px"
                     });
-                    $('#repos').change(prChanged);
+                    $('#repository').change(prChanged);
                     $('#pullRequestId').change(prChanged);
 
                     $(function () {
@@ -257,7 +257,7 @@
             item.prop('disabled', true);
         });
 
-        var baseUrl = '/api/v1/github/' + $('#repos').val() + '/pullRequest/' + pullRequestId.val();
+        var baseUrl = '/api/v1/github/' + $('#repository').val() + '/pullRequest/' + pullRequestId.val();
         $.getJSON(baseUrl + '/branch', function (data) {
             $.getJSON(baseUrl + '/comments', function (comments) {
                 _.each(itemsToDisable, function (item) {
