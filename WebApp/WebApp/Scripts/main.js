@@ -87,7 +87,7 @@
                 { id: 'Type', name: 'Type', field: 'type', width: 90, formatter: Slick.Formatters.TypeFormatter, editor: Slick.Editors.Type, sortable: true },
                 { id: 'Project', name: 'Proj.', field: 'project', width: 90, editor: Slick.Editors.Project, sortable: true },
                 { id: 'Branch', name: 'Branch', field: 'branch', width: 270, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
-                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 50, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: "https://github.com/hudl", editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 50, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.githubBaseUrl, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 33, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira, sortable: true },
                 { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.QuailEditor, sortable: true },
                 { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.DesignerEditor, sortable: true },

@@ -16,6 +16,9 @@ namespace WebApp.Models
         [JsonProperty("jiraSearchByLabelBaseUrl")]
         public string JiraSearchByLabelBaseUrl { get; set; }
 
+        [JsonProperty("githubBaseUrl")]
+        public string GithubBaseUrl { get; set; }
+
         [JsonProperty("gitHubPullRequestBaseUrl")]
         public string GitHubPullRequestBaseUrl { get; set; }
 
