@@ -47,6 +47,9 @@ namespace WebApp.Models
         [BsonElement("hotfixes")]
         public List<Hotfix> Hotfixes { get; set; }
 
+        [BsonElement("repository")]
+        public String Repository { get; set; }
+
         [BsonIgnore]
         public string Day
         {

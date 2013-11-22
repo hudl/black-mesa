@@ -36,7 +36,9 @@
             if (!value) {
                 return '';
             }
-            return '<a href="' + columnDef.githubBaseUrl + value.toString() + '" target="_blank">' + value.toString() + '<i class="icon-share-alt"></i></a>';
+            var repo = dataContext.repository || 'hudl';
+            var url = columnDef.githubBaseUrl + '/' + repo + '/pull/' + value;
+            return '<a href="' + url + '" target="_blank">' + value.toString() + '<i class="icon-share-alt"></i></a>';
         },
         TypeFormatter: function (row, cell, value, columnDef, dataContext) {
             if (value == "Hotfix") {
@@ -44,6 +46,12 @@
             }
             return value;
         },
+        RepositoryFormatter: function(row, cell, value, columnDef, dataContext) {
+            if (value === undefined) {
+                return 'hudl';
+            }
+            return value;
+        }
     });
     
     function loadData(loadAll) {
@@ -74,11 +82,12 @@
                 { id: 'Day', name: 'Day', field: 'day', width: 35 },
                 { id: 'DeployTime', name: 'Time', field: 'deployTime', width: 90, editor: Slick.Editors.HudlDateEditor, formatter: Slick.Formatters.DateTimeFormatter, dateFormat: dateFormatter, sortable: true },
                 { id: 'Action', name: 'Action', field: 'action', width: 50, editor: Slick.Editors.Action, sortable: true },
+                { id: 'Repository', name: 'Repo', field: 'repository', width: 75, formatter: Slick.Formatters.RepositoryFormatter, editor: Slick.Editors.RepositoryEditor, sortable: true},
                 { id: 'Component', name: 'Comp.', field: 'component', width: 60, editor: Slick.Editors.Component, sortable: true },
                 { id: 'Type', name: 'Type', field: 'type', width: 90, formatter: Slick.Formatters.TypeFormatter, editor: Slick.Editors.Type, sortable: true },
                 { id: 'Project', name: 'Proj.', field: 'project', width: 90, editor: Slick.Editors.Project, sortable: true },
                 { id: 'Branch', name: 'Branch', field: 'branch', width: 270, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
-                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 50, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.gitHubPullRequestBaseUrl, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
+                { id: 'PullRequestId', name: 'PR', field: 'pullRequestId', width: 50, formatter: Slick.Formatters.PullRequestFormatter, githubBaseUrl: blackmesa.config.githubBaseUrl, editor: Slick.Editors.NoBlankTextEditor, sortable: true },
                 { id: 'JiraLabel', name: 'Jira', field: 'branch', width: 33, formatter: Slick.Formatters.JiraFormatter, jiraBaseUrl: blackmesa.config.jiraSearchByLabelBaseUrl, editor: Slick.Editors.Jira, sortable: true },
                 { id: 'Quails', name: 'QA', field: 'qa', width: 100, editor: Slick.Editors.QuailEditor, sortable: true },
                 { id: 'Designers', name: 'DES', field: 'design', width: 100, editor: Slick.Editors.DesignerEditor, sortable: true },

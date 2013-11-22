@@ -29,5 +29,6 @@ namespace WebApp.Models
         public string TheProblem { get; set; }
         public string HowMissed { get; set; }
         public string TheFix { get; set; }
+        public string Repos { get; set; }
     }
 }
