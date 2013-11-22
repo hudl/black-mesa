@@ -4,40 +4,42 @@
 }
 <div class="container">
     <div class="login">
-	    <div class="row">
-		    <div class="span6">
-			    <h1>Log in to Black-Mesa</h1>
-			    <p>Use your domain username and password to login. You do not need to include the domain. For example, my username is alyx.vance</p>
+        <div class="row">
+            <div class="span6">
+                <h1>Log in to Black-Mesa</h1>
+                <p>Use your domain username and password to login. You do not need to include the domain. For example, my username is alyx.vance</p>
                 <p style="font-family: Papyrus">Note that this was copy-pasta'd from Alyx and a Designer should fix this please.</p>
-		    </div>
-	    </div>
-	    <div class="well well-login">
-		    <div class="row errormessage">
-			    <div class="span4 offset1">
-				    <span class="label label-important" style="visibility:hidden;">&nbsp;</span>
-			    </div>
-		    </div>
-		    <div class="row">
-			    <div class="span2 offset1">
-				    <label for="u">Domain Username</label>
-			    </div>
-			    <div class="span2">
-				    <input type="text" name="u" id="u" placeholder="alyx.vance" />
-			    </div>
-		    </div>
-		    <div class="row">
-			    <div class="span2 offset1">
-				    <label for="p">Password</label>
-			    </div>
-			    <div class="span2">
-				    <input type="password" name="p" id="p" placeholder="l4marr" />
-			    </div>
-		    </div>
-		    <div class="row">
-			    <div class="span6">
-				    <button id="login" class="btn" style="float:right;">Login</button>
-			    </div>
-		    </div>
-	    </div>
+            </div>
+        </div>
+        <form id="login-form">
+            <div class="well well-login">
+                <div class="row errormessage">
+                    <div class="span4 offset1">
+                        <span class="label label-important" style="visibility:hidden;">&nbsp;</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2 offset1">
+                        <label for="u">Domain Username</label>
+                    </div>
+                    <div class="span2">
+                        <input type="text" name="u" id="u" placeholder="alyx.vance" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2 offset1">
+                        <label for="p">Password</label>
+                    </div>
+                    <div class="span2">
+                        <input type="password" name="p" id="p" placeholder="l4marr" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span6">
+                        <button type="submit" id="login" class="btn" style="float:right;">Login</button>
+                    </div>
+                </div>
+	        </div>
+        </form>
     </div>
 </div>
