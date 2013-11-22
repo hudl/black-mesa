@@ -36,7 +36,7 @@
             if (!value) {
                 return '';
             }
-            var repo = dataContext.repository !== undefined ? dataContext.repository : 'hudl';
+            var repo = dataContext.repository || 'hudl';
             var url = columnDef.githubBaseUrl + '/' + repo + '/pull/' + value;
             return '<a href="' + url + '" target="_blank">' + value.toString() + '<i class="icon-share-alt"></i></a>';
         },
