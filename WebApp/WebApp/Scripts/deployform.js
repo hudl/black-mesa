@@ -119,6 +119,39 @@
                             $('#deploy-doc-submit').hide();
                             $('#deploy-doc-submit-spinner').show();
                             var deployDocForm = $('#deploy-doc-form');
+                            
+                            // Switch all people fields to None if blank
+                            var qa = $('#qa');
+                            var dev = $('#dev');
+                            var design = $('#design');
+                            var codeReview = $('#codeReview');
+                            var pm = $('#projectManager');
+                            var none = {
+                                Groups: ['all'],
+                                Name: 'None',
+                                id: 'None'
+                            };
+
+                            if (qa.val() === '') {
+                                qa.select2('data', none);
+                            }
+
+                            if (dev.val() === '') {
+                                dev.select2('data', none);
+                            }
+
+                            if (design.val() === '') {
+                                design.select2('data', none);
+                            }
+
+                            if (codeReview.val() === '') {
+                                codeReview.select2('data', none);
+                            }
+
+                            if (pm.val() === '') {
+                                pm.select2('data', none);
+                            }
+
                             var complete = true;
                             var incompleteForms = new Array();
                             var i = 0;
@@ -129,6 +162,7 @@
                                     incompleteForms[i++] = el.data('desc');
                                 }
                             });
+
                             if (!complete) {
                                 var str = "";
                                 $.each(incompleteForms, function () {
