@@ -5913,10 +5913,6 @@ a.badge:hover {
   position: fixed;
 }
 
-
-.header { height: 150px; background: #555 url('../Images/black-mesa.PNG'); background-size: 100%; margin-bottom: 30px; }
-.header .container { padding-top: 100px }
-
 .status-hotfix { background: #ff0000 !important; color: #fff; }
 .status-hotfix a { color: #fff; text-decoration: underline; }
 .status-new-feature { background: #ccccff !important; color: #fff; }
