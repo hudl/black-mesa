@@ -132,25 +132,11 @@
                                 id: 'None'
                             };
 
-                            if (qa.val() === '') {
-                                qa.select2('data', none);
-                            }
-
-                            if (dev.val() === '') {
-                                dev.select2('data', none);
-                            }
-
-                            if (design.val() === '') {
-                                design.select2('data', none);
-                            }
-
-                            if (codeReview.val() === '') {
-                                codeReview.select2('data', none);
-                            }
-
-                            if (pm.val() === '') {
-                                pm.select2('data', none);
-                            }
+                            _.each([$('#qa'), $('#dev'), $('#design'), $('#codeReview'), $('#projectManager')], function(field) {
+                                if (field.val() === '') {
+                                    field.select2('data', none);
+                                }
+                            });
 
                             var complete = true;
                             var incompleteForms = new Array();
