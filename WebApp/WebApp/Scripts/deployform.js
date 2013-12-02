@@ -119,6 +119,25 @@
                             $('#deploy-doc-submit').hide();
                             $('#deploy-doc-submit-spinner').show();
                             var deployDocForm = $('#deploy-doc-form');
+                            
+                            // Switch all people fields to None if blank
+                            var qa = $('#qa');
+                            var dev = $('#dev');
+                            var design = $('#design');
+                            var codeReview = $('#codeReview');
+                            var pm = $('#projectManager');
+                            var none = {
+                                Groups: ['all'],
+                                Name: 'None',
+                                id: 'None'
+                            };
+
+                            _.each([$('#qa'), $('#dev'), $('#design'), $('#codeReview'), $('#projectManager')], function(field) {
+                                if (field.val() === '') {
+                                    field.select2('data', none);
+                                }
+                            });
+
                             var complete = true;
                             var incompleteForms = new Array();
                             var i = 0;
@@ -129,6 +148,7 @@
                                     incompleteForms[i++] = el.data('desc');
                                 }
                             });
+
                             if (!complete) {
                                 var str = "";
                                 $.each(incompleteForms, function () {
