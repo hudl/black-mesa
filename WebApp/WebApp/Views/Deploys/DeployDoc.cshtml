@@ -282,26 +282,10 @@
             <label class="control-label" for="project">Project</label>
             <div class="controls">
                 <select id="project" name="project" data-hudl-required="true" data-desc="Project">
-                    <option value=""></option>
-                    <option>Admin</option>
-                    <option>Attachments</option>
-                    <option>Auto</option>
-                    <option>BBall</option>
-                    <option>Core</option>
-                    <option>DS</option>
-                    <option>DVD</option>
-                    <option>Fan</option>
-                    <option>Fundraising</option>
-                    <option>Hudroid</option>
-                    <option>Lifeguard</option>
-                    <option>MacMercury</option>
-                    <option>Mercury</option>
-                    <option>MODI</option>
-                    <option>Ops</option>
-                    <option>OVE</option>
-                    <option>Pro</option>
-                    <option>Recruit</option>
-                    <option>VE</option>
+                    @foreach (var p in ((List<Project>) ViewBag.Projects).OrderBy(x => x.Name))
+                    {
+                        <option>@p.Name</option>
+                    }
                 </select>
             </div>
         </div>
