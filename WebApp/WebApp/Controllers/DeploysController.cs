@@ -11,15 +11,15 @@ namespace WebApp.Controllers
     {
         public ActionResult Index()
         {
-            var components = new ComponentRepository().GetAll();
-            ViewBag.Components = components;
+            ViewBag.Components = new ComponentRepository().GetAll();;
+            ViewBag.Projects = new ProjectRepository().GetAll();
             return View();
         }
 
         public ActionResult Item(string id)
         {
-            var components = new ComponentRepository().GetAll();
-            ViewBag.Components = components;
+            ViewBag.Components = new ComponentRepository().GetAll();
+            ViewBag.Projects = new ProjectRepository().GetAll();
             return View("Index");
         }
     }
