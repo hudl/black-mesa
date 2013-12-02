@@ -12,16 +12,6 @@
 * { -webkit-text-stroke: 0.35px }
 */
 
-@font-face {
-	font-family: 'TradeGothic';
-	src: url('tradegothic/TradeGothicLTStd-BdCn20.otf'); 
-}
-
-@font-face {
-	font-family: 'TradeGothic';
-	src: url('tradegothic/TradeGothicLTStd-Cn18.otf'); 
-}
-
 article,
 aside,
 details,
@@ -699,8 +689,6 @@ h1 {
   font-size: 45px;
 	color: #eee;
 	margin: 0;
-	font-family: 'TradeGothic' !important;
-    text-shadow: 1px 1px 5px #222;
 }
 
 h2 {
@@ -711,7 +699,6 @@ h3 {
   font-size: 24.5px;
 	line-height: 28px;
 	margin-bottom: 3px;
-	font-family: 'TradeGothicBody',Impact !important;
 }
 
 h4 {

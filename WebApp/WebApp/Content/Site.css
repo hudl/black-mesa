@@ -1,12 +1,9 @@
 ﻿html {
-    background-color: #e2e2e2;
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: #fff;
-    border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -770,10 +767,6 @@ tr.pager td {
 .slick-cell {
     font-size: 10px;
     font-family: Sans-Serif
-}
-
-.login {
-	width: 500px;
 }
 
 .del {
