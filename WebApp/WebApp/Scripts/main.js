@@ -109,7 +109,7 @@
                 return button;
             }
 
-            $('.del').live('click', function() {
+            $(document).on('click', '.del', function () {
                 var id = $(this).attr('id');
 
                 $.ajax({
