@@ -452,6 +452,7 @@
     <Content Include="Views\History\Index.cshtml" />
     <Content Include="Views\Components\Index.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Shared\_bootstrapBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

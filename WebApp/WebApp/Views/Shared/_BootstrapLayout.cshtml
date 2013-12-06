@@ -20,14 +20,19 @@
     @Html.Partial("_html5shiv")
     @* favicons and touch icons go here *@
 </head>
-<body>
-    @Html.Partial("_alerts")
-    @RenderBody()
-    @Scripts.Render("~/js")
-    @Scripts.Render("~/bundles/app")
-    <script type="text/javascript" src="@Url.Action("Config", "Config")"></script>
-    <script type="text/javascript" src="@Url.Action("Config", "Home")"></script>
-    @RenderSection("Scripts", required: false)
-</body>
+    <body>
+        @Html.Partial("_bootstrapBar")
+        @Html.Partial("_alerts")
+        @RenderBody()
+        @Scripts.Render("~/js")
+        @Scripts.Render("~/bundles/app")
+        <script type="text/javascript" src="@Url.Action("Config", "Config")"></script>
+        <script type="text/javascript" src="@Url.Action("Config", "Home")"></script>
+        @RenderSection("Scripts", required: false)
+        <!-- Placing bootstrap javascript here -->
+        <script>
+            $('.collapse').collapse();
+        </script>
+    </body>
 </html>
 
