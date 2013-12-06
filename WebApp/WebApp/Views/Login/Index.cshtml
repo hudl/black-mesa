@@ -2,33 +2,32 @@
 {
     @Scripts.Render("~/bundles/login")
 }
+
 <div class="container">
-    <div class="login">
-        <div class="row">
-            <div class="span6">
-                <h1>Black-Mesa</h1>
-                <p>Use your domain username and password to login. You may login with or without the domain.</p>
-            </div>
+    <div class="row">
+        <div class="col-sm-10 col-md-8 col-lg-6">
+            <h1><strong>Black-Mesa</strong></h1>
+            <h4>Use your domain username and password to login. You may login with or without the domain.</h4>
         </div>
-        <div class="row">
-            <form id="login-form">
-                <div class="well span6">
-                    <div class="row">
-                        <div class="span6">
-                            <input class="span6" type="text" name="u" id="u" placeholder="Domain Username" />
-                        </div>
+    </div>
+    <div class="row">
+        <div class="well col-sm-10 col-md-8 col-lg-6">
+            <form class="form-horizontal" role="form" id="login-form">
+                <div class="form-group">
+                    <div>
+                        <input class="form-control" type="text" name="u" id="u" placeholder="Domain Username" />
                     </div>
-                    <div class="row">
-                        <div class="span6">
-                            <input class="span6" type="password" name="p" id="p" placeholder="Password" />
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <input class="form-control" type="password" name="p" id="p" placeholder="Password" />
                     </div>
-                    <div class="row">
-                        <div class="pull-right">
-                            <button type="submit" id="login" class="btn">Login</button>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="pull-right">
+                        <button class="btn btn-primary">Login</button>
                     </div>
-	            </div>
+                </div>
             </form>
         </div>
     </div>
