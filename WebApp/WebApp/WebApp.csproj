@@ -245,11 +245,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\grid.css" />
     <Content Include="Content\images\bomber3.jpg" />
+    <Content Include="Content\images\collapse.gif" />
+    <Content Include="Content\images\down.gif" />
+    <Content Include="Content\images\expand.gif" />
     <Content Include="Content\images\header-columns-bg.gif" />
+    <Content Include="Content\images\header-columns-over-bg.gif" />
     <Content Include="Content\images\sort-asc.gif" />
     <Content Include="Content\images\sort-desc.gif" />
     <Content Include="Content\select2.css" />
     <Content Include="Content\select2.png" />
+    <Content Include="Content\slick-default-theme.css" />
     <Content Include="Content\slick.columnpicker.css" />
     <Content Include="Content\slick.grid.css" />
     <Content Include="Content\slick.headerbuttons.css" />
@@ -338,6 +343,10 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery.event.drag.js" />
+    <Content Include="Scripts\jquery.event.drag.live.js" />
+    <Content Include="Scripts\jquery.event.drag.live.min.js" />
+    <Content Include="Scripts\jquery.event.drag.min.js" />
     <Content Include="Scripts\jquery.simplemodal-1.4.4.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\main.js" />
@@ -370,8 +379,6 @@
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.dateFormat-1.0.js" />
-    <Content Include="Scripts\jquery.event.drag.js" />
-    <Content Include="Scripts\jquery.event.drag.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
