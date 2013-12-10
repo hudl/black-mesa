@@ -9,6 +9,7 @@ using System.Web;
 
 namespace WebApp.Models
 {
+    [BsonIgnoreExtraElements]
     public class PrivateConfig : IEntity
     {
         [JsonIgnore]

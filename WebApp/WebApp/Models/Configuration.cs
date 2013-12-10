@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace WebApp.Models
 {
+    [BsonIgnoreExtraElements]
     public class Configuration : IEntity
     {
         [JsonIgnore]
