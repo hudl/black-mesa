@@ -3,17 +3,32 @@
 {
     @Scripts.Render("~/bundles/main")
 }
-<div style="margin-left: 10px; margin-right: 10px;">
-    <h1>Deploys</h1>
-    <a href="#" id="new-deploy">Add New Deploy</a>
-    <div id="deploys" style="height: 700px; width: auto;"></div>
-    <a href="#" id="load-all">Load All (Might be slow, there's a lot to load)</a><img src="~/Images/spinner.gif" id="row-loading-spinner" alt="Loading" style="display:none"/>
-    <a href="/History" target="_blank">Load History</a>
-    <a href="/components" target="_blank">Components</a>
-    <a href="/projects" target="_blank">Projects</a>
-    <a href="/api/v1/export/alltime">Export All Time</a>
-    <a href="/api/v1/export/currentmonth">Export current month (@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.UtcNow.Month))</a>
-    <a href="/api/v1/export/lastmonth">Export last month (@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.UtcNow.Month - 1 == 0 ? 12 : DateTime.UtcNow.Month - 1))</a>
+<div class="container">
+    <div class="row">
+        <h1>
+            <strong>Deploys</strong>
+            <span class="pull-right">
+                <small>Export</small>
+                <span class="btn-group">
+                    <a href="/api/v1/export/alltime" type="button" class="btn btn-default">All Time</a>
+                    <a href="/api/v1/export/currentmonth" type="button" class="btn btn-default">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.UtcNow.Month)</a>
+                    <a href="/api/v1/export/lastmonth" type="button" class="btn btn-default">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.UtcNow.Month - 1 == 0 ? 12 : DateTime.UtcNow.Month - 1)</a>
+                </span>
+                <button class="btn btn-primary" id="new-deploy">New Deploy</button>
+            </span>
+        </h1>
+    </div>
+</div>
+
+<div id="deploys" style="height: 700px; width: auto;"></div><br />
+
+<div class="container">
+    <div class="row">
+        <span class="pull-right">
+            <a href="#" id="load-all" class="btn btn-primary">Load All (Might be slow, there's a lot to load)</a>
+            <img src="~/Images/spinner.gif" id="row-loading-spinner" alt="Loading" style="display:none"/>
+        </span>
+    </div>
 </div>
 
 @Html.Partial("DeployDoc")
