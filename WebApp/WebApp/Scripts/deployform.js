@@ -41,6 +41,7 @@
                 minHeight: 600,
                 maxHeight: 800,
                 minWidth: 800,
+                containerCss: "container",
                 overlayClose: true,
                 onOpen: function (dialog) {
                     dialog.overlay.fadeIn(function () {
@@ -87,21 +88,21 @@
                             $('#hotfix-yes').removeClass('active');
                             $('#hotfix-no').removeClass('active');
                         });
-                        $('#hotfix-yes').click(function() {
+                        $('#hotfix-yes').click(function () {
                             $('#type').val("Hotfix");
                             $('#how-bad-was-it-scores').show();
                         });
-                        $('#hotfix-no').click(function() {
+                        $('#hotfix-no').click(function () {
                             $('#type').val("Fix");
                             $('#how-bad-was-it-scores').hide();
                         });
-                        $('#new-feature').click(function() {
+                        $('#new-feature').click(function () {
                             $('#type').val("New Feature");
                         });
-                        $('#enhancement').click(function() {
+                        $('#enhancement').click(function () {
                             $('#type').val("Enhancement");
                         });
-                        $('#task').click(function() {
+                        $('#task').click(function () {
                             $('#type').val("Task");
                         });
                         $('#basecampThread').change(function () {
