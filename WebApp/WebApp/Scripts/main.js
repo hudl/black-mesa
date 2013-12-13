@@ -130,7 +130,7 @@
                 enableCellNavigation: true,
                 multiColumnSort: true,
                 syncColumnCellResize: true,
-                rowHeight: 40,
+                rowHeight: 30,
         });
 
             grid.onSort.subscribe(function (e, args) {

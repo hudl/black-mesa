@@ -2,8 +2,16 @@
     visibility: hidden;
 }
 
+.slick-cell {
+    font-family: sans-serif;
+}
+
 .slick-cell:hover .del{
     visibility: visible;
+}
+
+.slick-header-column.ui-state-default {
+    height: 24px;
 }
 
 #simplemodal-overlay {background-color:#000;}
