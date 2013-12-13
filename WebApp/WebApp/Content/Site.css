@@ -5,3 +5,7 @@
 .slick-cell:hover .del{
     visibility: visible;
 }
+
+#simplemodal-overlay {background-color:#000;}
+#simplemodal-container {background-color:#FFF; border:8px solid #444; padding:12px;}
+#simplemodal-container a.modalCloseImg {background:url(../Images/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}

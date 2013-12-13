@@ -38,7 +38,7 @@
         });
         $('#new-deploy').click(function () {
             $('#deploy-doc').modal({
-                minHeight: 300,
+                minHeight: 600,
                 maxHeight: 800,
                 minWidth: 800,
                 overlayClose: true,
