@@ -22,7 +22,7 @@ namespace WebApp.Controllers.Api
         [GET("repos")]
         public ActionResult GetAllRepositories()
         {
-            var source = GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos", GetHeaders());
+            var source = GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos?per_page=100", GetHeaders());
             return JsonNet(source, true);
         }
 
