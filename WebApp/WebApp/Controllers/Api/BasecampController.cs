@@ -34,7 +34,7 @@ namespace WebApp.Controllers.Api
             do {
                 var raw = GetPageSource(PrivateConfig.BasecampConfig.GetAccessesUrl
                                             .Replace("{project}", project)
-                                            .Replace("{page}", page),
+                                            + "?page=" + page),
                                         GetHeaders());
                 ret.AddRange(JsonConvert.DeserializeObject<List<BasecampUser>>(raw));
             } while (raw.Length == 50);
