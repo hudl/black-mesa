@@ -31,12 +31,11 @@ namespace WebApp.Controllers.Api
         {
             var page = 1;
             var ret = new List<BasecampUser>();
+            var rawurl = PrivateConfig.BasecampConfig.GetAccessesUrl.Replace("{project}", project);
             do {
-                var raw = GetPageSource(PrivateConfig.BasecampConfig.GetAccessesUrl
-                                            .Replace("{project}", project)
-                                            + "?page=" + page),
-                                        GetHeaders());
+                var raw = GetPageSource(rawurl + "?page=" + page, GetHeaders());
                 ret.AddRange(JsonConvert.DeserializeObject<List<BasecampUser>>(raw));
+                ++page;
             } while (raw.Length == 50);
             return ret;
         }
