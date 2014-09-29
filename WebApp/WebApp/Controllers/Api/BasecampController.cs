@@ -21,9 +21,23 @@ namespace WebApp.Controllers.Api
         [POST("/"), ValidateInput(false)]
         public ActionResult PostBasecampMessage(string project, string message, string content)
         {
-            var usersRaw = GetPageSource(PrivateConfig.BasecampConfig.GetAccessesUrl.Replace("{project}", project), GetHeaders());
-            var users = JsonConvert.DeserializeObject<List<BasecampUser>>(usersRaw);
-            return JsonNet(PostMessage(PrivateConfig.BasecampConfig.PostUrl.Replace("{project}", project).Replace("{message}", message), content, users, GetHeaders()));
+            return JsonNet(PostMessage(PrivateConfig.BasecampConfig.PostUrl
+                                           .Replace("{project}", project)
+                                           .Replace("{message}", message),
+                                       content, GetUsers(), GetHeaders()));
+        }
+
+        private List<BasecampUser> GetUsers()
+        {
+            var page = 1;
+            var ret = new List<BasecampUser>();
+            var rawurl = PrivateConfig.BasecampConfig.GetAccessesUrl.Replace("{project}", project);
+            do {
+                var raw = GetPageSource(rawurl + "?page=" + page, GetHeaders());
+                ret.AddRange(JsonConvert.DeserializeObject<List<BasecampUser>>(raw));
+                ++page;
+            } while (raw.Length == 50);
+            return ret;
         }
 
         private string PostMessage(string url, string content, List<BasecampUser> usersToShare, Dictionary<string, string> headers)
