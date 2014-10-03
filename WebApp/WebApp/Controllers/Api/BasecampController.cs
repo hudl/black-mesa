@@ -10,7 +10,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
 using WebApp.Attributes;
-using System.Threading.Tasks;
 
 namespace WebApp.Controllers.Api
 {
@@ -20,26 +19,11 @@ namespace WebApp.Controllers.Api
     {
         // Note that "message" is like a thread id to basecamp, content is the actual message we will be posting.
         [POST("/"), ValidateInput(false)]
-        public async Task<ActionResult> PostBasecampMessage(string project, string message, string content)
+        public ActionResult PostBasecampMessage(string project, string message, string content)
         {
-            return JsonNet(PostMessage(PrivateConfig.BasecampConfig.PostUrl
-                                           .Replace("{project}", project)
-                                           .Replace("{message}", message),
-                                       content, await GetUsers(project), GetHeaders()));
-        }
-
-        private async Task<List<BasecampUser>> GetUsers(string project)
-        {
-            var page = 1;
-            var ret = new List<BasecampUser>();
-            var rawurl = PrivateConfig.BasecampConfig.GetAccessesUrl.Replace("{project}", project);
-            string raw;
-            do {
-                raw = await GetPageSourceAsync(rawurl + "?page=" + page, GetHeaders());
-                ret.AddRange(JsonConvert.DeserializeObject<List<BasecampUser>>(raw));
-                ++page;
-            } while (raw.Length == 50);
-            return ret;
+            var usersRaw = GetPageSource(PrivateConfig.BasecampConfig.GetAccessesUrl.Replace("{project}", project), GetHeaders());
+            var users = JsonConvert.DeserializeObject<List<BasecampUser>>(usersRaw);
+            return JsonNet(PostMessage(PrivateConfig.BasecampConfig.PostUrl.Replace("{project}", project).Replace("{message}", message), content, users, GetHeaders()));
         }
 
         private string PostMessage(string url, string content, List<BasecampUser> usersToShare, Dictionary<string, string> headers)
