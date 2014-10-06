@@ -31,7 +31,7 @@ namespace WebApp.Controllers.Api
 #endif
         }
 
-        protected string GetPageSource(string url, Dictionary<string, string> headers)
+        protected async Task<string> GetPageSource(string url, Dictionary<string, string> headers)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace WebApp.Controllers.Api
                     }
                     client.Headers["Content-Type"] = "application/json; charset=utf-8";
                     client.Headers["User-Agent"] = PrivateConfig.UserAgent;
-                    return client.DownloadString(url);
+                    return await client.DownloadStringTaskAsync(url);
                 }
             }
             catch (WebException)

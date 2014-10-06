@@ -1,4 +1,5 @@
-﻿using AttributeRouting;
+﻿using System.Threading.Tasks;
+using AttributeRouting;
 using AttributeRouting.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace WebApp.Controllers.Api
     public class JiraController : BaseController
     {
         [GET("tickets/{label}")]
-        public ActionResult GetTicketsForLabel(string label)
+        public async Task<ActionResult> GetTicketsForLabel(string label)
         {
-            var source = GetPageSource(PrivateConfig.JiraConfig.TicketsUrl.Replace("{label}", label), GetHeaders());
+            var source = await GetPageSource(PrivateConfig.JiraConfig.TicketsUrl.Replace("{label}", label), GetHeaders());
             return JsonNet(source, true);
         }
 

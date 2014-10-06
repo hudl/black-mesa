@@ -1,4 +1,5 @@
-﻿using AttributeRouting;
+﻿using System.Threading.Tasks;
+using AttributeRouting;
 using AttributeRouting.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,10 @@ namespace WebApp.Controllers.Api
     public class PeopleController : BaseController
     {
         [GET("/")]
-        public ActionResult GithubUsernames()
+        public async Task<ActionResult> GithubUsernames()
         {
             //TODO: Redis cache for 10 minutes so we don't keep pinging the AD server.
-            return JsonNet(GetPageSource(PrivateConfig.ActiveDirectory.Uri.ToString(), null), true);
+            return JsonNet( await GetPageSource(PrivateConfig.ActiveDirectory.Uri.ToString(), null), true);
         }
     }
 }

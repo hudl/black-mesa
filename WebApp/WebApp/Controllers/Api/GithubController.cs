@@ -1,4 +1,5 @@
-﻿using AttributeRouting;
+﻿using System.Threading.Tasks;
+using AttributeRouting;
 using AttributeRouting.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -20,32 +21,32 @@ namespace WebApp.Controllers.Api
     public class GithubController : BaseController
     {
         [GET("repos")]
-        public ActionResult GetAllRepositories()
+        public async Task<ActionResult> GetAllRepositories()
         {
-            var source = GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos?per_page=100", GetHeaders());
+            var source = await GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos?per_page=100", GetHeaders());
             return JsonNet(source, true);
         }
 
         [GET("{repo}/pullRequest/{pr}/branch")]
-        public ActionResult GetPullRequestBranch(string repo, string pr)
+        public async Task<ActionResult> GetPullRequestBranch(string repo, string pr)
         {
             var url = PrivateConfig.GithubConfig.BaseUrl + "/" + repo +"/pulls/" + pr;
-            var source = GetPageSource(url, GetHeaders());
+            var source = await GetPageSource(url, GetHeaders());
             return JsonNet(source, true);
         }
 
         [GET("{repo}/pullRequest/{pr}/comments")]
-        public ActionResult GetPullRequestComments(string repo, string pr)
+        public async Task<ActionResult> GetPullRequestComments(string repo, string pr)
         {
             var url = PrivateConfig.GithubConfig.BaseUrl + "/" + repo + "/pulls/" + pr + "/comments";
-            var source = GetPageSource(url, GetHeaders());
+            var source = await GetPageSource(url, GetHeaders());
             return JsonNet(source, true);
         }
 
         [GET("commits")]
-        public ActionResult GetRecentRequestsToMaster()
+        public async Task<ActionResult> GetRecentRequestsToMaster()
         {
-            var source = GetPageSource(PrivateConfig.GithubConfig.RecentCommitsUrl, GetHeaders());
+            var source = await GetPageSource(PrivateConfig.GithubConfig.RecentCommitsUrl, GetHeaders());
             return JsonNet(source, true);
         }
 
