@@ -13,9 +13,16 @@ using System.Text;
 using System.Web.Http;
 using System.Web.Mvc;
 using WebApp.Attributes;
+using System.Linq;
 
 namespace WebApp.Controllers.Api
 {
+    class GitHubRepo
+    {
+        [JsonProperty(PropertyName = "name")]
+        public string name { get; set; }
+    }
+
     [CookieAuthenticated]
     [RoutePrefix("github")]
     public class GithubController : BaseController
@@ -23,8 +30,19 @@ namespace WebApp.Controllers.Api
         [GET("repos")]
         public async Task<ActionResult> GetAllRepositories()
         {
-            var source = await GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos?per_page=100", GetHeaders());
-            return JsonNet(source, true);
+            int pageSize = 100;
+            var allRepos = JsonConvert.DeserializeObject<List<GitHubRepo>>(await GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos?per_page=" + pageSize + "&page=1", GetHeaders()));
+            var nextPage = JsonConvert.DeserializeObject<List<GitHubRepo>>(await GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos?per_page=" + pageSize + "&page=2", GetHeaders()));
+            allRepos.AddRange(nextPage);
+            int currentPage = 2;
+
+            while(nextPage.Count == pageSize) {
+                currentPage++;
+                nextPage = JsonConvert.DeserializeObject<List<GitHubRepo>>(await GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos?per_page=" + pageSize + "&page=" + currentPage, GetHeaders()));
+                allRepos.AddRange(nextPage);
+            }
+
+            return JsonNet(allRepos, false);
         }
 
         [GET("{repo}/pullRequest/{pr}/branch")]
