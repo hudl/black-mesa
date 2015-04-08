@@ -16,6 +16,12 @@ using WebApp.Attributes;
 
 namespace WebApp.Controllers.Api
 {
+    class GitHubRepo
+    {
+        [JsonProperty(PropertyName = "name")]
+        public string name { get; set; }
+    }
+
     [CookieAuthenticated]
     [RoutePrefix("github")]
     public class GithubController : BaseController
@@ -23,8 +29,28 @@ namespace WebApp.Controllers.Api
         [GET("repos")]
         public async Task<ActionResult> GetAllRepositories()
         {
-            var source = await GetPageSource(PrivateConfig.GithubConfig.OrganizationUrl + "/repos?per_page=100", GetHeaders());
-            return JsonNet(source, true);
+            int pageSize = 100;
+            int currentPage = 1;
+
+            var allRepos = await GetRepositoryPage(pageSize, currentPage);
+
+            // GitHub does pass the next page back in the headers,
+            // but this code was easier to write and will behave in any sane use case.
+
+            while (allRepos.Count % pageSize == 0)
+            {
+                currentPage++;
+                allRepos.AddRange(await GetRepositoryPage(pageSize, currentPage));
+            }
+
+            return JsonNet(allRepos, false);
+        }
+
+        private async Task<List<GitHubRepo>> GetRepositoryPage(int pageSize, int page)
+        {
+            var request = String.Format("{0}/repos?per_page={1}&page={2}", PrivateConfig.GithubConfig.OrganizationUrl, pageSize, page);
+            var response = await GetPageSource(request, GetHeaders());
+            return JsonConvert.DeserializeObject<List<GitHubRepo>>(response);
         }
 
         [GET("{repo}/pullRequest/{pr}/branch")]
