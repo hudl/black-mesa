@@ -19,7 +19,7 @@ namespace WebApp.Controllers.Api
     class GitHubRepo
     {
         [JsonProperty(PropertyName = "name")]
-        public string name { get; set; }
+        public string Name { get; set; }
     }
 
     [CookieAuthenticated]
