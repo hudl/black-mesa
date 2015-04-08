@@ -32,16 +32,18 @@ namespace WebApp.Controllers.Api
             int pageSize = 100;
             int currentPage = 1;
 
-            var allRepos = await GetRepositoryPage(pageSize, currentPage);
+            var allRepos = new List<GitHubRepo>();
+            var repoPage = new List<GitHubRepo>();
 
             // GitHub does pass the next page back in the headers,
             // but this code was easier to write and will behave in any sane use case.
-
-            while (allRepos.Count % pageSize == 0)
+ 
+            do
             {
+                repoPage = await GetRepositoryPage(pageSize, currentPage);
+                allRepos.AddRange(repoPage);
                 currentPage++;
-                allRepos.AddRange(await GetRepositoryPage(pageSize, currentPage));
-            }
+            } while (repoPage.Any());
 
             return JsonNet(allRepos, false);
         }
