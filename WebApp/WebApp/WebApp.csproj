@@ -317,6 +317,7 @@
     <Content Include="Images\black-mesa.PNG" />
     <Content Include="Images\ratings.png" />
     <Content Include="Images\select2-spinner.gif" />
+    <Content Include="Images\select2.png" />
     <Content Include="Images\select2x2.png" />
     <Content Include="Images\spinner.gif" />
     <Content Include="Images\x.png" />
